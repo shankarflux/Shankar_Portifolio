@@ -1,0 +1,132 @@
+/* Custom global CSS for your React app */
+/* Including colors and animations that aren't handled directly by Tailwind classes */
+
+/* Apply Inter font globally via HTML/body to ensure consistency */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  /* These base colors will be largely overridden by Tailwind classes in App.jsx */
+  background-color: #0A0A0A; /* Deepest Black/Gray */
+  color: #E0E0E0; /* Light text color */
+}
+
+html {
+  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+/* Base Tailwind classes are implicitly loaded via CDN in public/index.html */
+/* Define custom colors here if you want them globally or in JS for dynamic use */
+:root {
+  --color-gray-950: #0A0A0A;
+  --color-gray-900: #121212;
+  --color-gray-800: #1F1F1F;
+  --color-gray-700: #2D2D2D;
+  --color-gray-200: #E0E0E0;
+  --color-gray-300: #C0C0C0;
+  --color-gray-400: #A0A0A0;
+
+  --color-blue-300: #93C5FD;
+  --color-blue-400: #60A5FA;
+  --color-blue-600: #2563EB;
+  --color-blue-700: #1D4ED8;
+
+  --color-teal-400: #2DD4BF;
+  --color-teal-300: #5EEAD4;
+
+  --color-red-500: #EF4444;
+  --color-yellow-500: #F59E0B;
+  --color-green-600: #16A34A;
+  --color-yellow-600: #D97706;
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeAndScaleIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes textPopUp {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes textSlideIn {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+@keyframes pulseSubtle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+@keyframes pulseBorder {
+    0% { border-color: var(--color-blue-400); box-shadow: 0 0 10px var(--color-blue-400); }
+    50% { border-color: var(--color-teal-400); box-shadow: 0 0 20px var(--color-teal-400); }
+    100% { border-color: var(--color-blue-400); box-shadow: 0 0 10px var(--color-blue-400); }
+}
+
+@keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+/* Tailwind animation classes are defined directly in App.jsx for simplicity as they use these keyframes */
+/* Example: .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; } */
+
+
+/* Special animation for unread notifications */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); /* blue-600 with opacity */
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); /* fades out */
+  }
+}
+.animate-pulse-light {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Ensure fixed header doesn't cover content */
+/* This padding is handled in App.jsx directly on the <main> tag */
+/* section {
+    padding-top: 5rem;
+} */
+/* @media (max-width: 768px) {
+    section {
+        padding-top: 7rem;
+    }
+} */
+
