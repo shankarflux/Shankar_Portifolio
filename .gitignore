@@ -38,6 +38,6 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 Thumbs.db
-# You might want to ignore the dist folder if you still generate it
-# /dist
-# No need to ignore docs if it's your deployable folder
+
+# Vite build output (if not using 'docs')
+/dist
