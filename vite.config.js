@@ -1,13 +1,11 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  // This is CRUCIAL for GitHub Pages when your repository name is not
-  // in the format 'username.github.io'.
-  // It MUST be the exact name of your GitHub repository,
-  // surrounded by forward slashes.
-  // Your repository name: Shankar_Portifolio
-  base: '/Shankar_Portifolio/',
+  base: '/Shankar_Portifolio/', // Keep this as is for your repo name
   plugins: [react()],
+  build: {
+    outDir: 'docs', // <--- ADD THIS LINE! Vite will now build to ./docs
+  },
 });
