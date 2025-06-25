@@ -20,8 +20,8 @@ const defaultPortfolioData = {
       description: "Developed an intelligent chatbot using NLP to provide automated customer support.",
       category: "AI",
       images: [ // Placeholder images, replace with your actual screenshots
-        "https://placehold.co/600x400/FFD700/000?text=Chatbot+Screenshot1",
-        "https://placehold.co/600x400/FFD700/000?text=Chatbot+Screenshot2"
+        "https://placehold.co/600x400/5A189A/FFF?text=AI+Chatbot",
+        "https://placehold.co/600x400/5A189A/FFF?text=Chatbot+Detail"
       ],
       techUsed: ["Python", "NLTK", "TensorFlow", "Flask"],
       challenges: "Handling complex user queries and integrating with external APIs, ensuring real-time responsiveness.",
@@ -32,7 +32,7 @@ const defaultPortfolioData = {
       name: "Playing Tic Tac Toe with AI",
       description: "Implemented an unbeatable Tic-Tac-Toe AI player using the Minimax algorithm, demonstrating strategic decision-making.",
       category: "AI",
-      images: ["https://placehold.co/600x400/FFD700/000?text=TicTacToe+Screenshot1"],
+      images: ["https://placehold.co/600x400/FF0080/FFF?text=TicTacToe+AI"],
       techUsed: ["Python", "Minimax Algorithm"],
       challenges: "Optimizing the AI's decision-making process for quick responses without noticeable delay.",
       liveLink: "#",
@@ -42,7 +42,7 @@ const defaultPortfolioData = {
       name: "Image Captioning using AI",
       description: "A deep learning model that generates descriptive and contextually relevant captions for given images.",
       category: "AI",
-      images: ["https://placehold.co/600x400/FFD700/000?text=Captioning+Screenshot1"],
+      images: ["https://placehold.co/600x400/00BFFF/FFF?text=Image+Captioning"],
       techUsed: ["Python", "TensorFlow", "Keras", "CNN", "RNN"],
       challenges: "Achieving high accuracy in caption generation across diverse image content and vocabularies.",
       liveLink: "#",
@@ -52,7 +52,7 @@ const defaultPortfolioData = {
       name: "Face Recognition",
       description: "Developed a real-time face recognition system for secure authentication and attendance tracking.",
       category: "AI",
-      images: ["https://placehold.co/600x400/FFD700/000?text=FaceRec+Screenshot1"],
+      images: ["https://placehold.co/600x400/5A189A/FFF?text=Face+Recognition"],
       techUsed: ["Python", "OpenCV", "dlib"],
       challenges: "Ensuring robustness under varying lighting conditions, facial expressions, and angles.",
       liveLink: "#",
@@ -62,7 +62,7 @@ const defaultPortfolioData = {
       name: "IDS (Intrusion Detection System) with own rules using Snort",
       description: "Configured and customized Snort to detect various network intrusions based on custom, meticulously crafted rule sets.",
       category: "Cybersecurity",
-      images: ["https://placehold.co/600x400/FFD700/000?text=IDS+Screenshot1"],
+      images: ["https://placehold.co/600x400/FF0080/FFF?text=Snort+IDS"],
       techUsed: ["Snort", "Linux", "Network Security Concepts", "Rule Engineering"],
       challenges: "Writing effective and efficient Snort rules to minimize false positives and accurately identify threats.",
       liveLink: "#",
@@ -72,7 +72,7 @@ const defaultPortfolioData = {
       name: "Basic Packet Sniffer Tool",
       description: "A command-line tool developed to capture and analyze network packets, providing insights into network traffic.",
       category: "Cybersecurity",
-      images: ["https://placehold.co/600x400/FFD700/000?text=PacketSniffer+Screenshot1"],
+      images: ["https://placehold.co/600x400/00BFFF/FFF?text=Packet+Sniffer"],
       techUsed: ["Python", "Scapy"],
       challenges: "Parsing various network protocols accurately and presenting complex data in a readable format.",
       liveLink: "#",
@@ -82,7 +82,7 @@ const defaultPortfolioData = {
       name: "Port Scanner",
       description: "A robust network tool to identify open ports on a target host, crucial for vulnerability assessments and network mapping.",
       category: "Cybersecurity",
-      images: ["https://placehold.co/600x400/FFD700/000?text=PortScanner+Screenshot1"],
+      images: ["https://placehold.co/600x400/5A189A/FFF?text=Port+Scanner"],
       techUsed: ["Python", "Sockets"],
       challenges: "Handling different port states (open, closed, filtered) and optimizing scan speed for large networks.",
       liveLink: "#",
@@ -92,7 +92,7 @@ const defaultPortfolioData = {
       name: "Typing Speed Tester",
       description: "An interactive web application designed to test and improve typing speed and accuracy with real-time feedback.",
       category: "Full Stack",
-      images: ["https://placehold.co/600x400/FFD700/000?text=TypingTester+Screenshot1"],
+      images: ["https://placehold.co/600x400/FF0080/FFF?text=Typing+Tester"],
       techUsed: ["HTML", "CSS", "JavaScript", "React"],
       challenges: "Implementing accurate timer logic, real-time character comparison, and user performance tracking.",
       liveLink: "#",
@@ -102,7 +102,7 @@ const defaultPortfolioData = {
       name: "Secure IoT Dashboard",
       description: "Developed a real-time IoT dashboard with enhanced security features for data transmission and device management.",
       category: "Cybersecurity",
-      images: ["https://placehold.co/600x400/FFD700/000?text=IOTDashboard+Screenshot1"],
+      images: ["https://placehold.co/600x400/00BFFF/FFF?text=IoT+Dashboard"],
       techUsed: ["React", "Node.js", "MQTT", "TLS", "MongoDB"],
       challenges: "Securing data at rest and in transit for various IoT devices, implementing robust access controls.",
       liveLink: "#",
@@ -112,7 +112,7 @@ const defaultPortfolioData = {
       name: "Serverless E-commerce API",
       description: "Designed and deployed a scalable and cost-effective e-commerce API leveraging AWS Lambda and API Gateway.",
       category: "Cloud Computing",
-      images: ["https://placehold.co/600x400/FFD700/000?text=EcommerceAPI+Screenshot1"],
+      images: ["https://placehold.co/600x400/5A189A/FFF?text=Serverless+API"],
       techUsed: ["AWS Lambda", "API Gateway", "DynamoDB", "Node.js"],
       challenges: "Managing serverless cold starts, optimizing data access patterns for high traffic, and ensuring data consistency.",
       liveLink: "#",
@@ -122,7 +122,7 @@ const defaultPortfolioData = {
       name: "Portfolio Website",
       description: "Created this responsive portfolio using React, Tailwind CSS, and Local Storage for dynamic content management, showcasing various skills and projects.",
       category: "Full Stack",
-      images: ["https://placehold.co/600x400/FFD700/000?text=Portfolio+Screenshot1"],
+      images: ["https://placehold.co/600x400/FF0080/FFF?text=Portfolio"],
       techUsed: ["React", "Tailwind CSS", "JavaScript", "Local Storage", "HTML", "CSS"],
       challenges: "Implementing a multi-page structure with client-side routing, responsive design across devices, and theme switching.",
       liveLink: "https://shankarflux.github.io/Shankar_Portifolio/",
@@ -193,7 +193,7 @@ const defaultPortfolioData = {
     "Secured top 5% in national cybersecurity hackathon.",
     "Developed and deployed an open-source AI anomaly detection system on AWS."
   ],
-  profileImage: 'me1.jpg', // Reference to your local image in src/assets/me1.jpg
+  profileImage: 'me1.png', // Corrected to .png
   trackedInterests: [
     { name: "GitHub", image: "https://placehold.co/60x60/181717/FFFFFF?text=GitHub", link: "https://github.com/shankarflux" },
     { name: "LeetCode", image: "https://placehold.co/60x60/FFA116/000000?text=LeetCode", link: "https://leetcode.com/u/Kosuri_Gowry_Sankar/" },
@@ -230,12 +230,17 @@ const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEd
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const navTabs = ['Home', 'About', 'Achievements', 'Contact', 'Blog'];
 
+  const headerBgClass = isDarkMode ? 'bg-dark-bg-end' : 'bg-white';
+  const textColorClass = isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark';
+  const hoverClass = isDarkMode ? 'hover:text-dark-gradient-pink' : 'hover:text-light-accent-blue';
+  const activeClass = isDarkMode ? 'bg-dark-gradient-purple text-white' : 'bg-light-accent-blue text-white';
+
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 py-4 px-4 sm:px-8 shadow-lg transition-colors duration-500 ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-gray-800'}`}>
+    <header className={`fixed top-0 left-0 w-full z-50 py-4 px-4 sm:px-8 shadow-lg transition-colors duration-500 ${headerBgClass} ${textColorClass}`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo/Name */}
         <h1 className="text-2xl font-bold">
-          <span className={`${isDarkMode ? 'text-gold-400' : 'text-blue-600'} transition-colors duration-500`}>Gowry Sankar</span>
+          <span className={`${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-purple'} transition-colors duration-500`}>Gowry Sankar</span>
         </h1>
 
         {/* Desktop Navigation */}
@@ -246,8 +251,8 @@ const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEd
               onClick={() => setActiveTab(tab)}
               className={`py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out transform hover:scale-105
                 ${activeTab === tab
-                  ? `${isDarkMode ? 'bg-gold-500 text-black shadow-lg' : 'bg-blue-600 text-white shadow-lg'}`
-                  : `${isDarkMode ? 'text-gray-200 hover:text-gold-400' : 'text-gray-700 hover:text-blue-600'}`
+                  ? `${activeClass} shadow-lg`
+                  : `${textColorClass} ${hoverClass}`
                 }`}
             >
               {tab}
@@ -260,20 +265,21 @@ const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEd
           {isLocalEditMode && (
             <button
               onClick={() => setShowNotificationModal(true)}
-              className={`hidden md:block py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-green-700 hover:bg-green-800' : 'bg-green-600 hover:bg-green-700'} text-white text-sm`}
+              className={`hidden md:block py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold bg-green-600 hover:bg-green-700 text-white text-sm`}
             >
               Manage Notifications
             </button>
           )}
           <button
             onClick={handleToggleLocalEditMode}
-            className={`hidden md:block py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white text-sm ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'}`}
+            className={`hidden md:block py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white text-sm ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-dark-gradient-blue hover:bg-blue-700'}`}
           >
             {isLocalEditMode ? 'Exit Edit Mode' : 'Toggle Edit Mode'}
           </button>
           <button
             onClick={toggleDarkMode}
-            className={`p-2 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 ${isDarkMode ? 'bg-gray-700 text-gold-300 hover:bg-gray-600' : 'bg-gray-200 text-indigo-700 hover:bg-gray-300'}`}
+            className={`p-2 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105
+              ${isDarkMode ? 'bg-dark-gradient-purple text-accent-gold hover:bg-dark-gradient-blue' : 'bg-light-accent-blue text-white hover:bg-light-accent-purple'}`}
             title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
             {isDarkMode ? (
@@ -289,7 +295,7 @@ const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEd
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={`md:hidden p-2 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-dark-gradient-pink' : 'focus:ring-light-accent-blue'}`}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -308,8 +314,8 @@ const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEd
                 onClick={() => { setActiveTab(tab); setIsMobileMenuOpen(false); }}
                 className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300
                   ${activeTab === tab
-                    ? `${isDarkMode ? 'bg-gold-600 text-black' : 'bg-blue-600 text-white'}`
-                    : `${isDarkMode ? 'text-gray-200 hover:bg-gray-700 hover:text-gold-400' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'}`
+                    ? `${activeClass}`
+                    : `${textColorClass} ${hoverClass}`
                   }`}
               >
                 {tab}
@@ -318,14 +324,14 @@ const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEd
             {isLocalEditMode && (
               <button
                 onClick={() => { setShowNotificationModal(true); setIsMobileMenuOpen(false); }}
-                className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300 ${isDarkMode ? 'bg-green-700 hover:bg-green-800' : 'bg-green-600 hover:bg-green-700'} text-white`}
+                className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300 bg-green-600 hover:bg-green-700 text-white`}
               >
                 Manage Notifications
               </button>
             )}
             <button
               onClick={() => { handleToggleLocalEditMode(); setIsMobileMenuOpen(false); }}
-              className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300 text-white ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'}`}
+              className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300 text-white ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-dark-gradient-blue hover:bg-blue-700'}`}
             >
               {isLocalEditMode ? 'Exit Edit Mode' : 'Toggle Edit Mode'}
             </button>
@@ -338,15 +344,17 @@ const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEd
 
 // SkillBar component for visual proficiency
 const SkillBar = ({ skill, isDarkMode }) => {
-  const barColor = isDarkMode ? 'bg-gold-500' : 'bg-blue-500';
-  const textColor = isDarkMode ? 'text-gray-200' : 'text-gray-800';
+  const barColor = isDarkMode ? 'bg-dark-gradient-pink' : 'bg-light-accent-blue';
+  const textColor = isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark';
+  const bgColor = isDarkMode ? 'bg-dark-bg-start' : 'bg-gray-300'; // Adjusted for new dark theme background
+
   return (
     <div className="mb-4">
       <div className="flex justify-between items-center mb-1">
         <span className={`font-semibold ${textColor}`}>{skill.name}</span>
         <span className={`text-sm font-medium ${textColor}`}>{skill.level}%</span>
       </div>
-      <div className={`w-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'} rounded-full h-2.5`}>
+      <div className={`w-full ${bgColor} rounded-full h-2.5`}>
         <div
           className={`${barColor} h-2.5 rounded-full transition-all duration-1000 ease-out`}
           style={{ width: `${skill.level}%` }}
@@ -360,9 +368,16 @@ const SkillBar = ({ skill, isDarkMode }) => {
 const ProjectDetailModal = ({ project, isDarkMode, onClose }) => {
   if (!project) return null;
 
+  const bgColorClass = isDarkMode ? 'bg-dark-bg-end' : 'bg-white';
+  const headingColorClass = isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-blue';
+  const textColorClass = isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark';
+  const accentTextColor = isDarkMode ? 'text-dark-gradient-blue' : 'text-light-accent-purple';
+  const buttonBgClass = isDarkMode ? 'bg-dark-gradient-purple hover:bg-dark-gradient-blue' : 'bg-light-accent-blue hover:bg-light-accent-purple';
+  const secondaryButtonBgClass = isDarkMode ? 'bg-dark-bg-start hover:bg-dark-gradient-purple' : 'bg-gray-300 hover:bg-gray-400';
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[100]">
-      <div className={`relative ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-6 sm:p-8 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transition-colors duration-300 transform scale-95 opacity-0 animate-scale-in`}>
+      <div className={`relative ${bgColorClass} ${textColorClass} p-6 sm:p-8 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transition-colors duration-300 transform scale-95 opacity-0 animate-scale-in`}>
         <button
           onClick={onClose}
           className={`absolute top-3 right-3 p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'} transition-all duration-300`}
@@ -370,7 +385,7 @@ const ProjectDetailModal = ({ project, isDarkMode, onClose }) => {
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
 
-        <h3 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-gold-400' : 'text-blue-600'}`}>{project.name}</h3>
+        <h3 className={`text-3xl font-bold mb-4 ${headingColorClass}`}>{project.name}</h3>
         <p className={`text-sm italic mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Category: {project.category || 'Uncategorized'}</p>
 
         {project.images && project.images.length > 0 && (
@@ -381,14 +396,14 @@ const ProjectDetailModal = ({ project, isDarkMode, onClose }) => {
           </div>
         )}
 
-        <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{project.description}</p>
+        <p className={`mb-4 leading-relaxed ${textColorClass}`}>{project.description}</p>
 
         {project.techUsed && project.techUsed.length > 0 && (
           <div className="mb-4">
-            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-gold-300' : 'text-blue-500'}`}>Technologies Used:</h4>
+            <h4 className={`font-semibold mb-2 ${accentTextColor}`}>Technologies Used:</h4>
             <div className="flex flex-wrap gap-2">
               {project.techUsed.map((tech, idx) => (
-                <span key={idx} className={`px-3 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-700 text-gold-200' : 'bg-blue-100 text-blue-800'}`}>
+                <span key={idx} className={`px-3 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-dark-gradient-purple text-white' : 'bg-light-accent-blue text-white'}`}>
                   {tech}
                 </span>
               ))}
@@ -398,21 +413,21 @@ const ProjectDetailModal = ({ project, isDarkMode, onClose }) => {
 
         {project.challenges && (
           <div className="mb-4">
-            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-gold-300' : 'text-blue-500'}`}>Challenges:</h4>
-            <p className={`italic ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{project.challenges}</p>
+            <h4 className={`font-semibold mb-2 ${accentTextColor}`}>Challenges:</h4>
+            <p className={`italic ${textColorClass}`}>{project.challenges}</p>
           </div>
         )}
 
         <div className="flex flex-wrap gap-4 mt-6">
           {project.liveLink && project.liveLink !== '#' && (
             <a href={project.liveLink} target="_blank" rel="noopener noreferrer"
-               className={`flex items-center justify-center px-4 py-2 rounded-md font-bold transition duration-300 ease-in-out transform hover:scale-105 ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}>
+               className={`flex items-center justify-center px-4 py-2 rounded-md font-bold text-white transition duration-300 ease-in-out transform hover:scale-105 ${buttonBgClass}`}>
               <i className="fas fa-external-link-alt mr-2"></i> Live Demo
             </a>
           )}
           {project.githubLink && project.githubLink !== '#' && (
             <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
-               className={`flex items-center justify-center px-4 py-2 rounded-md font-bold transition duration-300 ease-in-out transform hover:scale-105 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'}`}>
+               className={`flex items-center justify-center px-4 py-2 rounded-md font-bold transition duration-300 ease-in-out transform hover:scale-105 ${secondaryButtonBgClass} ${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'}`}>
               <i className="fab fa-github mr-2"></i> GitHub Repo
             </a>
           )}
@@ -435,15 +450,16 @@ function App() {
 
       // Ensure that if new fields are added to defaultPortfolioData, they exist in saved data
       return { ...defaultPortfolioData, ...parsedData };
-    } catch (error) {
+    } catch (error)
+    {
       console.error("Error parsing portfolioData from localStorage:", error);
       return defaultPortfolioData; // Fallback to default on error
     }
   });
 
   const [isLocalEditMode, setIsLocalEditMode] = useState(false);
-  const [showInfoModal, setShowInfoModal] = useState(false); // Renamed from showLoginModal for clarity
-  const [infoMessage, setInfoMessage] = useState(''); // Renamed from loginMessage
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [infoMessage, setInfoMessage] = useState('');
 
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [notifications, setNotifications] = useState(() => {
@@ -465,24 +481,25 @@ function App() {
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectDesc, setNewProjectDesc] = useState('');
   const [newProjectCategory, setNewProjectCategory] = useState('');
-  const [newProjectImages, setNewProjectImages] = useState(''); // New for project images (comma-separated URLs)
-  const [newProjectTechUsed, setNewProjectTechUsed] = useState(''); // New for project tech (comma-separated)
-  const [newProjectChallenges, setNewProjectChallenges] = useState(''); // New for project challenges
-  const [newProjectLiveLink, setNewProjectLiveLink] = useState(''); // New for project live link
-  const [newProjectGithubLink, setNewProjectGithubLink] = useState(''); // New for project github link
+  const [newProjectImages, setNewProjectImages] = useState('');
+  const [newProjectTechUsed, setNewProjectTechUsed] = useState('');
+  const [newProjectChallenges, setNewProjectChallenges] = useState('');
+  const [newProjectLiveLink, setNewProjectLiveLink] = useState('');
+  const [newProjectGithubLink, setNewProjectGithubLink] = useState('');
 
 
   const [newCourseName, setNewCourseName] = useState('');
   const [newCourseCert, setNewCourseCert] = useState('');
-  const [newCourseDesc, setNewCourseDesc] = useState(''); // New for course description
-  const [newCourseLink, setNewCourseLink] = useState(''); // New for course link
+  const [newCourseDesc, setNewCourseDesc] = useState('');
+  const [newCourseLink, setNewCourseLink] = useState('');
 
-  const [newSkillName, setNewSkillName] = useState(''); // New for skill name
-  const [newSkillLevel, setNewSkillLevel] = useState(0); // New for skill level
-  const [newSkillCategory, setNewSkillCategory] = useState(''); // New for skill category
+  const [newSkillName, setNewSkillName] = useState('');
+  const [newSkillLevel, setNewSkillLevel] = useState(0);
+  const [newSkillCategory, setNewSkillCategory] = useState('');
 
-  const [profileImageUrl, setProfileImageUrl] = useState(`/${portfolioData.profileImage}`); // Use public path for local image
-  const [selectedProject, setSelectedProject] = useState(null); // State for selected project in modal
+  // Correctly reference the local asset path for profile image
+  const [profileImageUrl, setProfileImageUrl] = useState(`/assets/${portfolioData.profileImage}`);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   // Tracked Interests specific states
   const [showAddProfileModal, setShowAddProfileModal] = useState(false);
@@ -494,7 +511,7 @@ function App() {
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactMessage, setContactMessage] = useState('');
-  const [contactStatus, setContactStatus] = useState(''); // 'success', 'error', 'sending'
+  const [contactStatus, setContactStatus] = useState('');
 
   // Dark/Light Mode state (already local storage based)
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -562,10 +579,16 @@ function App() {
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
-      document.body.className = 'bg-gray-900'; // Ensure body background matches for full screen
+      // Apply dark mode gradient background to the entire body
+      document.body.style.background = 'linear-gradient(135deg, var(--tw-colors-dark-bg-start) 0%, var(--tw-colors-dark-bg-end) 100%)';
+      document.body.style.minHeight = '100vh'; // Ensure it covers full height
+      document.body.style.transition = 'background 0.5s ease-in-out';
     } else {
       document.documentElement.classList.remove('dark');
-      document.body.className = 'bg-gray-100'; // Ensure body background matches for full screen
+      // Apply light mode background
+      document.body.style.background = 'linear-gradient(135deg, #F0F2F5 0%, #E6E8EB 100%)'; // Light gray gradient
+      document.body.style.minHeight = '100vh';
+      document.body.style.transition = 'background 0.5s ease-in-out';
     }
     localStorage.setItem('theme-mode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
@@ -592,7 +615,7 @@ function App() {
 
   const handleAddNotification = () => {
     if (!newNotification.trim()) {
-      setInfoMessage("Cannot add empty notification.");
+      setInfoModalMessage("Cannot add empty notification."); // Use setInfoModalMessage if exists, or setInfoMessage
       return;
     }
     const newId = Date.now().toString(); // Simple ID for local storage
@@ -820,11 +843,23 @@ function App() {
 
   // Home Page Content
   const HomePage = () => (
-    <div className={`relative min-h-screen flex items-center justify-center p-4 sm:p-8 overflow-hidden
-      ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-gray-800'}`}>
-      {/* Background Video */}
+    <div className={`relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 overflow-hidden pt-20
+      ${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'}`}>
+      {/* Dynamic Background Elements for Dark Mode (Cloning the image) */}
+      {isDarkMode && (
+        <>
+          {/* Main large circle (like the VR headset image) */}
+          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/3 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-dark-gradient-purple to-dark-gradient-blue opacity-50 blur-3xl z-0 hidden lg:block animate-fade-in"></div>
+          {/* Smaller abstract shapes/lines */}
+          <div className="absolute left-10 top-1/4 w-40 h-40 rounded-full bg-dark-gradient-pink opacity-30 blur-2xl z-0 animate-fade-in hidden md:block"></div>
+          <div className="absolute bottom-5 right-1/4 w-60 h-60 rounded-full bg-dark-gradient-blue opacity-30 blur-2xl z-0 animate-fade-in hidden md:block"></div>
+          <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-dark-gradient-pink blur-sm animate-pulse-slow"></div> {/* Small pulsing dot */}
+        </>
+      )}
+
+      {/* Background Video (Subtle, for both themes, adjusted opacity) */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-10" // Reduced opacity for subtlety
         src="https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-and-red-lines-41589-large.mp4" // Abstract tech video
         autoPlay
         loop
@@ -833,16 +868,17 @@ function App() {
       >
         Your browser does not support the video tag.
       </video>
-      {/* Overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-80 z-10"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-80 z-10"></div>
+
+      {/* Overlay for text readability and theme blending */}
+      <div className={`absolute inset-0 z-10 ${isDarkMode ? 'bg-gradient-to-b from-dark-bg-start to-dark-bg-end opacity-90' : 'bg-gradient-to-b from-white to-gray-100 opacity-80'}`}></div>
 
 
-      <div className="relative z-20 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
-        {/* Profile Picture */}
-        <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-2xl border-4 sm:border-8 border-gold-400 group flex-shrink-0 mb-8 transition-all duration-500 transform hover:scale-105">
+      <div className="relative z-20 flex flex-col items-center justify-center text-center max-w-4xl mx-auto min-h-[calc(100vh-100px)] pt-16 animate-fade-in"> {/* Adjusted pt for header */}
+        {/* Profile Picture and Glowing Border */}
+        <div className={`relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-2xl group flex-shrink-0 mb-8 transition-all duration-500 transform hover:scale-105
+            ${isDarkMode ? 'border-4 sm:border-8 border-dark-gradient-pink shadow-glow-pink' : 'border-4 sm:border-8 border-light-accent-blue shadow-lg'}`}>
           <img
-            src={profileImageUrl === 'me1.jpg' ? `/assets/me1.jpg` : profileImageUrl} // Reference local asset directly
+            src={profileImageUrl}
             alt="Gowry Sankar Profile"
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
@@ -863,30 +899,55 @@ function App() {
           )}
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">
-          Hi, I'm <span className="text-gold-400">Gowry Sankar</span>
+        <h1 className={`text-4xl sm:text-6xl font-extrabold mb-4 drop-shadow-lg
+          ${isDarkMode ? 'text-white' : 'text-text-light-dark'}`}> {/* Text color adjusted for dark/light */}
+          Hi, I'm <span className={`${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-blue'} gradient-text`}>Gowry Sankar</span>
         </h1>
-        <p className="text-xl sm:text-2xl font-semibold text-gray-300 mb-6 max-w-2xl">
+        <p className={`text-xl sm:text-2xl font-semibold mb-6 max-w-2xl
+          ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
           Full Stack Developer & UI/UX Designer
         </p>
-        <p className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-8 max-w-3xl">
-          {portfolioData.about.split('. ')[0]}. {/* Display first sentence or two */}
+        <p className={`text-lg sm:text-xl leading-relaxed mb-8 max-w-3xl
+          ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          {portfolioData.about.split('. ').slice(0,2).join('. ')}. {/* Display first two sentences */}
         </p>
 
-        {/* Typing Animation Section */}
-        <div className="w-full max-w-xl text-lg sm:text-xl font-light text-gold-300 bg-gray-800 bg-opacity-70 rounded-xl p-6 flex items-center justify-center min-h-[90px] shadow-lg border border-gold-500 animate-pulse-border">
+        {/* Typing Animation Section - Styled like the 'metaverse world' section */}
+        <div className={`w-full max-w-xl text-lg sm:text-xl font-light rounded-xl p-6 flex items-center justify-center min-h-[90px] shadow-lg border animate-pulse-border
+          ${isDarkMode ? 'bg-dark-bg-start bg-opacity-80 border-dark-gradient-blue text-dark-gradient-blue' : 'bg-gray-100 bg-opacity-80 border-light-accent-blue text-light-accent-blue'}`}>
             <span ref={typingRef} className="whitespace-pre-wrap">{displayedQuote}</span>
         </div>
 
-        {/* Track My Interests Portal - Direct Access */}
-        <div className={`mt-12 w-full max-w-2xl pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} text-center`}>
-            <h3 className={`text-2xl sm:text-3xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-6`}>Track My Interests</h3>
+        {/* Call to action buttons mimicking the reference image */}
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-12">
+            <button
+                onClick={() => setActiveTab('About')}
+                className={`py-3 px-8 rounded-lg font-bold text-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-xl
+                  ${isDarkMode ? 'bg-dark-gradient-purple text-white hover:bg-dark-gradient-blue' : 'bg-light-accent-blue text-white hover:bg-light-accent-purple'}`}
+            >
+                Learn More
+            </button>
+            <button
+                onClick={() => setActiveTab('Achievements')}
+                className={`py-3 px-8 rounded-lg font-bold text-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-xl
+                  ${isDarkMode ? 'bg-dark-gradient-pink text-white hover:bg-dark-gradient-purple' : 'bg-light-accent-pink text-white hover:bg-light-accent-purple'}`}
+            >
+                View My Work
+            </button>
+        </div>
+
+
+        {/* Track My Interests Portal - Direct Access, styled */}
+        <div className={`mt-16 w-full max-w-3xl pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} text-center animate-fade-in`}>
+            <h3 className={`text-2xl sm:text-3xl font-bold mb-6
+              ${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-purple'}`}>Track My Interests</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {(portfolioData.trackedInterests || []).map((profile, index) => (
-                    <div key={index} className={`relative group ${isDarkMode ? 'bg-gray-700' : 'bg-white'} p-4 rounded-xl shadow-lg flex flex-col items-center justify-center text-center transition-all duration-300 transform hover:scale-105 hover:shadow-xl`}>
+                    <div key={index} className={`relative group p-4 rounded-xl shadow-lg flex flex-col items-center justify-center text-center transition-all duration-300 transform hover:scale-105 hover:shadow-xl
+                      ${isDarkMode ? 'bg-dark-bg-start' : 'bg-white'} border border-transparent ${isDarkMode ? 'hover:border-dark-gradient-blue' : 'hover:border-light-accent-blue'}`}>
                         <a href={profile.link} target="_blank" rel="noopener noreferrer" className="block">
-                            <img src={profile.image} alt={profile.name} className="w-16 h-16 rounded-full mx-auto mb-3 object-contain border-2 border-blue-400" />
-                            <span className={`${isDarkMode ? 'text-gray-200' : 'text-gray-700'} font-semibold text-sm sm:text-base`}>{profile.name}</span>
+                            <img src={profile.image} alt={profile.name} className="w-16 h-16 rounded-full mx-auto mb-3 object-contain border-2 border-dark-gradient-purple" />
+                            <span className={`${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'} font-semibold text-sm sm:text-base`}>{profile.name}</span>
                         </a>
                         {isLocalEditMode && (
                             <button
@@ -902,7 +963,8 @@ function App() {
             {isLocalEditMode && (
                 <button
                     onClick={handleAddProfile}
-                    className={`mt-8 py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+                    className={`mt-8 py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white
+                      ${isDarkMode ? 'bg-dark-gradient-blue hover:bg-dark-gradient-purple' : 'bg-light-accent-blue hover:bg-light-accent-purple'}`}
                 >
                     Add More Profiles
                 </button>
@@ -914,332 +976,352 @@ function App() {
 
   // About Page Content
   const AboutPage = () => (
-    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
-      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-gold-400' : 'text-blue-600'}`}>About Me</h2>
-      <div className="relative group">
-        <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>{portfolioData.about}</p>
-        {isLocalEditMode && (
-          <button
-            onClick={() => handleEdit('about', portfolioData.about)}
-            className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-          >
-            <i className="fas fa-edit text-sm"></i>
-          </button>
-        )}
-      </div>
+    <div className={`w-full min-h-screen pt-20 p-4 sm:p-8 ${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'} transition-colors duration-500`}>
+      <div className={`max-w-7xl mx-auto rounded-lg shadow-xl p-6 sm:p-10 ${isDarkMode ? 'bg-dark-bg-end' : 'bg-white'} animate-fade-in`}>
+        <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-purple'}`}>About Me</h2>
+        <div className="relative group">
+          <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>{portfolioData.about}</p>
+          {isLocalEditMode && (
+            <button
+              onClick={() => handleEdit('about', portfolioData.about)}
+              className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+            >
+              <i className="fas fa-edit text-sm"></i>
+            </button>
+          )}
+        </div>
 
-      <div className={`mt-10 pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-        <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-6`}>My Core Interests</h3>
-        <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'} mb-6`}>
-          My professional journey is driven by a deep fascination with cutting-edge technologies and their application. I am particularly passionate about:
-        </p>
-        <ul className={`list-disc list-inside space-y-3 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-          <li><strong>Cybersecurity:</strong> Safeguarding digital assets and exploring robust defense mechanisms against evolving threats.</li>
-          <li><strong>AI Development:</strong> Crafting intelligent systems that can learn, adapt, and solve complex problems.</li>
-          <li><strong>Cloud Computing:</strong> Architecting scalable, resilient, and efficient solutions leveraging cloud platforms.</li>
-          <li><strong>Full Stack Development:</strong> Bridging the gap between beautiful user interfaces and powerful backend systems.</li>
-          <li><strong>UI/UX Design:</strong> Creating intuitive and delightful user experiences that are both functional and aesthetically pleasing.</li>
-        </ul>
+        <div className={`mt-10 pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-dark-gradient-blue' : 'text-light-accent-blue'} mb-6`}>My Core Interests</h3>
+          <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'} mb-6`}>
+            My professional journey is driven by a deep fascination with cutting-edge technologies and their application. I am particularly passionate about:
+          </p>
+          <ul className={`list-disc list-inside space-y-3 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+            <li><strong>Cybersecurity:</strong> Safeguarding digital assets and exploring robust defense mechanisms against evolving threats.</li>
+            <li><strong>AI Development:</strong> Crafting intelligent systems that can learn, adapt, and solve complex problems.</li>
+            <li><strong>Cloud Computing:</strong> Architecting scalable, resilient, and efficient solutions leveraging cloud platforms.</li>
+            <li><strong>Full Stack Development:</strong> Bridging the gap between beautiful user interfaces and powerful backend systems.</li>
+            <li><strong>UI/UX Design:</strong> Creating intuitive and delightful user experiences that are both functional and aesthetically pleasing.</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
 
   // Achievements Page (Parent)
   const AchievementsPage = () => (
-    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
-      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-teal-400' : 'text-teal-600'}`}>My Achievements & Expertise</h2>
+    <div className={`w-full min-h-screen pt-20 p-4 sm:p-8 ${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'} transition-colors duration-500`}>
+      <div className={`max-w-7xl mx-auto rounded-lg shadow-xl p-6 sm:p-10 ${isDarkMode ? 'bg-dark-bg-end' : 'bg-white'} animate-fade-in`}>
+        <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-purple'}`}>My Achievements & Expertise</h2>
 
-      {/* Sub-navigation for Achievements */}
-      <div className={`flex flex-wrap justify-center sm:justify-start space-x-2 sm:space-x-4 mb-8 p-2 rounded-lg ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
-        {['Courses', 'Skills', 'Projects'].map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveAchievementsSubTab(tab)}
-            className={`py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out transform hover:scale-105 ${
-              activeAchievementsSubTab === tab
-                ? `${isDarkMode ? 'bg-gold-500 text-black shadow-lg' : 'bg-blue-600 text-white shadow-lg'}`
-                : `${isDarkMode ? 'text-gray-200 hover:text-gold-400' : 'text-gray-700 hover:text-blue-600'}`
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* Conditional rendering for sub-tabs */}
-      {activeAchievementsSubTab === 'Courses' && (
-        <div className={`p-6 rounded-lg shadow-inner relative ${isDarkMode ? 'bg-gray-700' : 'bg-yellow-50'} transition-colors duration-300`}>
-          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'} mb-4`}>Courses & Certifications</h3>
-          <div className="space-y-6">
-            {(portfolioData.courses || []).map((course, index) => (
-              <div key={index} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
-                <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}`}>{course.name}</h4>
-                <p className={`text-gray-400 text-sm mb-2`}>{course.certificate}</p>
-                <p className={`text-gray-300`}>{course.description}</p>
-                {course.link && course.link !== '#' && (
-                    <a href={course.link} target="_blank" rel="noopener noreferrer"
-                       className={`mt-3 inline-flex items-center text-sm font-medium ${isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}>
-                        View Credential <i className="fas fa-external-link-alt ml-2 text-xs"></i>
-                    </a>
-                )}
-                {isLocalEditMode && (
-                  <button
-                    onClick={() => handleDeleteItem('courses', index)}
-                    className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                  >
-                    <i className="fas fa-trash-alt text-sm"></i>
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-          {isLocalEditMode && (
+        {/* Sub-navigation for Achievements */}
+        <div className={`flex flex-wrap justify-center sm:justify-start space-x-2 sm:space-x-4 mb-8 p-2 rounded-lg ${isDarkMode ? 'bg-dark-bg-start' : 'bg-gray-200'}`}>
+          {['Courses', 'Skills', 'Projects'].map(tab => (
             <button
-              onClick={() => handleAddItem('courses')}
-              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-            >
-              Add Course
-            </button>
-          )}
-          {isLocalEditMode && (
-            <button
-              onClick={() => handleEdit('courses', portfolioData.courses)}
-              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
-            >
-              Edit Courses
-            </button>
-          )}
-        </div>
-      )}
-
-      {activeAchievementsSubTab === 'Skills' && (
-        <div className={`p-6 rounded-lg shadow-inner transition-colors duration-300 ${isDarkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
-          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-4`}>Technical Skills</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Object.keys(portfolioData.skills || {}).map(category => (
-              <div key={category} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
-                <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-3 capitalize`}>
-                  {category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
-                </h4>
-                <div className="space-y-3">
-                  {(portfolioData.skills[category] || []).map((skill, idx) => (
-                    <div key={idx} className="relative group">
-                      <SkillBar skill={skill} isDarkMode={isDarkMode} />
-                      {isLocalEditMode && (
-                        <button
-                          onClick={() => handleDeleteItem(`skills.${category}`, idx)} // Pass category and index
-                          className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                        >
-                          <i className="fas fa-trash-alt text-xs"></i>
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                {isLocalEditMode && (
-                    <button
-                        onClick={() => handleEdit(`skills.${category}`, portfolioData.skills[category])}
-                        className={`mt-4 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
-                    >
-                        Edit {category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} Skills
-                    </button>
-                )}
-              </div>
-            ))}
-          </div>
-          {isLocalEditMode && (
-            <button
-              onClick={() => handleAddItem('skills')}
-              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-            >
-              Add New Skill
-            </button>
-          )}
-        </div>
-      )}
-
-      {activeAchievementsSubTab === 'Projects' && (
-        <div className={`p-6 rounded-lg shadow-inner relative ${isDarkMode ? 'bg-gray-700' : 'bg-red-50'} transition-colors duration-300`}>
-          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-red-400' : 'text-red-600'} mb-4`}>My Projects</h3>
-          {/* Project Category Filters */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {projectCategories.map(category => (
-              <button
-                key={category}
-                onClick={() => setCurrentProjectFilter(category)}
-                className={`py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 ease-in-out ${
-                  currentProjectFilter === category
-                    ? `${isDarkMode ? 'bg-gold-600 text-black' : 'bg-blue-600 text-white'}`
-                    : `${isDarkMode ? 'bg-gray-600 text-gray-200 hover:bg-gray-500' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`
+              key={tab}
+              onClick={() => setActiveAchievementsSubTab(tab)}
+              className={`py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out transform hover:scale-105
+                ${activeAchievementsSubTab === tab
+                  ? `${isDarkMode ? 'bg-dark-gradient-blue text-white shadow-lg' : 'bg-light-accent-blue text-white shadow-lg'}`
+                  : `${isDarkMode ? 'text-gray-200 hover:text-dark-gradient-pink' : 'text-gray-700 hover:text-light-accent-blue'}`
                 }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(filteredProjects || []).map((project, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectedProject(project)}
-                className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group cursor-pointer transition-colors duration-300 transform hover:scale-105 hover:shadow-xl`}
-              >
-                <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-2`}>{project.name}</h4>
-                <p className={`text-gray-400 mb-2 text-sm italic`}>Category: {project.category || 'Uncategorized'}</p>
-                {project.images && project.images.length > 0 && (
-                  <img src={project.images[0]} alt={`${project.name} thumbnail`} className="w-full h-32 object-cover rounded-md mb-3" />
-                )}
-                <p className={`text-gray-300 line-clamp-3`}>{project.description}</p>
-                <button
-                    className={`mt-3 text-sm font-medium ${isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}
-                    onClick={(e) => { e.stopPropagation(); setSelectedProject(project); }} // Stop propagation to prevent parent div click
-                >
-                    Learn More <i className="fas fa-arrow-right text-xs ml-1"></i>
-                </button>
-                {isLocalEditMode && (
-                  <button
-                    onClick={(e) => { e.stopPropagation(); handleDeleteItem('projects', portfolioData.projects.indexOf(project)); }} // Stop propagation
-                    className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                  >
-                    <i className="fas fa-trash-alt text-sm"></i>
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-          {isLocalEditMode && (
-            <button
-              onClick={() => handleAddItem('projects')}
-              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
             >
-              Add Project
+              {tab}
             </button>
-          )}
-          {isLocalEditMode && (
-            <button
-              onClick={() => handleEdit('projects', portfolioData.projects)}
-              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
-            >
-              Edit Projects (JSON)
-            </button>
-          )}
+          ))}
         </div>
-      )}
+
+        {/* Conditional rendering for sub-tabs */}
+        {activeAchievementsSubTab === 'Courses' && (
+          <div className={`p-6 rounded-lg shadow-inner relative ${isDarkMode ? 'bg-dark-bg-start' : 'bg-yellow-50'} transition-colors duration-300`}>
+            <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-accent-gold' : 'text-yellow-600'} mb-4`}>Courses & Certifications</h3>
+            <div className="space-y-6">
+              {(portfolioData.courses || []).map((course, index) => (
+                <div key={index} className={`${isDarkMode ? 'bg-dark-bg-end' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
+                  <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-dark-gradient-pink' : 'text-text-light-dark'}`}>{course.name}</h4>
+                  <p className={`text-sm mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{course.certificate}</p>
+                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{course.description}</p>
+                  {course.link && course.link !== '#' && (
+                      <a href={course.link} target="_blank" rel="noopener noreferrer"
+                         className={`mt-3 inline-flex items-center text-sm font-medium ${isDarkMode ? 'text-dark-gradient-blue hover:text-dark-gradient-pink' : 'text-light-accent-blue hover:text-light-accent-purple'}`}>
+                          View Credential <i className="fas fa-external-link-alt ml-2 text-xs"></i>
+                      </a>
+                  )}
+                  {isLocalEditMode && (
+                    <button
+                      onClick={() => handleDeleteItem('courses', index)}
+                      className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                    >
+                      <i className="fas fa-trash-alt text-sm"></i>
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+            {isLocalEditMode && (
+              <button
+                onClick={() => handleAddItem('courses')}
+                className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold text-white
+                  ${isDarkMode ? 'bg-dark-gradient-blue hover:bg-dark-gradient-purple' : 'bg-light-accent-blue hover:bg-light-accent-purple'}`}
+              >
+                Add Course
+              </button>
+            )}
+            {isLocalEditMode && (
+              <button
+                onClick={() => handleEdit('courses', portfolioData.courses)}
+                className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white
+                  ${isDarkMode ? 'bg-accent-gold text-black hover:bg-yellow-600' : 'bg-yellow-500 hover:bg-yellow-600 text-white'}`}
+              >
+                Edit Courses (JSON)
+              </button>
+            )}
+          </div>
+        )}
+
+        {activeAchievementsSubTab === 'Skills' && (
+          <div className={`p-6 rounded-lg shadow-inner transition-colors duration-300 ${isDarkMode ? 'bg-dark-bg-start' : 'bg-green-50'}`}>
+            <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-dark-gradient-blue' : 'text-green-600'} mb-4`}>Technical Skills</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Object.keys(portfolioData.skills || {}).map(category => (
+                <div key={category} className={`${isDarkMode ? 'bg-dark-bg-end' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
+                  <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-dark-gradient-pink' : 'text-text-light-dark'} mb-3 capitalize`}>
+                    {category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                  </h4>
+                  <div className="space-y-3">
+                    {(portfolioData.skills[category] || []).map((skill, idx) => (
+                      <div key={idx} className="relative group">
+                        <SkillBar skill={skill} isDarkMode={isDarkMode} />
+                        {isLocalEditMode && (
+                          <button
+                            onClick={() => handleDeleteItem(`skills.${category}`, idx)} // Pass category and index
+                            className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                          >
+                            <i className="fas fa-trash-alt text-xs"></i>
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  {isLocalEditMode && (
+                      <button
+                          onClick={() => handleEdit(`skills.${category}`, portfolioData.skills[category])}
+                          className={`mt-4 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white
+                            ${isDarkMode ? 'bg-accent-gold text-black hover:bg-yellow-600' : 'bg-yellow-500 hover:bg-yellow-600 text-white'}`}
+                      >
+                          Edit {category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} Skills
+                      </button>
+                  )}
+                </div>
+              ))}
+            </div>
+            {isLocalEditMode && (
+              <button
+                onClick={() => handleAddItem('skills')}
+                className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white
+                  ${isDarkMode ? 'bg-dark-gradient-blue hover:bg-dark-gradient-purple' : 'bg-light-accent-blue hover:bg-light-accent-purple'}`}
+              >
+                Add New Skill
+              </button>
+            )}
+          </div>
+        )}
+
+        {activeAchievementsSubTab === 'Projects' && (
+          <div className={`p-6 rounded-lg shadow-inner relative ${isDarkMode ? 'bg-dark-bg-start' : 'bg-red-50'} transition-colors duration-300`}>
+            <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-dark-gradient-blue' : 'text-red-600'} mb-4`}>My Projects</h3>
+            {/* Project Category Filters */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {projectCategories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => setCurrentProjectFilter(category)}
+                  className={`py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 ease-in-out
+                    ${currentProjectFilter === category
+                      ? `${isDarkMode ? 'bg-dark-gradient-pink text-white' : 'bg-light-accent-blue text-white'}`
+                      : `${isDarkMode ? 'bg-dark-bg-end text-text-dark-light hover:text-dark-gradient-pink' : 'bg-gray-200 text-gray-700 hover:text-light-accent-blue'}`
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {(filteredProjects || []).map((project, index) => (
+                <div
+                  key={index}
+                  onClick={() => setSelectedProject(project)}
+                  className={`p-5 rounded-lg shadow-md relative group cursor-pointer transition-colors duration-300 transform hover:scale-105 hover:shadow-xl
+                    ${isDarkMode ? 'bg-dark-bg-end' : 'bg-white'} border border-transparent ${isDarkMode ? 'hover:border-dark-gradient-blue' : 'hover:border-light-accent-blue'}`}
+                >
+                  <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-dark-gradient-pink' : 'text-text-light-dark'} mb-2`}>{project.name}</h4>
+                  <p className={`text-sm italic mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Category: {project.category || 'Uncategorized'}</p>
+                  {project.images && project.images.length > 0 && (
+                    <img src={project.images[0]} alt={`${project.name} thumbnail`} className="w-full h-32 object-cover rounded-md mb-3" />
+                  )}
+                  <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} line-clamp-3`}>{project.description}</p>
+                  <button
+                      className={`mt-3 text-sm font-medium ${isDarkMode ? 'text-dark-gradient-blue hover:text-dark-gradient-pink' : 'text-light-accent-blue hover:text-light-accent-purple'}`}
+                      onClick={(e) => { e.stopPropagation(); setSelectedProject(project); }}
+                  >
+                      Learn More <i className="fas fa-arrow-right text-xs ml-1"></i>
+                  </button>
+                  {isLocalEditMode && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleDeleteItem('projects', portfolioData.projects.indexOf(project)); }}
+                      className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                    >
+                      <i className="fas fa-trash-alt text-sm"></i>
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+            {isLocalEditMode && (
+              <button
+                onClick={() => handleAddItem('projects')}
+                className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold text-white
+                  ${isDarkMode ? 'bg-dark-gradient-blue hover:bg-dark-gradient-purple' : 'bg-light-accent-blue hover:bg-light-accent-purple'}`}
+              >
+                Add Project
+              </button>
+            )}
+            {isLocalEditMode && (
+              <button
+                onClick={() => handleEdit('projects', portfolioData.projects)}
+                className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white
+                  ${isDarkMode ? 'bg-accent-gold text-black hover:bg-yellow-600' : 'bg-yellow-500 hover:bg-yellow-600 text-white'}`}
+              >
+                Edit Projects (JSON)
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 
   // Contact Page Content
   const ContactPage = () => (
-    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
-      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>Contact Me</h2>
-      <div className={`space-y-4 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-        <p className="flex items-center"><i className="fas fa-envelope mr-3 text-xl text-red-500"></i> <strong>Email:</strong> {portfolioData.contact?.email}</p>
-        <p className="flex items-center"><i className="fas fa-phone mr-3 text-xl text-green-500"></i> <strong>Phone:</strong> {portfolioData.contact?.phone}</p>
-        <p className="flex items-center"><i className="fab fa-linkedin mr-3 text-xl text-blue-500"></i> <strong>LinkedIn:</strong> <a href={portfolioData.contact?.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-blue-400 hover:underline' : 'text-blue-600 hover:underline'}`}>{portfolioData.contact?.linkedin}</a></p>
-        <p className="flex items-center"><i className="fab fa-github mr-3 text-xl text-gray-400"></i> <strong>GitHub:</strong> <a href={portfolioData.contact?.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400 hover:underline' : 'text-gray-700 hover:underline'}`}>{portfolioData.contact?.github}</a></p>
-        {portfolioData.contact?.resumeLink && (
-            <p className="flex items-center">
-                <i className="fas fa-file-download mr-3 text-xl text-purple-500"></i>
-                <a href={portfolioData.contact.resumeLink} download="Gowry_Sankar_Resume.pdf"
-                   className={`font-bold ${isDarkMode ? 'bg-purple-600 hover:bg-purple-700' : 'bg-purple-600 hover:bg-purple-700'} text-white py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105`}>
-                    Download My Resume
-                </a>
-            </p>
+    <div className={`w-full min-h-screen pt-20 p-4 sm:p-8 ${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'} transition-colors duration-500`}>
+      <div className={`max-w-7xl mx-auto rounded-lg shadow-xl p-6 sm:p-10 ${isDarkMode ? 'bg-dark-bg-end' : 'bg-white'} animate-fade-in`}>
+        <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-purple'}`}>Contact Me</h2>
+        <div className={`space-y-4 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+          <p className="flex items-center"><i className={`fas fa-envelope mr-3 text-xl ${isDarkMode ? 'text-dark-gradient-blue' : 'text-light-accent-blue'}`}></i> <strong>Email:</strong> {portfolioData.contact?.email}</p>
+          <p className="flex items-center"><i className={`fas fa-phone mr-3 text-xl ${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-pink'}`}></i> <strong>Phone:</strong> {portfolioData.contact?.phone}</p>
+          <p className="flex items-center"><i className={`fab fa-linkedin mr-3 text-xl ${isDarkMode ? 'text-dark-gradient-blue' : 'text-light-accent-blue'}`}></i> <strong>LinkedIn:</strong> <a href={portfolioData.contact?.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-dark-gradient-blue hover:underline' : 'text-light-accent-blue hover:underline'}`}>{portfolioData.contact?.linkedin}</a></p>
+          <p className="flex items-center"><i className={`fab fa-github mr-3 text-xl ${isDarkMode ? 'text-dark-gradient-pink' : 'text-text-light-dark'}`}></i> <strong>GitHub:</strong> <a href={portfolioData.contact?.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-dark-gradient-pink hover:underline' : 'text-text-light-dark hover:underline'}`}>{portfolioData.contact?.github}</a></p>
+          {portfolioData.contact?.resumeLink && (
+              <p className="flex items-center">
+                  <i className={`fas fa-file-download mr-3 text-xl ${isDarkMode ? 'text-accent-gold' : 'text-purple-500'}`}></i>
+                  <a href={portfolioData.contact.resumeLink} download="Gowry_Sankar_Resume.pdf"
+                     className={`font-bold text-white py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105
+                      ${isDarkMode ? 'bg-dark-gradient-purple hover:bg-dark-gradient-blue' : 'bg-light-accent-purple hover:bg-purple-700'}`}>
+                      Download My Resume
+                  </a>
+              </p>
+          )}
+        </div>
+        {isLocalEditMode && (
+          <button
+            onClick={() => handleEdit('contact', portfolioData.contact)}
+            className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition duration-300 transform hover:scale-110"
+          >
+            <i className="fas fa-edit text-sm"></i> Edit Contact Info
+          </button>
         )}
-      </div>
-      {isLocalEditMode && (
-        <button
-          onClick={() => handleEdit('contact', portfolioData.contact)}
-          className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition duration-300 transform hover:scale-110"
-        >
-          <i className="fas fa-edit text-sm"></i> Edit Contact Info
-        </button>
-      )}
 
-      {/* Contact Form */}
-      <form onSubmit={handleContactSubmit} className="mt-10 pt-8 border-t-2 border-gray-600">
-        <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`}>Send a Message</h3>
-        <input
-          type="text"
-          placeholder="Your Name"
-          className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-          value={contactName}
-          onChange={(e) => setContactName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Your Email"
-          className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-          value={contactEmail}
-          onChange={(e) => setContactEmail(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Your Message"
-          rows="5"
-          className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-          value={contactMessage}
-          onChange={(e) => setContactMessage(e.target.value)}
-          required
-        ></textarea>
-        <button
-          type="submit"
-          className={`w-full py-3 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-green-600 hover:bg-green-700' : 'bg-green-600 hover:bg-green-700'} text-white`}
-          disabled={contactStatus === 'sending'}
-        >
-          {contactStatus === 'sending' ? 'Sending...' : 'Send Message'}
-        </button>
-        {contactStatus === 'success' && <p className="text-green-500 mt-2 text-center">Message received (frontend demo only). A backend service is needed to send actual emails.</p>}
-        {contactStatus === 'error' && <p className="text-red-500 mt-2 text-center">Failed to send message. Please try again.</p>}
-      </form>
+        {/* Contact Form */}
+        <form onSubmit={handleContactSubmit} className="mt-10 pt-8 border-t-2 border-gray-700">
+          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-dark-gradient-blue' : 'text-light-accent-blue'} mb-4`}>Send a Message</h3>
+          <input
+            type="text"
+            placeholder="Your Name"
+            className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2
+              ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
+            value={contactName}
+            onChange={(e) => setContactName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2
+              ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
+            value={contactEmail}
+            onChange={(e) => setContactEmail(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Your Message"
+            rows="5"
+            className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2
+              ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
+            value={contactMessage}
+            onChange={(e) => setContactMessage(e.target.value)}
+            required
+          ></textarea>
+          <button
+            type="submit"
+            className={`w-full py-3 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white
+              ${isDarkMode ? 'bg-dark-gradient-pink hover:bg-dark-gradient-purple' : 'bg-green-600 hover:bg-green-700'}`}
+            disabled={contactStatus === 'sending'}
+          >
+            {contactStatus === 'sending' ? 'Sending...' : 'Send Message'}
+          </button>
+          {contactStatus === 'success' && <p className="text-green-500 mt-2 text-center">Message received (frontend demo only). A backend service is needed to send actual emails.</p>}
+          {contactStatus === 'error' && <p className="text-red-500 mt-2 text-center">Failed to send message. Please try again.</p>}
+        </form>
+      </div>
     </div>
   );
 
   // Blog Page Content
   const BlogPage = () => (
-    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
-      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-orange-400' : 'text-orange-600'}`}>My Blog & Articles</h2>
-      <div className="space-y-8">
-        {(portfolioData.blogPosts || []).map((post, index) => (
-          <div key={post.id || index} className={`${isDarkMode ? 'bg-gray-700' : 'bg-gray-50'} p-6 rounded-lg shadow-md relative group transition-colors duration-300`}>
-            <h3 className={`text-2xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-2`}>{post.title}</h3>
-            <p className={`text-sm italic ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} mb-3`}>
-              {new Date(post.date).toLocaleDateString()} &bull; {post.tags && post.tags.map((tag, idx) => (
-                <span key={idx} className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gold-700 text-gold-200' : 'bg-indigo-100 text-indigo-800'} mr-1`}>{tag}</span>
-              ))}
-            </p>
-            <p className={`text-md leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{post.content}</p>
-            {isLocalEditMode && (
-              <button
-                onClick={() => handleDeleteItem('blogPosts', index)}
-                className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-              >
-                <i className="fas fa-trash-alt text-sm"></i>
-              </button>
-            )}
-          </div>
-        ))}
+    <div className={`w-full min-h-screen pt-20 p-4 sm:p-8 ${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'} transition-colors duration-500`}>
+      <div className={`max-w-7xl mx-auto rounded-lg shadow-xl p-6 sm:p-10 ${isDarkMode ? 'bg-dark-bg-end' : 'bg-white'} animate-fade-in`}>
+        <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-dark-gradient-blue' : 'text-orange-600'}`}>My Blog & Articles</h2>
+        <div className="space-y-8">
+          {(portfolioData.blogPosts || []).map((post, index) => (
+            <div key={post.id || index} className={`${isDarkMode ? 'bg-dark-bg-start' : 'bg-gray-50'} p-6 rounded-lg shadow-md relative group transition-colors duration-300`}>
+              <h3 className={`text-2xl font-semibold ${isDarkMode ? 'text-dark-gradient-pink' : 'text-text-light-dark'} mb-2`}>{post.title}</h3>
+              <p className={`text-sm italic ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} mb-3`}>
+                {new Date(post.date).toLocaleDateString()} &bull; {post.tags && post.tags.map((tag, idx) => (
+                  <span key={idx} className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${isDarkMode ? 'bg-dark-gradient-purple text-white' : 'bg-light-accent-blue text-white'} mr-1`}>{tag}</span>
+                ))}
+              </p>
+              <p className={`text-md leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{post.content}</p>
+              {isLocalEditMode && (
+                <button
+                  onClick={() => handleDeleteItem('blogPosts', index)}
+                  className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                >
+                  <i className="fas fa-trash-alt text-sm"></i>
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+        {isLocalEditMode && (
+          <button
+            onClick={() => handleEdit('blogPosts', portfolioData.blogPosts)}
+            className={`mt-8 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white
+              ${isDarkMode ? 'bg-accent-gold text-black hover:bg-yellow-600' : 'bg-yellow-500 hover:bg-yellow-600 text-white'}`}
+          >
+            Edit Blog Posts (JSON)
+          </button>
+        )}
       </div>
-      {isLocalEditMode && (
-        <button
-          onClick={() => handleEdit('blogPosts', portfolioData.blogPosts)}
-          className={`mt-8 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-        >
-          Edit Blog Posts (JSON)
-        </button>
-      )}
-      {/* Adding a new blog post is done via editing the whole JSON for simplicity in local storage mode */}
     </div>
   );
 
 
   return (
-    <div className={`min-h-screen font-inter flex flex-col items-center transition-colors duration-500 ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-gray-100 text-gray-800'}`}>
+    <div className="min-h-screen font-inter flex flex-col items-center">
       {/* Global Message Display (for local storage info/errors) */}
       {infoMessage && (
-        <div className={`fixed top-4 right-4 ${isDarkMode ? 'bg-indigo-700' : 'bg-indigo-600'} text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2`}>
+        <div className={`fixed top-4 right-4 ${isDarkMode ? 'bg-dark-gradient-purple' : 'bg-light-accent-blue'} text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2`}>
           <span>{infoMessage}</span>
           <button onClick={handleCloseInfoModal} className="ml-2 text-white font-bold">&times;</button>
         </div>
@@ -1266,7 +1348,8 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className={`w-full mt-12 py-6 text-center text-sm ${isDarkMode ? 'bg-gray-900 text-gray-400' : 'bg-gray-100 text-gray-600'} transition-colors duration-500`}>
+      <footer className={`w-full mt-12 py-6 text-center text-sm transition-colors duration-500
+        ${isDarkMode ? 'bg-dark-bg-end text-gray-400' : 'bg-gray-100 text-gray-600'}`}>
         <p>© {new Date().getFullYear()} Kosuri Gowry Sankar. All rights reserved.</p>
         <p>Designed with ❤️ and built with React, Tailwind CSS, and Local Storage.</p>
       </footer>
@@ -1275,14 +1358,14 @@ function App() {
       {/* Modals */}
       {/* Info Modal (for Local Edit Mode status) */}
       {showInfoModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
-          <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[100]">
+          <div className={`${isDarkMode ? 'bg-dark-bg-end text-text-dark-light' : 'bg-white text-text-light-dark'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6 text-center">Local Edit Mode Status</h2>
             <p className="text-lg text-center mb-6">{infoMessage}</p>
             <div className="flex justify-center">
               <button
                 onClick={handleCloseInfoModal}
-                className={`py-2 px-6 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
+                className={`py-2 px-6 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-purple hover:bg-dark-gradient-blue text-white' : 'bg-gray-300 hover:bg-gray-400 text-text-light-dark'} font-bold`}
               >
                 Close
               </button>
@@ -1293,15 +1376,16 @@ function App() {
 
       {/* Notifications Modal */}
       {showNotificationModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
-          <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[80vh] overflow-y-auto transition-colors duration-300`}>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[100]">
+          <div className={`${isDarkMode ? 'bg-dark-bg-end text-text-dark-light' : 'bg-white text-text-light-dark'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6 text-center">Notifications</h2>
             <div className="mb-6">
               <input
                 ref={notificationInputRef}
                 type="text"
                 placeholder="Add new notification"
-                className={`w-full p-3 mb-2 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                className={`w-full p-3 mb-2 border rounded-md focus:outline-none focus:ring-2
+                  ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
                 value={newNotification}
                 onChange={(e) => setNewNotification(e.target.value)}
                 onKeyPress={(e) => {
@@ -1310,14 +1394,14 @@ function App() {
               />
               <button
                 onClick={handleAddNotification}
-                className={`w-full py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-green-600 hover:bg-green-700' : 'bg-green-600 hover:bg-green-700'} text-white font-bold`}
+                className={`w-full py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-pink hover:bg-dark-gradient-purple' : 'bg-green-600 hover:bg-green-700'} text-white font-bold`}
               >
                 Add Notification
               </button>
             </div>
             <ul className="space-y-3">
               {notifications.map((notification) => (
-                <li key={notification.id} className={`flex justify-between items-center p-3 rounded-md shadow-sm ${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
+                <li key={notification.id} className={`flex justify-between items-center p-3 rounded-md shadow-sm ${isDarkMode ? 'bg-dark-bg-start' : 'bg-gray-100'}`}>
                   <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} text-base`}>{notification.message}</span>
                   <button
                     onClick={() => handleDeleteNotification(notification.id)}
@@ -1331,7 +1415,7 @@ function App() {
             <div className="flex justify-end mt-6">
               <button
                 onClick={() => { setShowNotificationModal(false); setInfoMessage(''); }}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
+                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-purple hover:bg-dark-gradient-blue text-white' : 'bg-gray-300 hover:bg-gray-400 text-text-light-dark'} font-bold`}
               >
                 Close
               </button>
@@ -1342,13 +1426,14 @@ function App() {
 
       {/* Edit Modal (for about, contact, skills, achievements, experience, projects, courses, trackedInterests, blogPosts) */}
       {showEditModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
-          <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto transition-colors duration-300`}>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[100]">
+          <div className={`${isDarkMode ? 'bg-dark-bg-end text-text-dark-light' : 'bg-white text-text-light-dark'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Edit {editingField.replace('skills.', '').replace(/([A-Z])/g, ' $1').trim().replace(/^(.)/, (match) => match.toUpperCase())}</h2>
             {infoMessage && <p className="text-red-600 text-center mb-4">{infoMessage}</p>}
             {['about', 'achievements'].includes(editingField) && (
               <textarea
-                className={`w-full p-3 mb-4 border rounded-md h-32 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                className={`w-full p-3 mb-4 border rounded-md h-32 focus:outline-none focus:ring-2
+                  ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
                 placeholder={editingField === 'about' ? "About Me description" : "Enter each achievement on a new line"}
@@ -1356,7 +1441,8 @@ function App() {
             )}
             {editingField === 'contact' && (
               <textarea
-                className={`w-full p-3 mb-4 border rounded-md h-40 font-mono text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                className={`w-full p-3 mb-4 border rounded-md h-40 font-mono text-sm focus:outline-none focus:ring-2
+                  ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
                 placeholder='Enter contact info as JSON: {"email": "...", "phone": "...", "linkedin": "...", "github": "...", "resumeLink": "/resume.pdf"}'
@@ -1364,7 +1450,8 @@ function App() {
             )}
             {editingField.startsWith('skills.') && (
               <textarea
-                className={`w-full p-3 mb-4 border rounded-md h-40 font-mono text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                className={`w-full p-3 mb-4 border rounded-md h-40 font-mono text-sm focus:outline-none focus:ring-2
+                  ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
                 placeholder='Enter skills as JSON array of objects: [{"name": "Skill Name", "level": 90}]'
@@ -1372,7 +1459,8 @@ function App() {
             )}
             {['experience', 'projects', 'courses', 'trackedInterests', 'blogPosts'].includes(editingField) && (
               <textarea
-                className={`w-full p-3 mb-4 border rounded-md h-60 font-mono text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                className={`w-full p-3 mb-4 border rounded-md h-60 font-mono text-sm focus:outline-none focus:ring-2
+                  ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
                 placeholder={`Enter data as a JSON array of objects.
@@ -1386,13 +1474,13 @@ function App() {
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => { setShowEditModal(false); setInfoMessage(''); }}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
+                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-purple hover:bg-dark-gradient-blue text-white' : 'bg-gray-300 hover:bg-gray-400 text-text-light-dark'} font-bold`}
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveEdit}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold`}
+                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-pink hover:bg-dark-gradient-purple text-white' : 'bg-light-accent-blue hover:bg-light-accent-purple text-white'} font-bold`}
               >
                 Save Changes
               </button>
@@ -1403,22 +1491,22 @@ function App() {
 
       {/* Add Item Modal (for projects/courses/skills) */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
-          <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[100]">
+          <div className={`${isDarkMode ? 'bg-dark-bg-end text-text-dark-light' : 'bg-white text-text-light-dark'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Add New {editingField === 'skills' ? 'Skill' : editingField.slice(0, -1)}</h2>
             {infoMessage && <p className="text-red-600 text-center mb-4">{infoMessage}</p>}
             {editingField === 'projects' && (
               <>
-                <input type="text" placeholder="Project Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectName} onChange={(e) => setNewProjectName(e.target.value)} required />
-                <textarea placeholder="Project Description" className={`w-full p-3 mb-4 border rounded-md h-24 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectDesc} onChange={(e) => setNewProjectDesc(e.target.value)} required ></textarea>
-                <input type="text" placeholder="Image URLs (comma-separated)" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectImages} onChange={(e) => setNewProjectImages(e.target.value)} />
-                <input type="text" placeholder="Technologies Used (comma-separated)" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectTechUsed} onChange={(e) => setNewProjectTechUsed(e.target.value)} />
-                <textarea placeholder="Challenges Faced" className={`w-full p-3 mb-4 border rounded-md h-20 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectChallenges} onChange={(e) => setNewProjectChallenges(e.target.value)}></textarea>
-                <input type="url" placeholder="Live Demo Link" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectLiveLink} onChange={(e) => setNewProjectLiveLink(e.target.value)} />
-                <input type="url" placeholder="GitHub Link" className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectGithubLink} onChange={(e) => setNewProjectGithubLink(e.target.value)} />
+                <input type="text" placeholder="Project Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newProjectName} onChange={(e) => setNewProjectName(e.target.value)} required />
+                <textarea placeholder="Project Description" className={`w-full p-3 mb-4 border rounded-md h-24 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newProjectDesc} onChange={(e) => setNewProjectDesc(e.target.value)} required ></textarea>
+                <input type="text" placeholder="Image URLs (comma-separated)" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newProjectImages} onChange={(e) => setNewProjectImages(e.target.value)} />
+                <input type="text" placeholder="Technologies Used (comma-separated)" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newProjectTechUsed} onChange={(e) => setNewProjectTechUsed(e.target.value)} />
+                <textarea placeholder="Challenges Faced" className={`w-full p-3 mb-4 border rounded-md h-20 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newProjectChallenges} onChange={(e) => setNewProjectChallenges(e.target.value)}></textarea>
+                <input type="url" placeholder="Live Demo Link" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newProjectLiveLink} onChange={(e) => setNewProjectLiveLink(e.target.value)} />
+                <input type="url" placeholder="GitHub Link" className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newProjectGithubLink} onChange={(e) => setNewProjectGithubLink(e.target.value)} />
 
                  <select
-                    className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                    className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
                     value={newProjectCategory}
                     onChange={(e) => setNewProjectCategory(e.target.value)}
                     required
@@ -1430,18 +1518,18 @@ function App() {
             )}
             {editingField === 'courses' && (
               <>
-                <input type="text" placeholder="Course Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseName} onChange={(e) => setNewCourseName(e.target.value)} required />
-                <input type="text" placeholder="Certificate Details" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseCert} onChange={(e) => setNewCourseCert(e.target.value)} required />
-                <textarea placeholder="Course Description" className={`w-full p-3 mb-4 border rounded-md h-20 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseDesc} onChange={(e) => setNewCourseDesc(e.target.value)}></textarea>
-                <input type="url" placeholder="Course Link (optional)" className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseLink} onChange={(e) => setNewCourseLink(e.target.value)} />
+                <input type="text" placeholder="Course Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newCourseName} onChange={(e) => setNewCourseName(e.target.value)} required />
+                <input type="text" placeholder="Certificate Details" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newCourseCert} onChange={(e) => setNewCourseCert(e.target.value)} required />
+                <textarea placeholder="Course Description" className={`w-full p-3 mb-4 border rounded-md h-20 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newCourseDesc} onChange={(e) => setNewCourseDesc(e.target.value)}></textarea>
+                <input type="url" placeholder="Course Link (optional)" className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newCourseLink} onChange={(e) => setNewCourseLink(e.target.value)} />
               </>
             )}
             {editingField === 'skills' && (
               <>
-                <input type="text" placeholder="Skill Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newSkillName} onChange={(e) => setNewSkillName(e.target.value)} required />
-                <input type="number" placeholder="Proficiency Level (0-100)" min="0" max="100" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newSkillLevel} onChange={(e) => setNewSkillLevel(e.target.value)} required />
+                <input type="text" placeholder="Skill Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newSkillName} onChange={(e) => setNewSkillName(e.target.value)} required />
+                <input type="number" placeholder="Proficiency Level (0-100)" min="0" max="100" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`} value={newSkillLevel} onChange={(e) => setNewSkillLevel(e.target.value)} required />
                 <select
-                    className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                    className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
                     value={newSkillCategory}
                     onChange={(e) => setNewSkillCategory(e.target.value)}
                     required
@@ -1456,13 +1544,13 @@ function App() {
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => { setShowAddModal(false); setInfoMessage(''); }}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
+                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-purple hover:bg-dark-gradient-blue text-white' : 'bg-gray-300 hover:bg-gray-400 text-text-light-dark'} font-bold`}
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveNewItem}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold`}
+                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-pink hover:bg-dark-gradient-purple text-white' : 'bg-light-accent-blue hover:bg-light-accent-purple text-white'} font-bold`}
               >
                 Add Item
               </button>
@@ -1473,14 +1561,14 @@ function App() {
 
       {/* Add Profile Modal */}
       {showAddProfileModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
-          <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[100]">
+          <div className={`${isDarkMode ? 'bg-dark-bg-end text-text-dark-light' : 'bg-white text-text-light-dark'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Add New Tracked Profile</h2>
             {infoMessage && <p className="text-red-600 text-center mb-4">{infoMessage}</p>}
             <input
               type="text"
               placeholder="Platform Name (e.g., Medium, Stack Overflow)"
-              className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+              className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
               value={newProfileName}
               onChange={(e) => setNewProfileName(e.target.value)}
               required
@@ -1488,7 +1576,7 @@ function App() {
             <input
               type="url"
               placeholder="Image URL (e.g., https://placehold.co/60x60?text=Icon)"
-              className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+              className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
               value={newProfileImage}
               onChange={(e) => setNewProfileImage(e.target.value)}
               required
@@ -1496,7 +1584,7 @@ function App() {
             <input
               type="url"
               placeholder="Profile Link (e.g., https://stackoverflow.com/users/your_id)"
-              className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+              className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-dark-bg-start border-dark-gradient-purple text-text-dark-light focus:ring-dark-gradient-blue' : 'bg-white border-gray-300 text-text-light-dark focus:ring-light-accent-blue'}`}
               value={newProfileLink}
               onChange={(e) => setNewProfileLink(e.target.value)}
               required
@@ -1504,13 +1592,13 @@ function App() {
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => { setShowAddProfileModal(false); setInfoMessage(''); }}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
+                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-purple hover:bg-dark-gradient-blue text-white' : 'bg-gray-300 hover:bg-gray-400 text-text-light-dark'} font-bold`}
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveNewProfile}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold`}
+                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-dark-gradient-pink hover:bg-dark-gradient-purple text-white' : 'bg-light-accent-blue hover:bg-light-accent-purple text-white'} font-bold`}
               >
                 Add Profile
               </button>
