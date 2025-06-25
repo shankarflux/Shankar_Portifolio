@@ -4,9 +4,9 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 const defaultPortfolioData = {
   about: "A passionate full stack developer and UI/UX designer with a knack for creating intuitive and efficient web applications. I love bringing ideas to life through code and crafting seamless user experiences. My core interests lie in Cybersecurity, AI Development, and Cloud Computing, areas where I continuously learn and build.",
   contact: {
-    email: "shankarflux@example.com",
-    phone: "+1234567890",
-    linkedin: "https://linkedin.com/in/shankarflux",
+    email: "23jr1a05b3@gmail.com.com",
+    phone: "+91 9392960373",
+    linkedin: "https://www.linkedin.com/in/gowry-sankar-kosuri-03990231a/",
     github: "https://github.com/shankarflux"
   },
   experience: [
@@ -44,9 +44,9 @@ const defaultPortfolioData = {
   profileImage: 'https://placehold.co/400x400/CCCCCC/FFFFFF?text=Profile',
   trackedInterests: [
     { name: "GitHub", image: "https://placehold.co/60x60/181717/FFFFFF?text=GitHub", link: "https://github.com/shankarflux" },
-    { name: "LeetCode", image: "https://placehold.co/60x60/FFA116/000000?text=LeetCode", link: "https://leetcode.com/your-username" },
-    { name: "HackerRank", image: "https://placehold.co/60x60/2EC866/FFFFFF?text=HRank", link: "https://www.hackerrank.com/your-username" },
-    { name: "Hack The Box", image: "https://placehold.co/60x60/00C39C/FFFFFF?text=HTB", link: "https://www.hackthebox.com/profile/your-id" }
+    { name: "LeetCode", image: "https://placehold.co/60x60/FFA116/000000?text=LeetCode", link: "https://leetcode.com/u/Kosuri_Gowry_Sankar/" },
+    { name: "HackerRank", image: "https://placehold.co/60x60/2EC866/FFFFFF?text=HRank", link: "https://www.hackerrank.com/profile/23jr1a05b3" },
+    { name: "Hack The Box", image: "https://placehold.co/60x60/00C39C/FFFFFF?text=HTB", link: "https://account.hackthebox.com/nanomaverick4247" }
   ]
 };
 
