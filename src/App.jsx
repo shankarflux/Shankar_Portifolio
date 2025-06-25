@@ -4,35 +4,187 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 const defaultPortfolioData = {
   about: "A passionate full stack developer and UI/UX designer with a knack for creating intuitive and efficient web applications. I love bringing ideas to life through code and crafting seamless user experiences. My core interests lie in Cybersecurity, AI Development, and Cloud Computing, areas where I continuously learn and build.",
   contact: {
-    email: "23jr1a05b3@gmail.com.com",
+    email: "23jr1a05b3@gmail.com",
     phone: "+91 9392960373",
     linkedin: "https://www.linkedin.com/in/gowry-sankar-kosuri-03990231a/",
-    github: "https://github.com/shankarflux"
+    github: "https://github.com/shankarflux",
+    resumeLink: "/resume.pdf" // Path to your resume in the public folder
   },
   experience: [
     { title: "Software Engineer", company: "Tech Innovations", years: "2022-Present", description: "Developed and maintained web applications using React and Node.js, improving performance by 20%." },
     { title: "UI/UX Intern", company: "Creative Designs Inc.", years: "2021-2022", description: "Assisted in designing user interfaces and conducting usability tests for mobile applications." }
   ],
   projects: [
-    { name: "Secure IoT Dashboard", description: "Developed a real-time IoT dashboard with enhanced security features for data transmission.", category: "Cybersecurity" },
-    { name: "AI Chatbot Assistant", description: "Built an AI-powered chatbot using natural language processing for customer support automation.", category: "AI" },
-    { name: "Serverless E-commerce API", description: "Designed and deployed a scalable e-commerce API leveraging AWS Lambda and API Gateway.", category: "Cloud Computing" },
-    { name: "Portfolio Website", description: "Created this responsive portfolio using React, Tailwind CSS, and Firebase for dynamic content management.", category: "Full Stack" }
+    {
+      name: "AI Chatbot",
+      description: "Developed an intelligent chatbot using NLP to provide automated customer support.",
+      category: "AI",
+      images: [ // Placeholder images, replace with your actual screenshots
+        "https://placehold.co/600x400/FFD700/000?text=Chatbot+Screenshot1",
+        "https://placehold.co/600x400/FFD700/000?text=Chatbot+Screenshot2"
+      ],
+      techUsed: ["Python", "NLTK", "TensorFlow", "Flask"],
+      challenges: "Handling complex user queries and integrating with external APIs, ensuring real-time responsiveness.",
+      liveLink: "#", // Replace with actual live demo link
+      githubLink: "https://github.com/shankarflux/ai-chatbot" // Replace with actual GitHub repo link
+    },
+    {
+      name: "Playing Tic Tac Toe with AI",
+      description: "Implemented an unbeatable Tic-Tac-Toe AI player using the Minimax algorithm, demonstrating strategic decision-making.",
+      category: "AI",
+      images: ["https://placehold.co/600x400/FFD700/000?text=TicTacToe+Screenshot1"],
+      techUsed: ["Python", "Minimax Algorithm"],
+      challenges: "Optimizing the AI's decision-making process for quick responses without noticeable delay.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/tic-tac-toe-ai"
+    },
+    {
+      name: "Image Captioning using AI",
+      description: "A deep learning model that generates descriptive and contextually relevant captions for given images.",
+      category: "AI",
+      images: ["https://placehold.co/600x400/FFD700/000?text=Captioning+Screenshot1"],
+      techUsed: ["Python", "TensorFlow", "Keras", "CNN", "RNN"],
+      challenges: "Achieving high accuracy in caption generation across diverse image content and vocabularies.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/image-captioning-ai"
+    },
+    {
+      name: "Face Recognition",
+      description: "Developed a real-time face recognition system for secure authentication and attendance tracking.",
+      category: "AI",
+      images: ["https://placehold.co/600x400/FFD700/000?text=FaceRec+Screenshot1"],
+      techUsed: ["Python", "OpenCV", "dlib"],
+      challenges: "Ensuring robustness under varying lighting conditions, facial expressions, and angles.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/face-recognition"
+    },
+    {
+      name: "IDS (Intrusion Detection System) with own rules using Snort",
+      description: "Configured and customized Snort to detect various network intrusions based on custom, meticulously crafted rule sets.",
+      category: "Cybersecurity",
+      images: ["https://placehold.co/600x400/FFD700/000?text=IDS+Screenshot1"],
+      techUsed: ["Snort", "Linux", "Network Security Concepts", "Rule Engineering"],
+      challenges: "Writing effective and efficient Snort rules to minimize false positives and accurately identify threats.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/snort-ids"
+    },
+    {
+      name: "Basic Packet Sniffer Tool",
+      description: "A command-line tool developed to capture and analyze network packets, providing insights into network traffic.",
+      category: "Cybersecurity",
+      images: ["https://placehold.co/600x400/FFD700/000?text=PacketSniffer+Screenshot1"],
+      techUsed: ["Python", "Scapy"],
+      challenges: "Parsing various network protocols accurately and presenting complex data in a readable format.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/packet-sniffer"
+    },
+    {
+      name: "Port Scanner",
+      description: "A robust network tool to identify open ports on a target host, crucial for vulnerability assessments and network mapping.",
+      category: "Cybersecurity",
+      images: ["https://placehold.co/600x400/FFD700/000?text=PortScanner+Screenshot1"],
+      techUsed: ["Python", "Sockets"],
+      challenges: "Handling different port states (open, closed, filtered) and optimizing scan speed for large networks.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/port-scanner"
+    },
+    {
+      name: "Typing Speed Tester",
+      description: "An interactive web application designed to test and improve typing speed and accuracy with real-time feedback.",
+      category: "Full Stack",
+      images: ["https://placehold.co/600x400/FFD700/000?text=TypingTester+Screenshot1"],
+      techUsed: ["HTML", "CSS", "JavaScript", "React"],
+      challenges: "Implementing accurate timer logic, real-time character comparison, and user performance tracking.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/typing-speed-tester"
+    },
+    {
+      name: "Secure IoT Dashboard",
+      description: "Developed a real-time IoT dashboard with enhanced security features for data transmission and device management.",
+      category: "Cybersecurity",
+      images: ["https://placehold.co/600x400/FFD700/000?text=IOTDashboard+Screenshot1"],
+      techUsed: ["React", "Node.js", "MQTT", "TLS", "MongoDB"],
+      challenges: "Securing data at rest and in transit for various IoT devices, implementing robust access controls.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/secure-iot-dashboard"
+    },
+    {
+      name: "Serverless E-commerce API",
+      description: "Designed and deployed a scalable and cost-effective e-commerce API leveraging AWS Lambda and API Gateway.",
+      category: "Cloud Computing",
+      images: ["https://placehold.co/600x400/FFD700/000?text=EcommerceAPI+Screenshot1"],
+      techUsed: ["AWS Lambda", "API Gateway", "DynamoDB", "Node.js"],
+      challenges: "Managing serverless cold starts, optimizing data access patterns for high traffic, and ensuring data consistency.",
+      liveLink: "#",
+      githubLink: "https://github.com/shankarflux/serverless-ecommerce-api"
+    },
+    {
+      name: "Portfolio Website",
+      description: "Created this responsive portfolio using React, Tailwind CSS, and Local Storage for dynamic content management, showcasing various skills and projects.",
+      category: "Full Stack",
+      images: ["https://placehold.co/600x400/FFD700/000?text=Portfolio+Screenshot1"],
+      techUsed: ["React", "Tailwind CSS", "JavaScript", "Local Storage", "HTML", "CSS"],
+      challenges: "Implementing a multi-page structure with client-side routing, responsive design across devices, and theme switching.",
+      liveLink: "https://shankarflux.github.io/Shankar_Portifolio/",
+      githubLink: "https://github.com/shankarflux/Shankar_Portifolio"
+    }
   ],
   courses: [
-    { name: "Advanced React Patterns", certificate: "Issued by Online Academy" },
-    { name: "Responsive Web Design", certificate: "Issued by Web Dev Institute" },
-    { name: "Certified Ethical Hacker (CEH)", certificate: "Issued by EC-Council" },
-    { name: "Machine Learning with Python", certificate: "Issued by Coursera" },
-    { name: "AWS Certified Solutions Architect", certificate: "Issued by AWS" }
+    { name: "Java Programming", certificate: "Oracle Certified Associate", description: "Comprehensive course covering core Java concepts and object-oriented programming.", link: "#" },
+    { name: "Python for Data Science", certificate: "Coursera", description: "Explored data manipulation, analysis, and visualization with Python libraries, focusing on practical applications.", link: "#" },
+    { name: "Flutter Mobile Development", certificate: "Udemy", description: "Built cross-platform mobile applications using Dart and Flutter framework, from UI design to state management.", link: "#" },
+    { name: "Data Structures & Algorithms (DSA)", certificate: "NPTEL", description: "Mastered fundamental data structures and algorithms for efficient problem-solving and competitive programming.", link: "#" },
+    { name: "C Language Fundamentals", certificate: "Online Course", description: "Learned basic to advanced concepts of C programming for system-level programming and embedded systems.", link: "#" },
+    { name: "Internet of Things (IoT) Fundamentals", certificate: "Cisco Networking Academy", description: "Gained knowledge in IoT architectures, device connectivity, data analytics, and security considerations.", link: "#" }
   ],
   skills: {
-    cybersecurity: ["Network Security", "Penetration Testing", "Vulnerability Assessment", "IoT Security", "SIEM"],
-    ai_development: ["Machine Learning", "Deep Learning", "NLP", "Computer Vision", "TensorFlow", "PyTorch"],
-    cloud_computing: ["AWS", "Azure", "GCP", "Serverless Architectures", "Containerization (Docker, Kubernetes)"],
-    frontend: ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
-    backend: ["Node.js", "Express.js", "Firebase", "MongoDB", "Python"],
-    tools: ["Git", "VS Code", "Figma", "Jira", "Wireshark", "Burp Suite"]
+    cybersecurity: [
+        { name: "Network Security", level: 90 }, // Level added (1-100%)
+        { name: "Penetration Testing", level: 85 },
+        { name: "Vulnerability Assessment", level: 80 },
+        { name: "IoT Security", level: 75 },
+        { name: "SIEM (Security Information and Event Management)", level: 70 },
+        { name: "Web Security Testing (Burp Suite, Wireshark)", level: 88 }
+    ],
+    ai_development: [
+        { name: "Machine Learning", level: 92 },
+        { name: "Deep Learning", level: 88 },
+        { name: "Natural Language Processing (NLP)", level: 85 },
+        { name: "Computer Vision", level: 80 },
+        { name: "TensorFlow", level: 87 },
+        { name: "PyTorch", level: 82 },
+        { name: "AI Development", level: 90 }
+    ],
+    cloud_computing: [
+        { name: "AWS", level: 85 },
+        { name: "Azure", level: 70 },
+        { name: "GCP", level: 65 },
+        { name: "Serverless Architectures", level: 80 },
+        { name: "Containerization (Docker, Kubernetes)", level: 78 }
+    ],
+    frontend: [
+        { name: "React", level: 90 },
+        { name: "JavaScript", level: 95 },
+        { name: "HTML", level: 98 },
+        { name: "CSS", level: 95 },
+        { name: "Tailwind CSS", level: 90 },
+        { name: "UI/UX Design", level: 85 }
+    ],
+    backend: [
+        { name: "Node.js", level: 85 },
+        { name: "Express.js", level: 80 },
+        { name: "MongoDB", level: 75 },
+        { name: "Python", level: 93 }
+    ],
+    tools: [
+        { name: "Git", level: 95 },
+        { name: "VS Code", level: 90 },
+        { name: "Figma", level: 75 },
+        { name: "Jira", level: 70 }
+    ],
+    app_development: [
+        { name: "App Development (Flutter)", level: 88 }
+    ]
   },
   achievements: [
     "Awarded 'Innovator of the Year' at Tech Innovations 2023.",
@@ -41,32 +193,257 @@ const defaultPortfolioData = {
     "Secured top 5% in national cybersecurity hackathon.",
     "Developed and deployed an open-source AI anomaly detection system on AWS."
   ],
-  profileImage: 'https://placehold.co/400x400/CCCCCC/FFFFFF?text=Profile',
+  profileImage: 'me1.jpg', // Reference to your local image in src/assets/me1.jpg
   trackedInterests: [
     { name: "GitHub", image: "https://placehold.co/60x60/181717/FFFFFF?text=GitHub", link: "https://github.com/shankarflux" },
     { name: "LeetCode", image: "https://placehold.co/60x60/FFA116/000000?text=LeetCode", link: "https://leetcode.com/u/Kosuri_Gowry_Sankar/" },
     { name: "HackerRank", image: "https://placehold.co/60x60/2EC866/FFFFFF?text=HRank", link: "https://www.hackerrank.com/profile/23jr1a05b3" },
     { name: "Hack The Box", image: "https://placehold.co/60x60/00C39C/FFFFFF?text=HTB", link: "https://account.hackthebox.com/nanomaverick4247" }
+  ],
+  blogPosts: [
+    {
+      id: "blog1",
+      title: "The Future of Cybersecurity in IoT",
+      date: "2024-06-25",
+      tags: ["Cybersecurity", "IoT"],
+      content: "IoT devices are becoming ubiquitous, and with their proliferation comes a significant increase in attack surface. This post explores emerging threats and best practices for securing IoT ecosystems, including challenges in device authentication, data privacy, and firmware updates. We delve into the importance of a layered security approach, leveraging robust encryption, secure boot mechanisms, and continuous monitoring to mitigate risks in connected environments."
+    },
+    {
+      id: "blog2",
+      title: "Demystifying AI for Beginners",
+      date: "2024-05-10",
+      tags: ["AI", "Machine Learning"],
+      content: "Artificial Intelligence can seem daunting, but at its core, it's about teaching machines to learn from data. This article breaks down fundamental AI concepts for newcomers, from supervised and unsupervised learning to neural networks. We discuss the real-world applications of AI, such as natural language processing and computer vision, providing a stepping stone for aspiring AI enthusiasts to embark on their learning journey."
+    },
+    {
+      id: "blog3",
+      title: "Building Responsive UIs with Tailwind CSS",
+      date: "2024-04-15",
+      tags: ["Frontend", "Tailwind CSS", "UI/UX"],
+      content: "Tailwind CSS has revolutionized frontend development with its utility-first approach. Learn how to build highly responsive and customizable user interfaces efficiently without writing custom CSS. This guide covers responsive breakpoints, component-based styling, and optimizing your development workflow to create beautiful and performant web applications with unparalleled speed and flexibility."
+    }
   ]
 };
 
+// Component for the Header/Navbar
+const Header = ({ activeTab, setActiveTab, toggleDarkMode, isDarkMode, isLocalEditMode, handleToggleLocalEditMode, setShowNotificationModal }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const navTabs = ['Home', 'About', 'Achievements', 'Contact', 'Blog'];
+
+  return (
+    <header className={`fixed top-0 left-0 w-full z-50 py-4 px-4 sm:px-8 shadow-lg transition-colors duration-500 ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-gray-800'}`}>
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        {/* Logo/Name */}
+        <h1 className="text-2xl font-bold">
+          <span className={`${isDarkMode ? 'text-gold-400' : 'text-blue-600'} transition-colors duration-500`}>Gowry Sankar</span>
+        </h1>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-6">
+          {navTabs.map(tab => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out transform hover:scale-105
+                ${activeTab === tab
+                  ? `${isDarkMode ? 'bg-gold-500 text-black shadow-lg' : 'bg-blue-600 text-white shadow-lg'}`
+                  : `${isDarkMode ? 'text-gray-200 hover:text-gold-400' : 'text-gray-700 hover:text-blue-600'}`
+                }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </nav>
+
+        {/* Right-aligned controls */}
+        <div className="flex items-center space-x-4">
+          {isLocalEditMode && (
+            <button
+              onClick={() => setShowNotificationModal(true)}
+              className={`hidden md:block py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-green-700 hover:bg-green-800' : 'bg-green-600 hover:bg-green-700'} text-white text-sm`}
+            >
+              Manage Notifications
+            </button>
+          )}
+          <button
+            onClick={handleToggleLocalEditMode}
+            className={`hidden md:block py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold text-white text-sm ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'}`}
+          >
+            {isLocalEditMode ? 'Exit Edit Mode' : 'Toggle Edit Mode'}
+          </button>
+          <button
+            onClick={toggleDarkMode}
+            className={`p-2 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 ${isDarkMode ? 'bg-gray-700 text-gold-300 hover:bg-gray-600' : 'bg-gray-200 text-indigo-700 hover:bg-gray-300'}`}
+            title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {isDarkMode ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.275l.707-.707M6.707 6.707l-.707-.707m1.414 14.142l-.707-.707m10.606 0l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" />
+              </svg>
+            )}
+          </button>
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {isMobileMenuOpen && (
+        <div className={`md:hidden mt-4 pb-2 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+          <nav className="flex flex-col space-y-2 px-2">
+            {navTabs.map(tab => (
+              <button
+                key={tab}
+                onClick={() => { setActiveTab(tab); setIsMobileMenuOpen(false); }}
+                className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300
+                  ${activeTab === tab
+                    ? `${isDarkMode ? 'bg-gold-600 text-black' : 'bg-blue-600 text-white'}`
+                    : `${isDarkMode ? 'text-gray-200 hover:bg-gray-700 hover:text-gold-400' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'}`
+                  }`}
+              >
+                {tab}
+              </button>
+            ))}
+            {isLocalEditMode && (
+              <button
+                onClick={() => { setShowNotificationModal(true); setIsMobileMenuOpen(false); }}
+                className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300 ${isDarkMode ? 'bg-green-700 hover:bg-green-800' : 'bg-green-600 hover:bg-green-700'} text-white`}
+              >
+                Manage Notifications
+              </button>
+            )}
+            <button
+              onClick={() => { handleToggleLocalEditMode(); setIsMobileMenuOpen(false); }}
+              className={`block w-full text-left py-2 px-4 rounded-md font-medium transition-all duration-300 text-white ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'}`}
+            >
+              {isLocalEditMode ? 'Exit Edit Mode' : 'Toggle Edit Mode'}
+            </button>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
+
+// SkillBar component for visual proficiency
+const SkillBar = ({ skill, isDarkMode }) => {
+  const barColor = isDarkMode ? 'bg-gold-500' : 'bg-blue-500';
+  const textColor = isDarkMode ? 'text-gray-200' : 'text-gray-800';
+  return (
+    <div className="mb-4">
+      <div className="flex justify-between items-center mb-1">
+        <span className={`font-semibold ${textColor}`}>{skill.name}</span>
+        <span className={`text-sm font-medium ${textColor}`}>{skill.level}%</span>
+      </div>
+      <div className={`w-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'} rounded-full h-2.5`}>
+        <div
+          className={`${barColor} h-2.5 rounded-full transition-all duration-1000 ease-out`}
+          style={{ width: `${skill.level}%` }}
+        ></div>
+      </div>
+    </div>
+  );
+};
+
+// ProjectDetailModal Component
+const ProjectDetailModal = ({ project, isDarkMode, onClose }) => {
+  if (!project) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-[100]">
+      <div className={`relative ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-6 sm:p-8 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transition-colors duration-300 transform scale-95 opacity-0 animate-scale-in`}>
+        <button
+          onClick={onClose}
+          className={`absolute top-3 right-3 p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'} transition-all duration-300`}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <h3 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-gold-400' : 'text-blue-600'}`}>{project.name}</h3>
+        <p className={`text-sm italic mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Category: {project.category || 'Uncategorized'}</p>
+
+        {project.images && project.images.length > 0 && (
+          <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {project.images.map((imgSrc, idx) => (
+              <img key={idx} src={imgSrc} alt={`${project.name} screenshot ${idx + 1}`} className="rounded-lg shadow-md w-full h-auto object-cover" />
+            ))}
+          </div>
+        )}
+
+        <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{project.description}</p>
+
+        {project.techUsed && project.techUsed.length > 0 && (
+          <div className="mb-4">
+            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-gold-300' : 'text-blue-500'}`}>Technologies Used:</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.techUsed.map((tech, idx) => (
+                <span key={idx} className={`px-3 py-1 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gray-700 text-gold-200' : 'bg-blue-100 text-blue-800'}`}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {project.challenges && (
+          <div className="mb-4">
+            <h4 className={`font-semibold mb-2 ${isDarkMode ? 'text-gold-300' : 'text-blue-500'}`}>Challenges:</h4>
+            <p className={`italic ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{project.challenges}</p>
+          </div>
+        )}
+
+        <div className="flex flex-wrap gap-4 mt-6">
+          {project.liveLink && project.liveLink !== '#' && (
+            <a href={project.liveLink} target="_blank" rel="noopener noreferrer"
+               className={`flex items-center justify-center px-4 py-2 rounded-md font-bold transition duration-300 ease-in-out transform hover:scale-105 ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}>
+              <i className="fas fa-external-link-alt mr-2"></i> Live Demo
+            </a>
+          )}
+          {project.githubLink && project.githubLink !== '#' && (
+            <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
+               className={`flex items-center justify-center px-4 py-2 rounded-md font-bold transition duration-300 ease-in-out transform hover:scale-105 ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'}`}>
+              <i className="fab fa-github mr-2"></i> GitHub Repo
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 function App() {
-  const [activeTab, setActiveTab] = useState('About');
+  const [activeTab, setActiveTab] = useState('Home');
+  const [activeAchievementsSubTab, setActiveAchievementsSubTab] = useState('Courses'); // For nested navigation
+
   // Initialize portfolioData from Local Storage, or use default if empty
   const [portfolioData, setPortfolioData] = useState(() => {
     try {
       const savedData = localStorage.getItem('portfolioData');
-      return savedData ? JSON.parse(savedData) : defaultPortfolioData;
+      const parsedData = savedData ? JSON.parse(savedData) : defaultPortfolioData;
+
+      // Ensure that if new fields are added to defaultPortfolioData, they exist in saved data
+      return { ...defaultPortfolioData, ...parsedData };
     } catch (error) {
       console.error("Error parsing portfolioData from localStorage:", error);
       return defaultPortfolioData; // Fallback to default on error
     }
   });
 
-  // Local "Admin" state for editing, no actual login
   const [isLocalEditMode, setIsLocalEditMode] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false); // Still used for toggling edit mode info
-  const [loginMessage, setLoginMessage] = useState(''); // Used for info messages about local mode
+  const [showInfoModal, setShowInfoModal] = useState(false); // Renamed from showLoginModal for clarity
+  const [infoMessage, setInfoMessage] = useState(''); // Renamed from loginMessage
 
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [notifications, setNotifications] = useState(() => {
@@ -75,7 +452,7 @@ function App() {
       return savedNotifications ? JSON.parse(savedNotifications) : [];
     } catch (error) {
       console.error("Error parsing notifications from localStorage:", error);
-      return []; // Fallback to empty array on error
+      return [];
     }
   });
   const [newNotification, setNewNotification] = useState('');
@@ -83,17 +460,29 @@ function App() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingField, setEditingField] = useState('');
   const [editValue, setEditValue] = useState('');
-  const [editIndex, setEditIndex] = useState(null);
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectDesc, setNewProjectDesc] = useState('');
   const [newProjectCategory, setNewProjectCategory] = useState('');
+  const [newProjectImages, setNewProjectImages] = useState(''); // New for project images (comma-separated URLs)
+  const [newProjectTechUsed, setNewProjectTechUsed] = useState(''); // New for project tech (comma-separated)
+  const [newProjectChallenges, setNewProjectChallenges] = useState(''); // New for project challenges
+  const [newProjectLiveLink, setNewProjectLiveLink] = useState(''); // New for project live link
+  const [newProjectGithubLink, setNewProjectGithubLink] = useState(''); // New for project github link
+
 
   const [newCourseName, setNewCourseName] = useState('');
   const [newCourseCert, setNewCourseCert] = useState('');
+  const [newCourseDesc, setNewCourseDesc] = useState(''); // New for course description
+  const [newCourseLink, setNewCourseLink] = useState(''); // New for course link
 
-  const [profileImageUrl, setProfileImageUrl] = useState(portfolioData.profileImage);
+  const [newSkillName, setNewSkillName] = useState(''); // New for skill name
+  const [newSkillLevel, setNewSkillLevel] = useState(0); // New for skill level
+  const [newSkillCategory, setNewSkillCategory] = useState(''); // New for skill category
+
+  const [profileImageUrl, setProfileImageUrl] = useState(`/${portfolioData.profileImage}`); // Use public path for local image
+  const [selectedProject, setSelectedProject] = useState(null); // State for selected project in modal
 
   // Tracked Interests specific states
   const [showAddProfileModal, setShowAddProfileModal] = useState(false);
@@ -127,8 +516,9 @@ function App() {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [displayedQuote, setDisplayedQuote] = useState('');
   const [isTyping, setIsTyping] = useState(true);
+
   const typingSpeed = 50; // ms per character
-  const pauseTime = 9000; // Total time per quote (10s) - typing speed (approx 1s) = 9s pause
+  const pauseTime = 6500; // ms (time to wait after typing before starting next quote)
 
   // --- Effect to save portfolioData to Local Storage whenever it changes ---
   useEffect(() => {
@@ -152,30 +542,30 @@ function App() {
         charIndex++;
         timeout = setTimeout(typeCharacter, typingSpeed);
       } else {
-        setIsTyping(false);
-        // Pause after typing, then go to next quote
+        setIsTyping(false); // Finished typing, now pause
         timeout = setTimeout(() => {
-          setIsTyping(true);
+          setIsTyping(true); // Reset to start typing next quote
           charIndex = 0;
           setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
         }, pauseTime);
       }
     };
 
-    if (isTyping) {
+    if (isTyping) { // Only start typing if isTyping is true
       typeCharacter();
     }
 
     return () => clearTimeout(timeout);
-  }, [currentQuoteIndex, isTyping]);
-
+  }, [currentQuoteIndex, isTyping]); // Added isTyping to dependency array
 
   // --- Dark/Light Mode Toggle Effect ---
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
+      document.body.className = 'bg-gray-900'; // Ensure body background matches for full screen
     } else {
       document.documentElement.classList.remove('dark');
+      document.body.className = 'bg-gray-100'; // Ensure body background matches for full screen
     }
     localStorage.setItem('theme-mode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
@@ -184,27 +574,25 @@ function App() {
     setIsDarkMode(prevMode => !prevMode);
   };
 
-
   // --- Handlers for Local Edit Mode Functionality ---
-
   const handleToggleLocalEditMode = () => {
     setIsLocalEditMode(prevMode => !prevMode);
-    setShowLoginModal(true); // Reuse modal to show info
+    setShowInfoModal(true); // Reuse modal to show info
     if (!isLocalEditMode) {
-      setLoginMessage("You are now in Local Edit Mode. Changes will only be saved in this browser.");
+      setInfoMessage("You are now in Local Edit Mode. Changes will only be saved in this browser.");
     } else {
-      setLoginMessage("Local Edit Mode is OFF. Changes are not being saved.");
+      setInfoMessage("Local Edit Mode is OFF. Changes are not being saved.");
     }
   };
 
-  const handleCloseLoginModal = () => {
-    setShowLoginModal(false);
-    setLoginMessage('');
+  const handleCloseInfoModal = () => {
+    setShowInfoModal(false);
+    setInfoMessage('');
   };
 
   const handleAddNotification = () => {
     if (!newNotification.trim()) {
-      setLoginMessage("Cannot add empty notification.");
+      setInfoMessage("Cannot add empty notification.");
       return;
     }
     const newId = Date.now().toString(); // Simple ID for local storage
@@ -214,20 +602,20 @@ function App() {
     if (notificationInputRef.current) {
       notificationInputRef.current.focus();
     }
-    setLoginMessage('');
+    setInfoMessage('');
   };
 
   const handleDeleteNotification = (id) => {
     const updatedNotifications = notifications.filter(notif => notif.id !== id);
     setNotifications(updatedNotifications);
-    setLoginMessage('');
+    setInfoMessage('');
   };
 
   const handleEdit = (field, value) => {
     setEditingField(field);
     setEditValue(typeof value === 'object' ? JSON.stringify(value, null, 2) : value);
     setShowEditModal(true);
-    setLoginMessage(''); // Clear any previous message
+    setInfoMessage(''); // Clear any previous message
   };
 
   const handleSaveEdit = () => {
@@ -238,12 +626,17 @@ function App() {
         updatedData.about = editValue;
       } else if (editingField === 'contact') {
         updatedData.contact = JSON.parse(editValue);
-      } else if (editingField.startsWith('skills')) {
+      } else if (editingField.startsWith('skills.')) {
+        // For skills, editValue is a JSON string of array of objects: [{"name": "Skill", "level": 90}, ...]
         const skillCategory = editingField.split('.')[1];
-        updatedData.skills[skillCategory] = editValue.split(',').map(s => s.trim()).filter(s => s);
+        const parsedSkills = JSON.parse(editValue);
+        if (!Array.isArray(parsedSkills)) {
+            throw new Error("Skills data must be a JSON array of objects.");
+        }
+        updatedData.skills[skillCategory] = parsedSkills;
       } else if (editingField === 'achievements') {
         updatedData.achievements = editValue.split('\n').map(s => s.trim()).filter(s => s);
-      } else if (editingField === 'experience' || editingField === 'projects' || editingField === 'courses' || editingField === 'trackedInterests') {
+      } else if (['experience', 'projects', 'courses', 'trackedInterests', 'blogPosts'].includes(editingField)) {
         const parsedArray = JSON.parse(editValue);
         if (Array.isArray(parsedArray)) {
           updatedData[editingField] = parsedArray;
@@ -254,22 +647,24 @@ function App() {
 
       setPortfolioData(updatedData); // This will trigger useEffect to save to localStorage
       setShowEditModal(false);
-      setLoginMessage('Changes saved locally!');
+      setInfoMessage('Changes saved locally!');
     } catch (error) {
       console.error("Error saving portfolio data:", error);
-      setLoginMessage(`Error saving: ${error.message}`);
+      setInfoMessage(`Error saving: ${error.message}`);
     }
   };
 
   const handleAddItem = (type) => {
     setEditingField(type);
     setShowAddModal(true);
-    setNewProjectName('');
-    setNewProjectDesc('');
-    setNewProjectCategory('');
-    setNewCourseName('');
-    setNewCourseCert('');
-    setLoginMessage('');
+    // Reset all new item specific states
+    setNewProjectName(''); setNewProjectDesc(''); setNewProjectCategory('');
+    setNewProjectImages(''); setNewProjectTechUsed(''); setNewProjectChallenges('');
+    setNewProjectLiveLink(''); setNewProjectGithubLink('');
+    setNewCourseName(''); setNewCourseCert(''); setNewCourseDesc(''); setNewCourseLink('');
+    setNewSkillName(''); setNewSkillLevel(0); setNewSkillCategory('');
+    setNewProfileName(''); setNewProfileImage(''); setNewProfileLink('');
+    setInfoMessage('');
   };
 
   const handleSaveNewItem = () => {
@@ -278,26 +673,50 @@ function App() {
 
       if (editingField === 'projects') {
         if (newProjectName && newProjectDesc && newProjectCategory) {
-          const newProject = { name: newProjectName, description: newProjectDesc, category: newProjectCategory };
+          const newProject = {
+            name: newProjectName,
+            description: newProjectDesc,
+            category: newProjectCategory,
+            images: newProjectImages ? newProjectImages.split(',').map(s => s.trim()).filter(s => s) : [],
+            techUsed: newProjectTechUsed ? newProjectTechUsed.split(',').map(s => s.trim()).filter(s => s) : [],
+            challenges: newProjectChallenges,
+            liveLink: newProjectLiveLink,
+            githubLink: newProjectGithubLink
+          };
           updatedData.projects = [...(updatedData.projects || []), newProject];
         } else {
           throw new Error("Project name, description, and category cannot be empty.");
         }
       } else if (editingField === 'courses') {
         if (newCourseName && newCourseCert) {
-          const newCourse = { name: newCourseName, certificate: newCourseCert };
+          const newCourse = {
+            name: newCourseName,
+            certificate: newCourseCert,
+            description: newCourseDesc, // New field
+            link: newCourseLink // New field
+          };
           updatedData.courses = [...(updatedData.courses || []), newCourse];
         } else {
           throw new Error("Course name and certificate cannot be empty.");
+        }
+      } else if (editingField === 'skills') { // Adding new skill
+        if (newSkillName && newSkillLevel && newSkillCategory) {
+          const newSkill = { name: newSkillName, level: parseInt(newSkillLevel, 10) };
+          if (!updatedData.skills[newSkillCategory]) {
+              updatedData.skills[newSkillCategory] = [];
+          }
+          updatedData.skills[newSkillCategory] = [...(updatedData.skills[newSkillCategory] || []), newSkill];
+        } else {
+          throw new Error("Skill name, level, and category cannot be empty.");
         }
       }
 
       setPortfolioData(updatedData);
       setShowAddModal(false);
-      setLoginMessage('New item added locally!');
+      setInfoMessage('New item added locally!');
     } catch (error) {
       console.error("Error adding new item:", error);
-      setLoginMessage(`Error adding item: ${error.message}`);
+      setInfoMessage(`Error adding item: ${error.message}`);
     }
   };
 
@@ -315,13 +734,19 @@ function App() {
         updatedData.achievements = updatedData.achievements.filter((_, i) => i !== index);
       } else if (type === 'trackedInterests') {
         updatedData.trackedInterests = updatedData.trackedInterests.filter((_, i) => i !== index);
+      } else if (type.startsWith('skills.')) {
+        const skillCategory = type.split('.')[1];
+        const skillIndex = parseInt(index, 10); // Index of the skill to delete within its category
+        updatedData.skills[skillCategory] = updatedData.skills[skillCategory].filter((_, i) => i !== skillIndex);
+      } else if (type === 'blogPosts') {
+        updatedData.blogPosts = updatedData.blogPosts.filter((_, i) => i !== index);
       }
 
       setPortfolioData(updatedData);
-      setLoginMessage('Item deleted locally!');
+      setInfoMessage('Item deleted locally!');
     } catch (error) {
       console.error("Error deleting item:", error);
-      setLoginMessage(`Error deleting item: ${error.message}`);
+      setInfoMessage(`Error deleting item: ${error.message}`);
     }
   };
 
@@ -334,7 +759,7 @@ function App() {
       const base64Image = reader.result;
       setProfileImageUrl(base64Image);
       setPortfolioData(prevData => ({ ...prevData, profileImage: base64Image }));
-      setLoginMessage('Profile image updated locally!');
+      setInfoMessage('Profile image updated locally!');
     };
     reader.readAsDataURL(file);
   };
@@ -344,12 +769,12 @@ function App() {
     setNewProfileName('');
     setNewProfileImage('');
     setNewProfileLink('');
-    setLoginMessage('');
+    setInfoMessage('');
   };
 
   const handleSaveNewProfile = () => {
     if (!newProfileName || !newProfileImage || !newProfileLink) {
-      setLoginMessage("All profile fields are required.");
+      setInfoMessage("All profile fields are required.");
       return;
     }
 
@@ -364,216 +789,245 @@ function App() {
 
       setPortfolioData(updatedData);
       setShowAddProfileModal(false);
-      setLoginMessage('New profile added locally!');
+      setInfoMessage('New profile added locally!');
     } catch (error) {
       console.error("Error adding new profile:", error);
-      setLoginMessage(`Error adding profile: ${error.message}`);
+      setInfoMessage(`Error adding profile: ${error.message}`);
     }
   };
 
   const handleContactSubmit = (e) => {
     e.preventDefault();
     setContactStatus('sending');
-    setLoginMessage('');
+    setInfoMessage('');
     // Simulate sending, as there's no backend for local storage version
     setTimeout(() => {
       setContactStatus('success');
       setContactName('');
       setContactEmail('');
       setContactMessage('');
-      setLoginMessage('Message received (frontend demo only). A backend service is needed to send actual emails.');
-      setTimeout(() => { setContactStatus(''); setLoginMessage(''); }, 8000); // Clear after longer time
+      setInfoMessage('Message received (frontend demo only). A backend service is needed to send actual emails.');
+      setTimeout(() => { setContactStatus(''); setInfoMessage(''); }, 8000); // Clear after longer time
     }, 1500);
   };
 
-
-  const projectCategories = ['All', 'Cybersecurity', 'AI', 'Cloud Computing', 'Full Stack'];
+  const projectCategories = ['All', 'Cybersecurity', 'AI', 'Cloud Computing', 'Full Stack', 'Other'];
   const [currentProjectFilter, setCurrentProjectFilter] = useState('All');
 
   const filteredProjects = currentProjectFilter === 'All'
     ? (portfolioData.projects || [])
     : (portfolioData.projects || []).filter(project => project.category === currentProjectFilter);
 
+  // Home Page Content
+  const HomePage = () => (
+    <div className={`relative min-h-screen flex items-center justify-center p-4 sm:p-8 overflow-hidden
+      ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-gray-800'}`}>
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        src="https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-and-red-lines-41589-large.mp4" // Abstract tech video
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        Your browser does not support the video tag.
+      </video>
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-80 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-80 z-10"></div>
 
-  // No loading state needed as data is instant from local storage or default
-  return (
-    <div className={`min-h-screen font-inter flex flex-col items-center p-4 sm:p-8 transition-colors duration-500 ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-gray-100 text-gray-800'}`}>
-      {/* Global Message Display (for local storage info/errors) */}
-      {loginMessage && (
-        <div className={`fixed top-4 right-4 ${isDarkMode ? 'bg-indigo-700' : 'bg-indigo-600'} text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2`}>
-          <span>{loginMessage}</span>
-          <button onClick={() => setLoginMessage('')} className="ml-2 text-white font-bold">&times;</button>
+
+      <div className="relative z-20 flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+        {/* Profile Picture */}
+        <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-2xl border-4 sm:border-8 border-gold-400 group flex-shrink-0 mb-8 transition-all duration-500 transform hover:scale-105">
+          <img
+            src={profileImageUrl === 'me1.jpg' ? `/assets/me1.jpg` : profileImageUrl} // Reference local asset directly
+            alt="Gowry Sankar Profile"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          />
+          {isLocalEditMode && (
+            <label
+              htmlFor="profileImageUpload"
+              className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+            >
+              Upload
+              <input
+                id="profileImageUpload"
+                type="file"
+                accept="image/*"
+                onChange={handleProfileImageUpload}
+                className="hidden"
+              />
+            </label>
+          )}
+        </div>
+
+        <h1 className="text-4xl sm:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">
+          Hi, I'm <span className="text-gold-400">Gowry Sankar</span>
+        </h1>
+        <p className="text-xl sm:text-2xl font-semibold text-gray-300 mb-6 max-w-2xl">
+          Full Stack Developer & UI/UX Designer
+        </p>
+        <p className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-8 max-w-3xl">
+          {portfolioData.about.split('. ')[0]}. {/* Display first sentence or two */}
+        </p>
+
+        {/* Typing Animation Section */}
+        <div className="w-full max-w-xl text-lg sm:text-xl font-light text-gold-300 bg-gray-800 bg-opacity-70 rounded-xl p-6 flex items-center justify-center min-h-[90px] shadow-lg border border-gold-500 animate-pulse-border">
+            <span ref={typingRef} className="whitespace-pre-wrap">{displayedQuote}</span>
+        </div>
+
+        {/* Track My Interests Portal - Direct Access */}
+        <div className={`mt-12 w-full max-w-2xl pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} text-center`}>
+            <h3 className={`text-2xl sm:text-3xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-6`}>Track My Interests</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                {(portfolioData.trackedInterests || []).map((profile, index) => (
+                    <div key={index} className={`relative group ${isDarkMode ? 'bg-gray-700' : 'bg-white'} p-4 rounded-xl shadow-lg flex flex-col items-center justify-center text-center transition-all duration-300 transform hover:scale-105 hover:shadow-xl`}>
+                        <a href={profile.link} target="_blank" rel="noopener noreferrer" className="block">
+                            <img src={profile.image} alt={profile.name} className="w-16 h-16 rounded-full mx-auto mb-3 object-contain border-2 border-blue-400" />
+                            <span className={`${isDarkMode ? 'text-gray-200' : 'text-gray-700'} font-semibold text-sm sm:text-base`}>{profile.name}</span>
+                        </a>
+                        {isLocalEditMode && (
+                            <button
+                                onClick={() => handleDeleteItem('trackedInterests', index)}
+                                className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                            >
+                                <i className="fas fa-trash-alt text-xs"></i>
+                            </button>
+                        )}
+                    </div>
+                ))}
+            </div>
+            {isLocalEditMode && (
+                <button
+                    onClick={handleAddProfile}
+                    className={`mt-8 py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+                >
+                    Add More Profiles
+                </button>
+            )}
+        </div>
+      </div>
+    </div>
+  );
+
+  // About Page Content
+  const AboutPage = () => (
+    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
+      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-gold-400' : 'text-blue-600'}`}>About Me</h2>
+      <div className="relative group">
+        <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>{portfolioData.about}</p>
+        {isLocalEditMode && (
+          <button
+            onClick={() => handleEdit('about', portfolioData.about)}
+            className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+          >
+            <i className="fas fa-edit text-sm"></i>
+          </button>
+        )}
+      </div>
+
+      <div className={`mt-10 pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+        <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-6`}>My Core Interests</h3>
+        <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'} mb-6`}>
+          My professional journey is driven by a deep fascination with cutting-edge technologies and their application. I am particularly passionate about:
+        </p>
+        <ul className={`list-disc list-inside space-y-3 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+          <li><strong>Cybersecurity:</strong> Safeguarding digital assets and exploring robust defense mechanisms against evolving threats.</li>
+          <li><strong>AI Development:</strong> Crafting intelligent systems that can learn, adapt, and solve complex problems.</li>
+          <li><strong>Cloud Computing:</strong> Architecting scalable, resilient, and efficient solutions leveraging cloud platforms.</li>
+          <li><strong>Full Stack Development:</strong> Bridging the gap between beautiful user interfaces and powerful backend systems.</li>
+          <li><strong>UI/UX Design:</strong> Creating intuitive and delightful user experiences that are both functional and aesthetically pleasing.</li>
+        </ul>
+      </div>
+    </div>
+  );
+
+  // Achievements Page (Parent)
+  const AchievementsPage = () => (
+    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
+      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-teal-400' : 'text-teal-600'}`}>My Achievements & Expertise</h2>
+
+      {/* Sub-navigation for Achievements */}
+      <div className={`flex flex-wrap justify-center sm:justify-start space-x-2 sm:space-x-4 mb-8 p-2 rounded-lg ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
+        {['Courses', 'Skills', 'Projects'].map(tab => (
+          <button
+            key={tab}
+            onClick={() => setActiveAchievementsSubTab(tab)}
+            className={`py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out transform hover:scale-105 ${
+              activeAchievementsSubTab === tab
+                ? `${isDarkMode ? 'bg-gold-500 text-black shadow-lg' : 'bg-blue-600 text-white shadow-lg'}`
+                : `${isDarkMode ? 'text-gray-200 hover:text-gold-400' : 'text-gray-700 hover:text-blue-600'}`
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Conditional rendering for sub-tabs */}
+      {activeAchievementsSubTab === 'Courses' && (
+        <div className={`p-6 rounded-lg shadow-inner relative ${isDarkMode ? 'bg-gray-700' : 'bg-yellow-50'} transition-colors duration-300`}>
+          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'} mb-4`}>Courses & Certifications</h3>
+          <div className="space-y-6">
+            {(portfolioData.courses || []).map((course, index) => (
+              <div key={index} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
+                <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}`}>{course.name}</h4>
+                <p className={`text-gray-400 text-sm mb-2`}>{course.certificate}</p>
+                <p className={`text-gray-300`}>{course.description}</p>
+                {course.link && course.link !== '#' && (
+                    <a href={course.link} target="_blank" rel="noopener noreferrer"
+                       className={`mt-3 inline-flex items-center text-sm font-medium ${isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}>
+                        View Credential <i className="fas fa-external-link-alt ml-2 text-xs"></i>
+                    </a>
+                )}
+                {isLocalEditMode && (
+                  <button
+                    onClick={() => handleDeleteItem('courses', index)}
+                    className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                  >
+                    <i className="fas fa-trash-alt text-sm"></i>
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+          {isLocalEditMode && (
+            <button
+              onClick={() => handleAddItem('courses')}
+              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+            >
+              Add Course
+            </button>
+          )}
+          {isLocalEditMode && (
+            <button
+              onClick={() => handleEdit('courses', portfolioData.courses)}
+              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
+            >
+              Edit Courses
+            </button>
+          )}
         </div>
       )}
 
-      {/* Header and Controls */}
-      <div className="w-full max-w-6xl flex justify-between items-center mb-6 z-10">
-        <div className="flex space-x-4">
-          <button
-            onClick={handleToggleLocalEditMode}
-            className={`py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'} text-white`}
-          >
-            {isLocalEditMode ? 'Exit Local Edit Mode' : 'Toggle Local Edit Mode'}
-          </button>
-        </div>
-
-        <div className="flex space-x-4 items-center">
-          {isLocalEditMode && (
-            <button
-              onClick={() => setShowNotificationModal(true)}
-              className={`py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-green-700 hover:bg-green-800' : 'bg-green-600 hover:bg-green-700'} text-white`}
-            >
-              Manage Notifications
-            </button>
-          )}
-          <button
-            onClick={toggleDarkMode}
-            className={`p-2 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105 ${isDarkMode ? 'bg-gray-700 text-yellow-300 hover:bg-gray-600' : 'bg-gray-200 text-indigo-700 hover:bg-gray-300'}`}
-            title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          >
-            {isDarkMode ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.275l.707-.707M6.707 6.707l-.707-.707m1.414 14.142l-.707-.707m10.606 0l-.707-.707M12 18a6 6 0 100-12 6 6 0 000 12z" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9 9 0 008.354-5.646z" />
-              </svg>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Main Content Area */}
-      <div className={`relative ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-xl rounded-lg p-6 sm:p-10 w-full max-w-6xl transform transition-all duration-500 ease-in-out scale-95 sm:scale-100`}>
-
-        {/* Background Video (Hero Section) */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden rounded-lg">
-          {/* Placeholder video - replace with your own optimized video */}
-          <video
-            className="w-full h-full object-cover z-0"
-            src="https://assets.mixkit.co/videos/preview/mixkit-circuit-board-background-2720-large.mp4" // Example tech-themed video
-            autoPlay
-            loop
-            muted
-            playsInline
-          >
-            Your browser does not support the video tag.
-          </video>
-          {/* Overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-80 z-10"></div>
-        </div>
-
-
-        {/* Profile Section with Video Backdrop - Z-index for content above video */}
-        <div className="relative z-20 flex flex-col sm:flex-row items-center sm:items-start space-y-6 sm:space-y-0 sm:space-x-8 mb-10 pb-8 border-b-2 border-gray-700">
-          <div className="relative w-40 h-40 rounded-full overflow-hidden shadow-lg border-4 border-blue-400 group flex-shrink-0">
-            <img
-              src={profileImageUrl}
-              alt="Profile"
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            />
-            {isLocalEditMode && (
-              <label
-                htmlFor="profileImageUpload"
-                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-              >
-                Upload
-                <input
-                  id="profileImageUpload"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleProfileImageUpload}
-                  className="hidden"
-                />
-              </label>
-            )}
-          </div>
-          <div className="text-center sm:text-left flex-grow">
-            <h1 className="text-4xl font-extrabold text-blue-400 mb-2">Gowry Sankar</h1>
-            <p className="text-xl font-semibold text-gray-300 mb-4">Full Stack Developer & UI/UX Designer</p>
-            <div className="flex justify-center sm:justify-start space-x-4">
-              {portfolioData.contact?.linkedin && (
-                <a
-                  href={portfolioData.contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:text-blue-300 text-3xl transition-colors duration-300"
-                >
-                  <i className="fab fa-linkedin"></i>
-                </a>
-              )}
-              {portfolioData.contact?.github && (
-                <a
-                  href={portfolioData.contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white text-3xl transition-colors duration-300"
-                >
-                  <i className="fab fa-github"></i>
-                </a>
-              )}
-              {portfolioData.contact?.email && (
-                <a
-                  href={`mailto:${portfolioData.contact.email}`}
-                  className="text-red-400 hover:text-red-300 text-3xl transition-colors duration-300"
-                >
-                  <i className="fas fa-envelope"></i>
-                </a>
-              )}
-            </div>
-            {/* Typing Animation Section */}
-            <div className="mt-8 text-xl font-light text-gray-300 bg-gray-700 bg-opacity-70 rounded-md p-4 flex items-center justify-center min-h-[80px]">
-                <span ref={typingRef} className="whitespace-pre-wrap">{displayedQuote}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className={`relative z-20 flex flex-wrap justify-center sm:justify-start space-x-2 sm:space-x-4 mb-8 p-2 rounded-lg ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
-          {['About', 'Skills', 'Experience', 'Projects', 'Courses', 'Achievements', 'Contact'].map(tab => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`py-2 px-4 rounded-full font-medium transition-all duration-300 ease-in-out transform hover:scale-105 ${
-                activeTab === tab
-                  ? `${isDarkMode ? 'bg-blue-600 text-white shadow-lg' : 'bg-blue-600 text-white shadow-lg'}`
-                  : `${isDarkMode ? 'bg-gray-600 text-gray-200 hover:bg-gray-500' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        {/* Tab Content */}
-        <div className="tab-content relative z-20">
-          {activeTab === 'About' && (
-            <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-blue-50'} p-6 rounded-lg shadow-inner relative group transition-colors duration-300`}>
-              <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`}>About Me</h2>
-              <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>{portfolioData.about}</p>
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleEdit('about', portfolioData.about)}
-                  className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                >
-                  <i className="fas fa-edit text-sm"></i>
-                </button>
-              )}
-
-              {/* Track My Interests Portal */}
-              <div className={`mt-10 pt-8 border-t-2 ${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}>
-                <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-4`}>Track My Interests</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                  {(portfolioData.trackedInterests || []).map((profile, index) => (
-                    <div key={index} className={`relative group ${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-4 rounded-lg shadow-md flex flex-col items-center justify-center text-center transition-colors duration-300`}>
-                      <a href={profile.link} target="_blank" rel="noopener noreferrer" className="block">
-                        <img src={profile.image} alt={profile.name} className="w-16 h-16 rounded-full mx-auto mb-3 object-contain" />
-                        <span className={`${isDarkMode ? 'text-gray-200' : 'text-gray-700'} font-semibold`}>{profile.name}</span>
-                      </a>
+      {activeAchievementsSubTab === 'Skills' && (
+        <div className={`p-6 rounded-lg shadow-inner transition-colors duration-300 ${isDarkMode ? 'bg-gray-700' : 'bg-green-50'}`}>
+          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-4`}>Technical Skills</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Object.keys(portfolioData.skills || {}).map(category => (
+              <div key={category} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
+                <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-3 capitalize`}>
+                  {category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                </h4>
+                <div className="space-y-3">
+                  {(portfolioData.skills[category] || []).map((skill, idx) => (
+                    <div key={idx} className="relative group">
+                      <SkillBar skill={skill} isDarkMode={isDarkMode} />
                       {isLocalEditMode && (
                         <button
-                          onClick={() => handleDeleteItem('trackedInterests', index)}
+                          onClick={() => handleDeleteItem(`skills.${category}`, idx)} // Pass category and index
                           className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
                         >
                           <i className="fas fa-trash-alt text-xs"></i>
@@ -583,278 +1037,252 @@ function App() {
                   ))}
                 </div>
                 {isLocalEditMode && (
+                    <button
+                        onClick={() => handleEdit(`skills.${category}`, portfolioData.skills[category])}
+                        className={`mt-4 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
+                    >
+                        Edit {category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} Skills
+                    </button>
+                )}
+              </div>
+            ))}
+          </div>
+          {isLocalEditMode && (
+            <button
+              onClick={() => handleAddItem('skills')}
+              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+            >
+              Add New Skill
+            </button>
+          )}
+        </div>
+      )}
+
+      {activeAchievementsSubTab === 'Projects' && (
+        <div className={`p-6 rounded-lg shadow-inner relative ${isDarkMode ? 'bg-gray-700' : 'bg-red-50'} transition-colors duration-300`}>
+          <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-red-400' : 'text-red-600'} mb-4`}>My Projects</h3>
+          {/* Project Category Filters */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {projectCategories.map(category => (
+              <button
+                key={category}
+                onClick={() => setCurrentProjectFilter(category)}
+                className={`py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 ease-in-out ${
+                  currentProjectFilter === category
+                    ? `${isDarkMode ? 'bg-gold-600 text-black' : 'bg-blue-600 text-white'}`
+                    : `${isDarkMode ? 'bg-gray-600 text-gray-200 hover:bg-gray-500' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(filteredProjects || []).map((project, index) => (
+              <div
+                key={index}
+                onClick={() => setSelectedProject(project)}
+                className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group cursor-pointer transition-colors duration-300 transform hover:scale-105 hover:shadow-xl`}
+              >
+                <h4 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-2`}>{project.name}</h4>
+                <p className={`text-gray-400 mb-2 text-sm italic`}>Category: {project.category || 'Uncategorized'}</p>
+                {project.images && project.images.length > 0 && (
+                  <img src={project.images[0]} alt={`${project.name} thumbnail`} className="w-full h-32 object-cover rounded-md mb-3" />
+                )}
+                <p className={`text-gray-300 line-clamp-3`}>{project.description}</p>
+                <button
+                    className={`mt-3 text-sm font-medium ${isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}
+                    onClick={(e) => { e.stopPropagation(); setSelectedProject(project); }} // Stop propagation to prevent parent div click
+                >
+                    Learn More <i className="fas fa-arrow-right text-xs ml-1"></i>
+                </button>
+                {isLocalEditMode && (
                   <button
-                    onClick={handleAddProfile}
-                    className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+                    onClick={(e) => { e.stopPropagation(); handleDeleteItem('projects', portfolioData.projects.indexOf(project)); }} // Stop propagation
+                    className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
                   >
-                    Add More Profiles
+                    <i className="fas fa-trash-alt text-sm"></i>
                   </button>
                 )}
               </div>
-            </div>
+            ))}
+          </div>
+          {isLocalEditMode && (
+            <button
+              onClick={() => handleAddItem('projects')}
+              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+            >
+              Add Project
+            </button>
           )}
-
-          {activeTab === 'Skills' && (
-            <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-green-50'} p-6 rounded-lg shadow-inner transition-colors duration-300`}>
-              <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'} mb-4`}>Skills</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Object.keys(portfolioData.skills || {}).map(category => (
-                  <div key={category} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-3 capitalize`}>
-                      {category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} {/* Format category names */}
-                    </h3>
-                    <ul className="list-disc list-inside text-gray-400 space-y-1">
-                      {(portfolioData.skills[category] || []).map((skill, idx) => (
-                        <li key={idx}>{skill}</li>
-                      ))}
-                    </ul>
-                    {isLocalEditMode && (
-                      <button
-                        onClick={() => handleEdit(`skills.${category}`, portfolioData.skills[category].join(', '))}
-                        className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-edit text-sm"></i>
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'Experience' && (
-            <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-purple-50'} p-6 rounded-lg shadow-inner relative transition-colors duration-300`}>
-              <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-purple-400' : 'text-purple-600'} mb-4`}>Experience</h2>
-              <div className="space-y-6">
-                {(portfolioData.experience || []).map((exp, index) => (
-                  <div key={index} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}`}>{exp.title} at {exp.company}</h3>
-                    <p className={`text-gray-400 text-sm mb-2`}>{exp.years}</p>
-                    <p className={`text-gray-300`}>{exp.description}</p>
-                    {isLocalEditMode && (
-                      <button
-                        onClick={() => handleDeleteItem('experience', index)}
-                        className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-trash-alt text-sm"></i>
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleEdit('experience', portfolioData.experience)}
-                  className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
-                >
-                  Edit Experience
-                </button>
-              )}
-            </div>
-          )}
-
-          {activeTab === 'Projects' && (
-            <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-red-50'} p-6 rounded-lg shadow-inner relative transition-colors duration-300`}>
-              <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-red-400' : 'text-red-600'} mb-4`}>Projects</h2>
-              {/* Project Category Filters */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {projectCategories.map(category => (
-                  <button
-                    key={category}
-                    onClick={() => setCurrentProjectFilter(category)}
-                    className={`py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 ease-in-out ${
-                      currentProjectFilter === category
-                        ? `${isDarkMode ? 'bg-blue-600 text-white' : 'bg-blue-600 text-white'}`
-                        : `${isDarkMode ? 'bg-gray-600 text-gray-200 hover:bg-gray-500' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {(filteredProjects || []).map((project, index) => (
-                  <div key={index} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-2`}>{project.name}</h3>
-                    <p className={`text-gray-400 mb-2 text-sm italic`}>Category: {project.category || 'Uncategorized'}</p>
-                    <p className={`text-gray-300`}>{project.description}</p>
-                    {isLocalEditMode && (
-                      <button
-                        onClick={() => handleDeleteItem('projects', portfolioData.projects.indexOf(project))} // Find original index for deletion
-                        className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-trash-alt text-sm"></i>
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleAddItem('projects')}
-                  className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-                >
-                  Add Project
-                </button>
-              )}
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleEdit('projects', portfolioData.projects)}
-                  className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
-                >
-                  Edit Projects
-                </button>
-              )}
-            </div>
-          )}
-
-          {activeTab === 'Courses' && (
-            <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-yellow-50'} p-6 rounded-lg shadow-inner relative transition-colors duration-300`}>
-              <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'} mb-4`}>Courses & Certifications</h2>
-              <div className="space-y-6">
-                {(portfolioData.courses || []).map((course, index) => (
-                  <div key={index} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
-                    <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}`}>{course.name}</h3>
-                    <p className={`text-gray-400`}>{course.certificate}</p>
-                    {isLocalEditMode && (
-                      <button
-                        onClick={() => handleDeleteItem('courses', index)}
-                        className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-trash-alt text-sm"></i>
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleAddItem('courses')}
-                  className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-                >
-                  Add Course
-                </button>
-              )}
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleEdit('courses', portfolioData.courses)}
-                  className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
-                >
-                  Edit Courses
-                </button>
-              )}
-            </div>
-          )}
-
-          {activeTab === 'Achievements' && (
-            <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-teal-50'} p-6 rounded-lg shadow-inner relative transition-colors duration-300`}>
-              <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-teal-400' : 'text-teal-600'} mb-4`}>Achievements</h2>
-              <ul className={`list-disc list-inside space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                {(portfolioData.achievements || []).map((achievement, index) => (
-                  <li key={index} className="relative group">
-                    {achievement}
-                    {isLocalEditMode && (
-                      <button
-                        onClick={() => handleDeleteItem('achievements', index)}
-                        className="absolute left-full top-0 ml-2 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                        style={{ transform: 'translateY(-50%)' }}
-                      >
-                        <i className="fas fa-trash-alt text-xs"></i>
-                      </button>
-                    )}
-                  </li>
-                ))}
-              </ul>
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleEdit('achievements', (portfolioData.achievements || []).join('\n'))}
-                  className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
-                >
-                  Edit Achievements
-                </button>
-              )}
-            </div>
-          )}
-
-          {activeTab === 'Contact' && (
-            <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-indigo-50'} p-6 rounded-lg shadow-inner relative group transition-colors duration-300`}>
-              <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'} mb-4`}>Contact Me</h2>
-              <div className={`space-y-3 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-                <p><strong>Email:</strong> {portfolioData.contact?.email}</p>
-                <p><strong>Phone:</strong> {portfolioData.contact?.phone}</p>
-                <p><strong>LinkedIn:</strong> <a href={portfolioData.contact?.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-blue-400 hover:underline' : 'text-blue-600 hover:underline'}`}>{portfolioData.contact?.linkedin}</a></p>
-                <p><strong>GitHub:</strong> <a href={portfolioData.contact?.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400 hover:underline' : 'text-gray-700 hover:underline'}`}>{portfolioData.contact?.github}</a></p>
-              </div>
-              {isLocalEditMode && (
-                <button
-                  onClick={() => handleEdit('contact', portfolioData.contact)}
-                  className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                >
-                  <i className="fas fa-edit text-sm"></i>
-                </button>
-              )}
-
-              {/* Contact Form */}
-              <form onSubmit={handleContactSubmit} className="mt-8 pt-8 border-t-2 border-gray-600">
-                <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`}>Send a Message</h3>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-600 border-gray-500 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                  value={contactName}
-                  onChange={(e) => setContactName(e.target.value)}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-600 border-gray-500 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                  value={contactEmail}
-                  onChange={(e) => setContactEmail(e.target.value)}
-                  required
-                />
-                <textarea
-                  placeholder="Your Message"
-                  rows="5"
-                  className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-600 border-gray-500 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                  value={contactMessage}
-                  onChange={(e) => setContactMessage(e.target.value)}
-                  required
-                ></textarea>
-                <button
-                  type="submit"
-                  className={`w-full py-3 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-green-600 hover:bg-green-700' : 'bg-green-600 hover:bg-green-700'} text-white`}
-                  disabled={contactStatus === 'sending'}
-                >
-                  {contactStatus === 'sending' ? 'Sending...' : 'Send Message'}
-                </button>
-                {contactStatus === 'success' && <p className="text-green-500 mt-2 text-center">Message received (frontend demo only). A backend service is needed to send actual emails.</p>}
-                {contactStatus === 'error' && <p className="text-red-500 mt-2 text-center">Failed to send message. Please try again.</p>}
-              </form>
-            </div>
+          {isLocalEditMode && (
+            <button
+              onClick={() => handleEdit('projects', portfolioData.projects)}
+              className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
+            >
+              Edit Projects (JSON)
+            </button>
           )}
         </div>
+      )}
+    </div>
+  );
+
+  // Contact Page Content
+  const ContactPage = () => (
+    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
+      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>Contact Me</h2>
+      <div className={`space-y-4 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+        <p className="flex items-center"><i className="fas fa-envelope mr-3 text-xl text-red-500"></i> <strong>Email:</strong> {portfolioData.contact?.email}</p>
+        <p className="flex items-center"><i className="fas fa-phone mr-3 text-xl text-green-500"></i> <strong>Phone:</strong> {portfolioData.contact?.phone}</p>
+        <p className="flex items-center"><i className="fab fa-linkedin mr-3 text-xl text-blue-500"></i> <strong>LinkedIn:</strong> <a href={portfolioData.contact?.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-blue-400 hover:underline' : 'text-blue-600 hover:underline'}`}>{portfolioData.contact?.linkedin}</a></p>
+        <p className="flex items-center"><i className="fab fa-github mr-3 text-xl text-gray-400"></i> <strong>GitHub:</strong> <a href={portfolioData.contact?.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400 hover:underline' : 'text-gray-700 hover:underline'}`}>{portfolioData.contact?.github}</a></p>
+        {portfolioData.contact?.resumeLink && (
+            <p className="flex items-center">
+                <i className="fas fa-file-download mr-3 text-xl text-purple-500"></i>
+                <a href={portfolioData.contact.resumeLink} download="Gowry_Sankar_Resume.pdf"
+                   className={`font-bold ${isDarkMode ? 'bg-purple-600 hover:bg-purple-700' : 'bg-purple-600 hover:bg-purple-700'} text-white py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105`}>
+                    Download My Resume
+                </a>
+            </p>
+        )}
       </div>
+      {isLocalEditMode && (
+        <button
+          onClick={() => handleEdit('contact', portfolioData.contact)}
+          className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full transition duration-300 transform hover:scale-110"
+        >
+          <i className="fas fa-edit text-sm"></i> Edit Contact Info
+        </button>
+      )}
+
+      {/* Contact Form */}
+      <form onSubmit={handleContactSubmit} className="mt-10 pt-8 border-t-2 border-gray-600">
+        <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`}>Send a Message</h3>
+        <input
+          type="text"
+          placeholder="Your Name"
+          className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+          value={contactName}
+          onChange={(e) => setContactName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Your Email"
+          className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+          value={contactEmail}
+          onChange={(e) => setContactEmail(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Your Message"
+          rows="5"
+          className={`w-full p-3 mb-4 rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+          value={contactMessage}
+          onChange={(e) => setContactMessage(e.target.value)}
+          required
+        ></textarea>
+        <button
+          type="submit"
+          className={`w-full py-3 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-green-600 hover:bg-green-700' : 'bg-green-600 hover:bg-green-700'} text-white`}
+          disabled={contactStatus === 'sending'}
+        >
+          {contactStatus === 'sending' ? 'Sending...' : 'Send Message'}
+        </button>
+        {contactStatus === 'success' && <p className="text-green-500 mt-2 text-center">Message received (frontend demo only). A backend service is needed to send actual emails.</p>}
+        {contactStatus === 'error' && <p className="text-red-500 mt-2 text-center">Failed to send message. Please try again.</p>}
+      </form>
+    </div>
+  );
+
+  // Blog Page Content
+  const BlogPage = () => (
+    <div className={`w-full max-w-7xl mx-auto p-4 sm:p-8 mt-20 rounded-lg shadow-xl ${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} transition-colors duration-500`}>
+      <h2 className={`text-4xl font-bold mb-6 ${isDarkMode ? 'text-orange-400' : 'text-orange-600'}`}>My Blog & Articles</h2>
+      <div className="space-y-8">
+        {(portfolioData.blogPosts || []).map((post, index) => (
+          <div key={post.id || index} className={`${isDarkMode ? 'bg-gray-700' : 'bg-gray-50'} p-6 rounded-lg shadow-md relative group transition-colors duration-300`}>
+            <h3 className={`text-2xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-2`}>{post.title}</h3>
+            <p className={`text-sm italic ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} mb-3`}>
+              {new Date(post.date).toLocaleDateString()} &bull; {post.tags && post.tags.map((tag, idx) => (
+                <span key={idx} className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${isDarkMode ? 'bg-gold-700 text-gold-200' : 'bg-indigo-100 text-indigo-800'} mr-1`}>{tag}</span>
+              ))}
+            </p>
+            <p className={`text-md leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{post.content}</p>
+            {isLocalEditMode && (
+              <button
+                onClick={() => handleDeleteItem('blogPosts', index)}
+                className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+              >
+                <i className="fas fa-trash-alt text-sm"></i>
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+      {isLocalEditMode && (
+        <button
+          onClick={() => handleEdit('blogPosts', portfolioData.blogPosts)}
+          className={`mt-8 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+        >
+          Edit Blog Posts (JSON)
+        </button>
+      )}
+      {/* Adding a new blog post is done via editing the whole JSON for simplicity in local storage mode */}
+    </div>
+  );
+
+
+  return (
+    <div className={`min-h-screen font-inter flex flex-col items-center transition-colors duration-500 ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-gray-100 text-gray-800'}`}>
+      {/* Global Message Display (for local storage info/errors) */}
+      {infoMessage && (
+        <div className={`fixed top-4 right-4 ${isDarkMode ? 'bg-indigo-700' : 'bg-indigo-600'} text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2`}>
+          <span>{infoMessage}</span>
+          <button onClick={handleCloseInfoModal} className="ml-2 text-white font-bold">&times;</button>
+        </div>
+      )}
+
+      {/* Header (Navbar) */}
+      <Header
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        toggleDarkMode={toggleDarkMode}
+        isDarkMode={isDarkMode}
+        isLocalEditMode={isLocalEditMode}
+        handleToggleLocalEditMode={handleToggleLocalEditMode}
+        setShowNotificationModal={setShowNotificationModal}
+      />
+
+      {/* Main Content Area - dynamically rendered based on activeTab */}
+      <main className="flex-grow w-full">
+        {activeTab === 'Home' && <HomePage />}
+        {activeTab === 'About' && <AboutPage />}
+        {activeTab === 'Achievements' && <AchievementsPage />}
+        {activeTab === 'Contact' && <ContactPage />}
+        {activeTab === 'Blog' && <BlogPage />}
+      </main>
 
       {/* Footer */}
-      <footer className={`mt-8 text-center text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+      <footer className={`w-full mt-12 py-6 text-center text-sm ${isDarkMode ? 'bg-gray-900 text-gray-400' : 'bg-gray-100 text-gray-600'} transition-colors duration-500`}>
         <p>© {new Date().getFullYear()} Kosuri Gowry Sankar. All rights reserved.</p>
         <p>Designed with ❤️ and built with React, Tailwind CSS, and Local Storage.</p>
       </footer>
 
 
       {/* Modals */}
-      {/* Login Modal (repurposed for Local Edit Mode info) */}
-      {showLoginModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      {/* Info Modal (for Local Edit Mode status) */}
+      {showInfoModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
-            <h2 className="text-2xl font-bold mb-6">Local Edit Mode</h2>
-            <p className="text-lg text-center mb-6">{loginMessage}</p>
-            <div className="flex justify-end space-x-4">
+            <h2 className="text-2xl font-bold mb-6 text-center">Local Edit Mode Status</h2>
+            <p className="text-lg text-center mb-6">{infoMessage}</p>
+            <div className="flex justify-center">
               <button
-                onClick={handleCloseLoginModal}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
+                onClick={handleCloseInfoModal}
+                className={`py-2 px-6 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Close
               </button>
@@ -865,9 +1293,9 @@ function App() {
 
       {/* Notifications Modal */}
       {showNotificationModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[80vh] overflow-y-auto transition-colors duration-300`}>
-            <h2 className="text-2xl font-bold mb-6">Notifications</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">Notifications</h2>
             <div className="mb-6">
               <input
                 ref={notificationInputRef}
@@ -902,7 +1330,7 @@ function App() {
             </ul>
             <div className="flex justify-end mt-6">
               <button
-                onClick={() => { setShowNotificationModal(false); setLoginMessage(''); }}
+                onClick={() => { setShowNotificationModal(false); setInfoMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Close
@@ -912,18 +1340,18 @@ function App() {
         </div>
       )}
 
-      {/* Edit Modal (for about, contact, skills, achievements, experience, projects, courses, trackedInterests) */}
+      {/* Edit Modal (for about, contact, skills, achievements, experience, projects, courses, trackedInterests, blogPosts) */}
       {showEditModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[80vh] overflow-y-auto transition-colors duration-300`}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
+          <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Edit {editingField.replace('skills.', '').replace(/([A-Z])/g, ' $1').trim().replace(/^(.)/, (match) => match.toUpperCase())}</h2>
-            {loginMessage && <p className="text-red-600 text-center mb-4">{loginMessage}</p>}
-            {editingField === 'about' && (
+            {infoMessage && <p className="text-red-600 text-center mb-4">{infoMessage}</p>}
+            {['about', 'achievements'].includes(editingField) && (
               <textarea
                 className={`w-full p-3 mb-4 border rounded-md h-32 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
-                placeholder="About Me description"
+                placeholder={editingField === 'about' ? "About Me description" : "Enter each achievement on a new line"}
               ></textarea>
             )}
             {editingField === 'contact' && (
@@ -931,36 +1359,33 @@ function App() {
                 className={`w-full p-3 mb-4 border rounded-md h-40 font-mono text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
-                placeholder='Enter contact info as JSON: {"email": "...", "phone": "...", "linkedin": "...", "github": "..."}'
+                placeholder='Enter contact info as JSON: {"email": "...", "phone": "...", "linkedin": "...", "github": "...", "resumeLink": "/resume.pdf"}'
               ></textarea>
             )}
             {editingField.startsWith('skills.') && (
               <textarea
-                className={`w-full p-3 mb-4 border rounded-md h-32 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                className={`w-full p-3 mb-4 border rounded-md h-40 font-mono text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
-                placeholder="Enter skills separated by commas (e.g., React, JavaScript, HTML)"
+                placeholder='Enter skills as JSON array of objects: [{"name": "Skill Name", "level": 90}]'
               ></textarea>
             )}
-            {editingField === 'achievements' && (
-              <textarea
-                className={`w-full p-3 mb-4 border rounded-md h-40 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                value={editValue}
-                onChange={(e) => setEditValue(e.target.value)}
-                placeholder="Enter each achievement on a new line"
-              ></textarea>
-            )}
-            {(editingField === 'experience' || editingField === 'projects' || editingField === 'courses' || editingField === 'trackedInterests') && (
+            {['experience', 'projects', 'courses', 'trackedInterests', 'blogPosts'].includes(editingField) && (
               <textarea
                 className={`w-full p-3 mb-4 border rounded-md h-60 font-mono text-sm focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
-                placeholder={`Enter data as a JSON array of objects, e.g., [{"name": "Item 1", "description": "Desc 1", "category": "AI"}] for projects, or [{"name": "Platform", "image": "URL", "link": "URL"}] for tracked interests.`}
+                placeholder={`Enter data as a JSON array of objects.
+                For Projects: [{"name": "Name", "description": "Desc", "category": "Category", "images": ["url1"], "techUsed": ["Tech1"], "challenges": "Challenges", "liveLink": "url", "githubLink": "url"}]
+                For Courses: [{"name": "Course Name", "certificate": "Cert Details", "description": "Desc", "link": "link"}]
+                For Tracked Interests: [{"name": "Platform", "image": "URL", "link": "URL"}]
+                For Blog Posts: [{"id": "id", "title": "Title", "date": "YYYY-MM-DD", "tags": ["Tag1"], "content": "Content..."}]
+                `}
               ></textarea>
             )}
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowEditModal(false); setLoginMessage(''); }}
+                onClick={() => { setShowEditModal(false); setInfoMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Cancel
@@ -976,27 +1401,22 @@ function App() {
         </div>
       )}
 
-      {/* Add Item Modal (for projects/courses) */}
+      {/* Add Item Modal (for projects/courses/skills) */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
-            <h2 className="text-2xl font-bold mb-6">Add New {editingField.slice(0, -1)}</h2>
-            {loginMessage && <p className="text-red-600 text-center mb-4">{loginMessage}</p>}
+            <h2 className="text-2xl font-bold mb-6">Add New {editingField === 'skills' ? 'Skill' : editingField.slice(0, -1)}</h2>
+            {infoMessage && <p className="text-red-600 text-center mb-4">{infoMessage}</p>}
             {editingField === 'projects' && (
               <>
-                <input
-                  type="text"
-                  placeholder="Project Name"
-                  className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                  value={newProjectName}
-                  onChange={(e) => setNewProjectName(e.target.value)}
-                />
-                <textarea
-                  placeholder="Project Description"
-                  className={`w-full p-3 mb-4 border rounded-md h-24 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                  value={newProjectDesc}
-                  onChange={(e) => setNewProjectDesc(e.target.value)}
-                ></textarea>
+                <input type="text" placeholder="Project Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectName} onChange={(e) => setNewProjectName(e.target.value)} required />
+                <textarea placeholder="Project Description" className={`w-full p-3 mb-4 border rounded-md h-24 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectDesc} onChange={(e) => setNewProjectDesc(e.target.value)} required ></textarea>
+                <input type="text" placeholder="Image URLs (comma-separated)" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectImages} onChange={(e) => setNewProjectImages(e.target.value)} />
+                <input type="text" placeholder="Technologies Used (comma-separated)" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectTechUsed} onChange={(e) => setNewProjectTechUsed(e.target.value)} />
+                <textarea placeholder="Challenges Faced" className={`w-full p-3 mb-4 border rounded-md h-20 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectChallenges} onChange={(e) => setNewProjectChallenges(e.target.value)}></textarea>
+                <input type="url" placeholder="Live Demo Link" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectLiveLink} onChange={(e) => setNewProjectLiveLink(e.target.value)} />
+                <input type="url" placeholder="GitHub Link" className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newProjectGithubLink} onChange={(e) => setNewProjectGithubLink(e.target.value)} />
+
                  <select
                     className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
                     value={newProjectCategory}
@@ -1004,35 +1424,38 @@ function App() {
                     required
                  >
                     <option value="">Select Category</option>
-                    <option value="Cybersecurity">Cybersecurity</option>
-                    <option value="AI">AI</option>
-                    <option value="Cloud Computing">Cloud Computing</option>
-                    <option value="Full Stack">Full Stack</option>
-                    <option value="Other">Other</option>
+                    {projectCategories.filter(cat => cat !== 'All').map(cat => <option key={cat} value={cat}>{cat}</option>)}
                  </select>
               </>
             )}
             {editingField === 'courses' && (
               <>
-                <input
-                  type="text"
-                  placeholder="Course Name"
-                  className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                  value={newCourseName}
-                  onChange={(e) => setNewCourseName(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Certificate Details"
-                  className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-                  value={newCourseCert}
-                  onChange={(e) => setNewCourseCert(e.target.value)}
-                />
+                <input type="text" placeholder="Course Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseName} onChange={(e) => setNewCourseName(e.target.value)} required />
+                <input type="text" placeholder="Certificate Details" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseCert} onChange={(e) => setNewCourseCert(e.target.value)} required />
+                <textarea placeholder="Course Description" className={`w-full p-3 mb-4 border rounded-md h-20 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseDesc} onChange={(e) => setNewCourseDesc(e.target.value)}></textarea>
+                <input type="url" placeholder="Course Link (optional)" className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newCourseLink} onChange={(e) => setNewCourseLink(e.target.value)} />
+              </>
+            )}
+            {editingField === 'skills' && (
+              <>
+                <input type="text" placeholder="Skill Name" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newSkillName} onChange={(e) => setNewSkillName(e.target.value)} required />
+                <input type="number" placeholder="Proficiency Level (0-100)" min="0" max="100" className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`} value={newSkillLevel} onChange={(e) => setNewSkillLevel(e.target.value)} required />
+                <select
+                    className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
+                    value={newSkillCategory}
+                    onChange={(e) => setNewSkillCategory(e.target.value)}
+                    required
+                 >
+                    <option value="">Select Category</option>
+                    {Object.keys(defaultPortfolioData.skills).map(cat => (
+                        <option key={cat} value={cat}>{cat.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</option>
+                    ))}
+                 </select>
               </>
             )}
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowAddModal(false); setLoginMessage(''); }}
+                onClick={() => { setShowAddModal(false); setInfoMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Cancel
@@ -1050,10 +1473,10 @@ function App() {
 
       {/* Add Profile Modal */}
       {showAddProfileModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[100]">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Add New Tracked Profile</h2>
-            {loginMessage && <p className="text-red-600 text-center mb-4">{loginMessage}</p>}
+            {infoMessage && <p className="text-red-600 text-center mb-4">{infoMessage}</p>}
             <input
               type="text"
               placeholder="Platform Name (e.g., Medium, Stack Overflow)"
@@ -1080,7 +1503,7 @@ function App() {
             />
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowAddProfileModal(false); setLoginMessage(''); }}
+                onClick={() => { setShowAddProfileModal(false); setInfoMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Cancel
@@ -1094,6 +1517,14 @@ function App() {
             </div>
           </div>
         </div>
+      )}
+      {/* Project Detail Modal */}
+      {selectedProject && (
+        <ProjectDetailModal
+          project={selectedProject}
+          isDarkMode={isDarkMode}
+          onClose={() => setSelectedProject(null)}
+        />
       )}
     </div>
   );
