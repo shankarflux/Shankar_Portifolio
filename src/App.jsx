@@ -1,143 +1,99 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, doc, setDoc, updateDoc, onSnapshot, collection, query, orderBy, addDoc, deleteDoc } from 'firebase/firestore';
 
-// --- Global Variables for Canvas Environment ---
-// Note: These are ONLY available within the Canvas environment (e.g., when running in Google's AI Studio).
-// For deployments like GitHub Pages, these will be undefined, so we provide hardcoded values.
-
-const appId = 'shnakar-portfolio'; // This should match your Firebase projectId
-
-// *** YOUR ACTUAL FIREBASE CONFIGURATION (FOR portwebApp) ***
-// This configuration MUST EXACTLY match the details for the 'portwebApp' web app
-// (App ID: 1:283865216684:web:1e5e9af6946fc513df1109) in your Firebase Project Settings.
-const firebaseConfig = {
-  apiKey: "AIzaSyB22e6RAx4jHl_eRHmC6Zj6Xjl9U6lRlf8",
-  authDomain: "shnakar-portfolio.firebaseapp.com",
-  projectId: "shnakar-portfolio",
-  storageBucket: "shnakar-portfolio.firebasestorage.app",
-  messagingSenderId: "283865216684",
-  appId: "1:283865216684:web:1e5e9af6946fc513df1109", // CORRECT APP ID for portwebApp
-  measurementId: "G-Z3EXX744MN" // CORRECT MEASUREMENT ID for portwebApp
-};
-// ******************************************************
-
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-// Initialize Firebase outside the component to prevent re-initialization on re-renders
-let firebaseApp;
-let db;
-let auth;
-
-try {
-  firebaseApp = initializeApp(firebaseConfig);
-  db = getFirestore(firebaseApp);
-  auth = getAuth(firebaseApp);
-} catch (error) {
-  console.error("Firebase initialization failed:", error);
-}
-
-// Contact form Cloud Function endpoint (REPLACE WITH YOUR DEPLOYED FUNCTION URL)
-// Example: https://us-central1-your-project-id.cloudfunctions.net/sendMail
-const CONTACT_FORM_CLOUD_FUNCTION_URL = 'https://us-central1-shnakar-portfolio.cloudfunctions.net/sendMail'; // Placeholder
-
-// Sample Firebase Cloud Function (Node.js) for sending contact form emails
-/*
-// Filename: functions/index.js
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const nodemailer = require('nodemailer');
-
-admin.initializeApp();
-
-// Configure the email transport using the default SMTP transport and a GMail account.
-// For example, using Gmail. You can use any SMTP transporter.
-// NOTE: Set these environment variables via `firebase functions:config:set gmail.email="your_email@gmail.com" gmail.password="your_app_password"`
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: functions.config().gmail.email,
-    pass: functions.config().gmail.password,
+// Default initial portfolio data if Local Storage is empty
+const defaultPortfolioData = {
+  about: "A passionate full stack developer and UI/UX designer with a knack for creating intuitive and efficient web applications. I love bringing ideas to life through code and crafting seamless user experiences. My core interests lie in Cybersecurity, AI Development, and Cloud Computing, areas where I continuously learn and build.",
+  contact: {
+    email: "shankarflux@example.com",
+    phone: "+1234567890",
+    linkedin: "https://linkedin.com/in/shankarflux",
+    github: "https://github.com/shankarflux"
   },
-});
-
-exports.sendMail = functions.https.onRequest(async (req, res) => {
-  // Enable CORS
-  res.set('Access-Control-Allow-Origin', '*'); // Adjust for production
-  res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    res.status(204).send('');
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).send('Method Not Allowed');
-  }
-
-  const { name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).send('Missing required fields: name, email, message.');
-  }
-
-  const mailOptions = {
-    from: functions.config().gmail.email,
-    to: functions.config().gmail.email, // Send to your admin email
-    subject: `Portfolio Contact Form: Message from ${name}`,
-    html: `
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong> ${message}</p>
-    `,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    return res.status(200).send('Email sent successfully!');
-  } catch (error) {
-    console.error('Error sending email:', error);
-    return res.status(500).send('Failed to send email.');
-  }
-});
-
-// To deploy this function:
-// 1. Install Node.js, npm, and Firebase CLI globally.
-// 2. In your Firebase project's functions directory (e.g., `my-portfolio-website/functions`), run `npm install nodemailer`.
-// 3. Set your Gmail credentials:
-//    `firebase functions:config:set gmail.email="your_email@gmail.com" gmail.password="your_app_password"`
-//    (For `your_app_password`, you might need to generate an app-specific password in your Google Account security settings if you have 2FA enabled).
-// 4. Deploy the function: `firebase deploy --only functions`
-*/
-
+  experience: [
+    { title: "Software Engineer", company: "Tech Innovations", years: "2022-Present", description: "Developed and maintained web applications using React and Node.js, improving performance by 20%." },
+    { title: "UI/UX Intern", company: "Creative Designs Inc.", years: "2021-2022", description: "Assisted in designing user interfaces and conducting usability tests for mobile applications." }
+  ],
+  projects: [
+    { name: "Secure IoT Dashboard", description: "Developed a real-time IoT dashboard with enhanced security features for data transmission.", category: "Cybersecurity" },
+    { name: "AI Chatbot Assistant", description: "Built an AI-powered chatbot using natural language processing for customer support automation.", category: "AI" },
+    { name: "Serverless E-commerce API", description: "Designed and deployed a scalable e-commerce API leveraging AWS Lambda and API Gateway.", category: "Cloud Computing" },
+    { name: "Portfolio Website", description: "Created this responsive portfolio using React, Tailwind CSS, and Firebase for dynamic content management.", category: "Full Stack" }
+  ],
+  courses: [
+    { name: "Advanced React Patterns", certificate: "Issued by Online Academy" },
+    { name: "Responsive Web Design", certificate: "Issued by Web Dev Institute" },
+    { name: "Certified Ethical Hacker (CEH)", certificate: "Issued by EC-Council" },
+    { name: "Machine Learning with Python", certificate: "Issued by Coursera" },
+    { name: "AWS Certified Solutions Architect", certificate: "Issued by AWS" }
+  ],
+  skills: {
+    cybersecurity: ["Network Security", "Penetration Testing", "Vulnerability Assessment", "IoT Security", "SIEM"],
+    ai_development: ["Machine Learning", "Deep Learning", "NLP", "Computer Vision", "TensorFlow", "PyTorch"],
+    cloud_computing: ["AWS", "Azure", "GCP", "Serverless Architectures", "Containerization (Docker, Kubernetes)"],
+    frontend: ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
+    backend: ["Node.js", "Express.js", "Firebase", "MongoDB", "Python"],
+    tools: ["Git", "VS Code", "Figma", "Jira", "Wireshark", "Burp Suite"]
+  },
+  achievements: [
+    "Awarded 'Innovator of the Year' at Tech Innovations 2023.",
+    "Published a research paper on accessible web design.",
+    "Mentored junior developers in web development best practices.",
+    "Secured top 5% in national cybersecurity hackathon.",
+    "Developed and deployed an open-source AI anomaly detection system on AWS."
+  ],
+  profileImage: 'https://placehold.co/400x400/CCCCCC/FFFFFF?text=Profile',
+  trackedInterests: [
+    { name: "GitHub", image: "https://placehold.co/60x60/181717/FFFFFF?text=GitHub", link: "https://github.com/shankarflux" },
+    { name: "LeetCode", image: "https://placehold.co/60x60/FFA116/000000?text=LeetCode", link: "https://leetcode.com/your-username" },
+    { name: "HackerRank", image: "https://placehold.co/60x60/2EC866/FFFFFF?text=HRank", link: "https://www.hackerrank.com/your-username" },
+    { name: "Hack The Box", image: "https://placehold.co/60x60/00C39C/FFFFFF?text=HTB", link: "https://www.hackthebox.com/profile/your-id" }
+  ]
+};
 
 function App() {
   const [activeTab, setActiveTab] = useState('About');
-  const [portfolioData, setPortfolioData] = useState({});
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [adminEmail, setAdminEmail] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
-  const [authReady, setAuthReady] = useState(false);
-  const [currentUserId, setCurrentUserId] = useState(null);
+  // Initialize portfolioData from Local Storage, or use default if empty
+  const [portfolioData, setPortfolioData] = useState(() => {
+    try {
+      const savedData = localStorage.getItem('portfolioData');
+      return savedData ? JSON.parse(savedData) : defaultPortfolioData;
+    } catch (error) {
+      console.error("Error parsing portfolioData from localStorage:", error);
+      return defaultPortfolioData; // Fallback to default on error
+    }
+  });
+
+  // Local "Admin" state for editing, no actual login
+  const [isLocalEditMode, setIsLocalEditMode] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false); // Still used for toggling edit mode info
+  const [loginMessage, setLoginMessage] = useState(''); // Used for info messages about local mode
+
   const [showNotificationModal, setShowNotificationModal] = useState(false);
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState(() => {
+    try {
+      const savedNotifications = localStorage.getItem('notifications');
+      return savedNotifications ? JSON.parse(savedNotifications) : [];
+    } catch (error) {
+      console.error("Error parsing notifications from localStorage:", error);
+      return []; // Fallback to empty array on error
+    }
+  });
   const [newNotification, setNewNotification] = useState('');
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingField, setEditingField] = useState('');
   const [editValue, setEditValue] = useState('');
   const [editIndex, setEditIndex] = useState(null);
+
   const [showAddModal, setShowAddModal] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
   const [newProjectDesc, setNewProjectDesc] = useState('');
-  const [newProjectCategory, setNewProjectCategory] = useState(''); // For categorized projects
+  const [newProjectCategory, setNewProjectCategory] = useState('');
+
   const [newCourseName, setNewCourseName] = useState('');
   const [newCourseCert, setNewCourseCert] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [profileImageUrl, setProfileImageUrl] = useState('https://placehold.co/400x400/CCCCCC/FFFFFF?text=Profile');
+
+  const [profileImageUrl, setProfileImageUrl] = useState(portfolioData.profileImage);
 
   // Tracked Interests specific states
   const [showAddProfileModal, setShowAddProfileModal] = useState(false);
@@ -145,24 +101,20 @@ function App() {
   const [newProfileImage, setNewProfileImage] = useState('');
   const [newProfileLink, setNewProfileLink] = useState('');
 
-  // Contact Form states
+  // Contact Form states (frontend only now)
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactMessage, setContactMessage] = useState('');
   const [contactStatus, setContactStatus] = useState(''); // 'success', 'error', 'sending'
 
-  // Dark/Light Mode state
+  // Dark/Light Mode state (already local storage based)
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Initialize from local storage, default to true (dark mode)
     const savedMode = localStorage.getItem('theme-mode');
     return savedMode ? JSON.parse(savedMode) : true;
   });
 
   const notificationInputRef = useRef(null);
   const typingRef = useRef(null); // Ref for typing animation container
-
-  // Admin credentials
-  const ADMIN_EMAIL = '23jr1a05b3@gmail.com';
 
   // Professional Quotes for typing animation
   const quotes = [
@@ -177,6 +129,16 @@ function App() {
   const [isTyping, setIsTyping] = useState(true);
   const typingSpeed = 50; // ms per character
   const pauseTime = 9000; // Total time per quote (10s) - typing speed (approx 1s) = 9s pause
+
+  // --- Effect to save portfolioData to Local Storage whenever it changes ---
+  useEffect(() => {
+    localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+  }, [portfolioData]);
+
+  // --- Effect to save notifications to Local Storage whenever they change ---
+  useEffect(() => {
+    localStorage.setItem('notifications', JSON.stringify(notifications));
+  }, [notifications]);
 
   // --- Typing Animation Effect ---
   useEffect(() => {
@@ -223,306 +185,79 @@ function App() {
   };
 
 
-  // --- Utility Functions ---
+  // --- Handlers for Local Edit Mode Functionality ---
 
-  /**
-   * Generates a unique ID for new documents.
-   * @returns {string} A unique ID.
-   */
-  const generateUniqueId = () => crypto.randomUUID();
-
-  /**
-   * Sets up real-time listener for portfolio data.
-   * Fetches data from Firestore and updates state.
-   */
-  const setupPortfolioListener = useCallback(() => {
-    if (!db) {
-      console.error("Firestore not initialized for portfolio listener.");
-      setLoading(false);
-      return undefined;
-    }
-
-    const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
-    const unsubscribe = onSnapshot(portfolioDocRef, (docSnap) => {
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        setPortfolioData(data);
-        if (data.profileImage) {
-          setProfileImageUrl(data.profileImage);
-        }
-        console.log("Portfolio data updated:", data);
-      } else {
-        console.log("No portfolio data found. Initializing with default structure.");
-        const defaultPortfolioData = {
-          about: "A passionate full stack developer and UI/UX designer with a knack for creating intuitive and efficient web applications. I love bringing ideas to life through code and crafting seamless user experiences. My core interests lie in Cybersecurity, AI Development, and Cloud Computing, areas where I continuously learn and build.",
-          contact: {
-            email: "shankarflux@example.com",
-            phone: "+1234567890",
-            linkedin: "https://linkedin.com/in/shankarflux",
-            github: "https://github.com/shankarflux"
-          },
-          experience: [
-            { title: "Software Engineer", company: "Tech Innovations", years: "2022-Present", description: "Developed and maintained web applications using React and Node.js, improving performance by 20%." },
-            { title: "UI/UX Intern", company: "Creative Designs Inc.", years: "2021-2022", description: "Assisted in designing user interfaces and conducting usability tests for mobile applications." }
-          ],
-          projects: [
-            { name: "Secure IoT Dashboard", description: "Developed a real-time IoT dashboard with enhanced security features for data transmission.", category: "Cybersecurity" },
-            { name: "AI Chatbot Assistant", description: "Built an AI-powered chatbot using natural language processing for customer support automation.", category: "AI" },
-            { name: "Serverless E-commerce API", description: "Designed and deployed a scalable e-commerce API leveraging AWS Lambda and API Gateway.", category: "Cloud Computing" },
-            { name: "Portfolio Website", description: "Created this responsive portfolio using React, Tailwind CSS, and Firebase for dynamic content management.", category: "Full Stack" }
-          ],
-          courses: [
-            { name: "Advanced React Patterns", certificate: "Issued by Online Academy" },
-            { name: "Responsive Web Design", certificate: "Issued by Web Dev Institute" },
-            { name: "Certified Ethical Hacker (CEH)", certificate: "Issued by EC-Council" },
-            { name: "Machine Learning with Python", certificate: "Issued by Coursera" },
-            { name: "AWS Certified Solutions Architect", certificate: "Issued by AWS" }
-          ],
-          skills: {
-            cybersecurity: ["Network Security", "Penetration Testing", "Vulnerability Assessment", "IoT Security", "SIEM"],
-            ai_development: ["Machine Learning", "Deep Learning", "NLP", "Computer Vision", "TensorFlow", "PyTorch"],
-            cloud_computing: ["AWS", "Azure", "GCP", "Serverless Architectures", "Containerization (Docker, Kubernetes)"],
-            frontend: ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
-            backend: ["Node.js", "Express.js", "Firebase", "MongoDB", "Python"],
-            tools: ["Git", "VS Code", "Figma", "Jira", "Wireshark", "Burp Suite"]
-          },
-          achievements: [
-            "Awarded 'Innovator of the Year' at Tech Innovations 2023.",
-            "Published a research paper on accessible web design.",
-            "Mentored junior developers in web development best practices.",
-            "Secured top 5% in national cybersecurity hackathon.",
-            "Developed and deployed an open-source AI anomaly detection system on AWS."
-          ],
-          profileImage: profileImageUrl,
-          trackedInterests: [
-            { name: "GitHub", image: "https://placehold.co/60x60/181717/FFFFFF?text=GitHub", link: "https://github.com/shankarflux" },
-            { name: "LeetCode", image: "https://placehold.co/60x60/FFA116/000000?text=LeetCode", link: "https://leetcode.com/your-username" },
-            { name: "HackerRank", image: "https://placehold.co/60x60/2EC866/FFFFFF?text=HRank", link: "https://www.hackerrank.com/your-username" },
-            { name: "Hack The Box", image: "https://placehold.co/60x60/00C39C/FFFFFF?text=HTB", link: "https://www.hackthebox.com/profile/your-id" }
-          ]
-        };
-        setPortfolioData(defaultPortfolioData);
-        setDoc(portfolioDocRef, defaultPortfolioData) // Using setDoc to initialize or overwrite
-          .then(() => console.log("Default portfolio data set."))
-          .catch(e => console.error("Error setting default portfolio data:", e));
-      }
-      setLoading(false);
-    }, (error) => {
-      console.error("Error fetching portfolio data:", error);
-      setLoginError(`Failed to load portfolio data: ${error.message}. Please check Firebase rules.`);
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, [db, appId, profileImageUrl]);
-
-  /**
-   * Sets up real-time listener for notifications.
-   * Fetches data from Firestore and updates state.
-   */
-  const setupNotificationsListener = useCallback(() => {
-    if (!db || !currentUserId) {
-      console.log("Skipping notification listener setup: DB not ready or user not authenticated.");
-      return undefined;
-    }
-
-    const notificationsCollectionRef = collection(db, 'artifacts', appId, 'users', currentUserId, 'notifications');
-    const q = query(notificationsCollectionRef, orderBy('timestamp', 'desc'));
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const fetchedNotifications = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setNotifications(fetchedNotifications);
-      console.log("Notifications updated:", fetchedNotifications);
-    }, (error) => {
-      console.error("Error fetching notifications:", error);
-      setLoginError(`Failed to load notifications: ${error.message}.`);
-    });
-
-    return unsubscribe;
-  }, [db, appId, currentUserId]);
-
-  // --- Firebase Authentication Effect ---
-  useEffect(() => {
-    if (auth) {
-      const unsubscribe = onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          setCurrentUserId(user.uid);
-          if (user.email === ADMIN_EMAIL) {
-            setIsAdmin(true);
-            console.log("Admin logged in:", user.uid);
-          } else {
-            setIsAdmin(false);
-            console.log("User logged in:", user.uid);
-          }
-        } else {
-          setCurrentUserId(null);
-          setIsAdmin(false);
-          console.log("No user logged in. Attempting anonymous sign-in.");
-          try {
-            await signInAnonymously(auth);
-            console.log("Signed in anonymously.");
-          } catch (error) {
-            console.error("Error signing in anonymously:", error);
-            setLoginError(`Authentication failed: ${error.message}. App may not function correctly.`);
-          }
-        }
-        setAuthReady(true);
-      });
-      return () => unsubscribe();
+  const handleToggleLocalEditMode = () => {
+    setIsLocalEditMode(prevMode => !prevMode);
+    setShowLoginModal(true); // Reuse modal to show info
+    if (!isLocalEditMode) {
+      setLoginMessage("You are now in Local Edit Mode. Changes will only be saved in this browser.");
     } else {
-      setLoginError("Firebase Authentication service is not available. Check Firebase setup.");
-      setAuthReady(true);
-      setLoading(false);
-    }
-  }, [auth, ADMIN_EMAIL]);
-
-  // --- Data Listeners Effect ---
-  useEffect(() => {
-    if (authReady && db) {
-      const unsubscribePortfolio = setupPortfolioListener();
-      let unsubscribeNotifications;
-      if (currentUserId) {
-        unsubscribeNotifications = setupNotificationsListener();
-      }
-
-      return () => {
-        if (unsubscribePortfolio) unsubscribePortfolio();
-        if (unsubscribeNotifications) unsubscribeNotifications();
-      };
-    } else if (authReady && !db) {
-      setLoginError("Firestore Database is not available. Data persistence will not work.");
-      setLoading(false);
-    }
-  }, [authReady, db, currentUserId, setupPortfolioListener, setupNotificationsListener]);
-
-
-  // --- Handlers for Admin/Edit Functionality ---
-
-  const handleLogin = async () => {
-    setLoginError('');
-    try {
-      await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
-      setShowLoginModal(false);
-    } catch (error) {
-      setLoginError(error.message);
-      console.error("Login failed:", error);
+      setLoginMessage("Local Edit Mode is OFF. Changes are not being saved.");
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      console.log("Logged out.");
-      await signInAnonymously(auth);
-    } catch (error) {
-      console.error("Logout failed:", error);
-      setLoginError(`Logout failed: ${error.message}`);
-    }
+  const handleCloseLoginModal = () => {
+    setShowLoginModal(false);
+    setLoginMessage('');
   };
 
-  const handleAddNotification = async () => {
-    if (!newNotification.trim() || !db || !currentUserId) {
-      setLoginError("Cannot add notification: Invalid input or Firebase not ready.");
+  const handleAddNotification = () => {
+    if (!newNotification.trim()) {
+      setLoginMessage("Cannot add empty notification.");
       return;
     }
-    try {
-      const notificationsCollectionRef = collection(db, 'artifacts', appId, 'users', currentUserId, 'notifications');
-      await addDoc(notificationsCollectionRef, {
-        message: newNotification.trim(),
-        timestamp: new Date().toISOString(),
-      });
-      setNewNotification('');
-      if (notificationInputRef.current) {
-        notificationInputRef.current.focus();
-      }
-      setLoginError('');
-    } catch (error) {
-      console.error("Error adding notification:", error);
-      setLoginError(`Error adding notification: ${error.message}`);
+    const newId = Date.now().toString(); // Simple ID for local storage
+    const updatedNotifications = [{ id: newId, message: newNotification.trim(), timestamp: new Date().toISOString() }, ...notifications];
+    setNotifications(updatedNotifications);
+    setNewNotification('');
+    if (notificationInputRef.current) {
+      notificationInputRef.current.focus();
     }
+    setLoginMessage('');
   };
 
-  const handleDeleteNotification = async (id) => {
-    if (!db || !currentUserId) {
-      setLoginError("Cannot delete notification: Firebase not ready or no user.");
-      return;
-    }
-    try {
-      const notificationDocRef = doc(db, 'artifacts', appId, 'users', currentUserId, 'notifications', id);
-      await deleteDoc(notificationDocRef);
-      setLoginError('');
-    } catch (error) {
-      console.error("Error deleting notification:", error);
-      setLoginError(`Error deleting notification: ${error.message}`);
-    }
+  const handleDeleteNotification = (id) => {
+    const updatedNotifications = notifications.filter(notif => notif.id !== id);
+    setNotifications(updatedNotifications);
+    setLoginMessage('');
   };
 
-  const handleEdit = (field, value, index = null) => {
+  const handleEdit = (field, value) => {
     setEditingField(field);
     setEditValue(typeof value === 'object' ? JSON.stringify(value, null, 2) : value);
-    setEditIndex(index);
     setShowEditModal(true);
-    setLoginError(''); // Clear error when opening edit modal
+    setLoginMessage(''); // Clear any previous message
   };
 
-  const handleSaveEdit = async () => {
-    if (!db) {
-      setLoginError("Cannot save changes: Firebase not ready.");
-      return;
-    }
-    setLoading(true);
+  const handleSaveEdit = () => {
     try {
-      const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
       let updatedData = { ...portfolioData };
 
       if (editingField === 'about') {
         updatedData.about = editValue;
       } else if (editingField === 'contact') {
-        try {
-          updatedData.contact = JSON.parse(editValue);
-        } catch (e) {
-          throw new Error("Invalid JSON for Contact data.");
-        }
+        updatedData.contact = JSON.parse(editValue);
       } else if (editingField.startsWith('skills')) {
         const skillCategory = editingField.split('.')[1];
         updatedData.skills[skillCategory] = editValue.split(',').map(s => s.trim()).filter(s => s);
       } else if (editingField === 'achievements') {
         updatedData.achievements = editValue.split('\n').map(s => s.trim()).filter(s => s);
-      } else if (editingField === 'experience' || editingField === 'projects' || editingField === 'courses') {
-        try {
-          const parsedArray = JSON.parse(editValue);
-          if (Array.isArray(parsedArray)) {
-            updatedData[editingField] = parsedArray;
-          } else {
-            throw new Error(`${editingField} data must be a JSON array.`);
-          }
-        } catch (e) {
-          throw new Error(`Invalid JSON for ${editingField} data: ${e.message}`);
-        }
-      } else if (editingField === 'trackedInterests') {
-        try {
-          const parsedArray = JSON.parse(editValue);
-          if (Array.isArray(parsedArray)) {
-            updatedData.trackedInterests = parsedArray;
-          } else {
-            throw new Error(`Tracked Interests data must be a JSON array.`);
-          }
-        } catch (e) {
-          throw new Error(`Invalid JSON for Tracked Interests data: ${e.message}`);
+      } else if (editingField === 'experience' || editingField === 'projects' || editingField === 'courses' || editingField === 'trackedInterests') {
+        const parsedArray = JSON.parse(editValue);
+        if (Array.isArray(parsedArray)) {
+          updatedData[editingField] = parsedArray;
+        } else {
+          throw new Error(`${editingField} data must be a JSON array.`);
         }
       }
 
-      await setDoc(portfolioDocRef, updatedData);
+      setPortfolioData(updatedData); // This will trigger useEffect to save to localStorage
       setShowEditModal(false);
-      setLoading(false);
-      setLoginError('');
+      setLoginMessage('Changes saved locally!');
     } catch (error) {
       console.error("Error saving portfolio data:", error);
-      setLoginError(`Error saving: ${error.message}`);
-      setLoading(false);
+      setLoginMessage(`Error saving: ${error.message}`);
     }
   };
 
@@ -534,17 +269,11 @@ function App() {
     setNewProjectCategory('');
     setNewCourseName('');
     setNewCourseCert('');
-    setLoginError('');
+    setLoginMessage('');
   };
 
-  const handleSaveNewItem = async () => {
-    if (!db) {
-      setLoginError("Cannot add item: Firebase not ready.");
-      return;
-    }
-    setLoading(true);
+  const handleSaveNewItem = () => {
     try {
-      const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
       let updatedData = { ...portfolioData };
 
       if (editingField === 'projects') {
@@ -563,25 +292,17 @@ function App() {
         }
       }
 
-      await setDoc(portfolioDocRef, updatedData);
+      setPortfolioData(updatedData);
       setShowAddModal(false);
-      setLoading(false);
-      setLoginError('');
+      setLoginMessage('New item added locally!');
     } catch (error) {
       console.error("Error adding new item:", error);
-      setLoginError(`Error adding item: ${error.message}`);
-      setLoading(false);
+      setLoginMessage(`Error adding item: ${error.message}`);
     }
   };
 
-  const handleDeleteItem = async (type, index) => {
-    if (!db) {
-      setLoginError("Cannot delete item: Firebase not ready.");
-      return;
-    }
-    setLoading(true);
+  const handleDeleteItem = (type, index) => {
     try {
-      const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
       let updatedData = { ...portfolioData };
 
       if (type === 'experience') {
@@ -592,44 +313,28 @@ function App() {
         updatedData.courses = updatedData.courses.filter((_, i) => i !== index);
       } else if (type === 'achievements') {
         updatedData.achievements = updatedData.achievements.filter((_, i) => i !== index);
-      } else if (type === 'trackedInterests') { // Handle deletion for tracked interests
+      } else if (type === 'trackedInterests') {
         updatedData.trackedInterests = updatedData.trackedInterests.filter((_, i) => i !== index);
       }
 
-      await setDoc(portfolioDocRef, updatedData);
-      setLoading(false);
-      setLoginError('');
+      setPortfolioData(updatedData);
+      setLoginMessage('Item deleted locally!');
     } catch (error) {
       console.error("Error deleting item:", error);
-      setLoginError(`Error deleting item: ${error.message}`);
-      setLoading(false);
+      setLoginMessage(`Error deleting item: ${error.message}`);
     }
   };
 
-  const handleProfileImageUpload = async (event) => {
+  const handleProfileImageUpload = (event) => {
     const file = event.target.files[0];
     if (!file) return;
-    if (!db) {
-      setLoginError("Cannot upload image: Firebase not ready.");
-      return;
-    }
 
-    setLoading(true);
     const reader = new FileReader();
-    reader.onloadend = async () => {
+    reader.onloadend = () => {
       const base64Image = reader.result;
-
-      try {
-        const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
-        await updateDoc(portfolioDocRef, { profileImage: base64Image });
-        setProfileImageUrl(base64Image);
-        setLoading(false);
-        setLoginError('');
-      } catch (error) {
-        console.error("Error uploading profile image:", error);
-        setLoginError(`Error uploading image: ${error.message}`);
-        setLoading(false);
-      }
+      setProfileImageUrl(base64Image);
+      setPortfolioData(prevData => ({ ...prevData, profileImage: base64Image }));
+      setLoginMessage('Profile image updated locally!');
     };
     reader.readAsDataURL(file);
   };
@@ -639,22 +344,16 @@ function App() {
     setNewProfileName('');
     setNewProfileImage('');
     setNewProfileLink('');
-    setLoginError('');
+    setLoginMessage('');
   };
 
-  const handleSaveNewProfile = async () => {
-    if (!db) {
-      setLoginError("Cannot add profile: Firebase not ready.");
-      return;
-    }
+  const handleSaveNewProfile = () => {
     if (!newProfileName || !newProfileImage || !newProfileLink) {
-      setLoginError("All profile fields are required.");
+      setLoginMessage("All profile fields are required.");
       return;
     }
 
-    setLoading(true);
     try {
-      const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
       let updatedData = { ...portfolioData };
       const newProfile = {
         name: newProfileName,
@@ -663,50 +362,28 @@ function App() {
       };
       updatedData.trackedInterests = [...(updatedData.trackedInterests || []), newProfile];
 
-      await setDoc(portfolioDocRef, updatedData);
+      setPortfolioData(updatedData);
       setShowAddProfileModal(false);
-      setLoading(false);
-      setLoginError('');
+      setLoginMessage('New profile added locally!');
     } catch (error) {
       console.error("Error adding new profile:", error);
-      setLoginError(`Error adding profile: ${error.message}`);
-      setLoading(false);
+      setLoginMessage(`Error adding profile: ${error.message}`);
     }
   };
 
-  const handleContactSubmit = async (e) => {
+  const handleContactSubmit = (e) => {
     e.preventDefault();
     setContactStatus('sending');
-    setLoginError(''); // Clear general login error
-    try {
-      const response = await fetch(CONTACT_FORM_CLOUD_FUNCTION_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: contactName,
-          email: contactEmail,
-          message: contactMessage,
-        }),
-      });
-
-      if (response.ok) {
-        setContactStatus('success');
-        setContactName('');
-        setContactEmail('');
-        setContactMessage('');
-        setTimeout(() => setContactStatus(''), 3000); // Clear status after 3 seconds
-      } else {
-        const errorData = await response.text();
-        throw new Error(errorData || 'Failed to send message.');
-      }
-    } catch (error) {
-      console.error("Contact form submission failed:", error);
-      setContactStatus('error');
-      setLoginError(`Message failed to send: ${error.message}`);
-      setTimeout(() => { setContactStatus(''); setLoginError(''); }, 5000); // Clear status/error
-    }
+    setLoginMessage('');
+    // Simulate sending, as there's no backend for local storage version
+    setTimeout(() => {
+      setContactStatus('success');
+      setContactName('');
+      setContactEmail('');
+      setContactMessage('');
+      setLoginMessage('Message received (frontend demo only). A backend service is needed to send actual emails.');
+      setTimeout(() => { setContactStatus(''); setLoginMessage(''); }, 8000); // Clear after longer time
+    }, 1500);
   };
 
 
@@ -718,55 +395,30 @@ function App() {
     : (portfolioData.projects || []).filter(project => project.category === currentProjectFilter);
 
 
-  if (loading || !authReady) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-gray-200">
-        <p className="text-2xl font-bold">
-          {loginError ? `Error: ${loginError}` : "Loading Portfolio..."}
-        </p>
-      </div>
-    );
-  }
-
+  // No loading state needed as data is instant from local storage or default
   return (
     <div className={`min-h-screen font-inter flex flex-col items-center p-4 sm:p-8 transition-colors duration-500 ${isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-gray-100 text-gray-800'}`}>
-      {/* Global Error Message Display */}
-      {loginError && (
-        <div className={`fixed top-4 right-4 ${isDarkMode ? 'bg-red-700' : 'bg-red-600'} text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2`}>
-          <span>{loginError}</span>
-          <button onClick={() => setLoginError('')} className="ml-2 text-white font-bold">&times;</button>
+      {/* Global Message Display (for local storage info/errors) */}
+      {loginMessage && (
+        <div className={`fixed top-4 right-4 ${isDarkMode ? 'bg-indigo-700' : 'bg-indigo-600'} text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2`}>
+          <span>{loginMessage}</span>
+          <button onClick={() => setLoginMessage('')} className="ml-2 text-white font-bold">&times;</button>
         </div>
       )}
 
       {/* Header and Controls */}
       <div className="w-full max-w-6xl flex justify-between items-center mb-6 z-10">
         <div className="flex space-x-4">
-          {isAdmin ? (
-            <button
-              onClick={handleLogout}
-              className={`py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-red-700 hover:bg-red-800' : 'bg-red-500 hover:bg-red-600'} text-white`}
-            >
-              Logout (Admin)
-            </button>
-          ) : (
-            <button
-              onClick={() => setShowLoginModal(true)}
-              className={`py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-700 hover:bg-blue-800' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-            >
-              Admin Login
-            </button>
-          )}
+          <button
+            onClick={handleToggleLocalEditMode}
+            className={`py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isLocalEditMode ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'} text-white`}
+          >
+            {isLocalEditMode ? 'Exit Local Edit Mode' : 'Toggle Local Edit Mode'}
+          </button>
         </div>
 
-        {/* Display currentUserId */}
-        {currentUserId && (
-          <div className={`text-sm ${isDarkMode ? 'text-gray-400 bg-gray-700' : 'text-gray-600 bg-gray-200'} px-3 py-1 rounded-full`}>
-            User ID: {currentUserId}
-          </div>
-        )}
-
         <div className="flex space-x-4 items-center">
-          {isAdmin && (
+          {isLocalEditMode && (
             <button
               onClick={() => setShowNotificationModal(true)}
               className={`py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-green-700 hover:bg-green-800' : 'bg-green-600 hover:bg-green-700'} text-white`}
@@ -821,7 +473,7 @@ function App() {
               alt="Profile"
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             />
-            {isAdmin && (
+            {isLocalEditMode && (
               <label
                 htmlFor="profileImageUpload"
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
@@ -900,7 +552,7 @@ function App() {
             <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-blue-50'} p-6 rounded-lg shadow-inner relative group transition-colors duration-300`}>
               <h2 className={`text-3xl font-bold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} mb-4`}>About Me</h2>
               <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>{portfolioData.about}</p>
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleEdit('about', portfolioData.about)}
                   className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -919,7 +571,7 @@ function App() {
                         <img src={profile.image} alt={profile.name} className="w-16 h-16 rounded-full mx-auto mb-3 object-contain" />
                         <span className={`${isDarkMode ? 'text-gray-200' : 'text-gray-700'} font-semibold`}>{profile.name}</span>
                       </a>
-                      {isAdmin && (
+                      {isLocalEditMode && (
                         <button
                           onClick={() => handleDeleteItem('trackedInterests', index)}
                           className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -930,7 +582,7 @@ function App() {
                     </div>
                   ))}
                 </div>
-                {isAdmin && (
+                {isLocalEditMode && (
                   <button
                     onClick={handleAddProfile}
                     className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
@@ -956,7 +608,7 @@ function App() {
                         <li key={idx}>{skill}</li>
                       ))}
                     </ul>
-                    {isAdmin && (
+                    {isLocalEditMode && (
                       <button
                         onClick={() => handleEdit(`skills.${category}`, portfolioData.skills[category].join(', '))}
                         className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -979,7 +631,7 @@ function App() {
                     <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}`}>{exp.title} at {exp.company}</h3>
                     <p className={`text-gray-400 text-sm mb-2`}>{exp.years}</p>
                     <p className={`text-gray-300`}>{exp.description}</p>
-                    {isAdmin && (
+                    {isLocalEditMode && (
                       <button
                         onClick={() => handleDeleteItem('experience', index)}
                         className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -990,7 +642,7 @@ function App() {
                   </div>
                 ))}
               </div>
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleEdit('experience', portfolioData.experience)}
                   className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
@@ -1027,7 +679,7 @@ function App() {
                     <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'} mb-2`}>{project.name}</h3>
                     <p className={`text-gray-400 mb-2 text-sm italic`}>Category: {project.category || 'Uncategorized'}</p>
                     <p className={`text-gray-300`}>{project.description}</p>
-                    {isAdmin && (
+                    {isLocalEditMode && (
                       <button
                         onClick={() => handleDeleteItem('projects', portfolioData.projects.indexOf(project))} // Find original index for deletion
                         className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -1038,7 +690,7 @@ function App() {
                   </div>
                 ))}
               </div>
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleAddItem('projects')}
                   className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
@@ -1046,7 +698,7 @@ function App() {
                   Add Project
                 </button>
               )}
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleEdit('projects', portfolioData.projects)}
                   className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
@@ -1065,7 +717,7 @@ function App() {
                   <div key={index} className={`${isDarkMode ? 'bg-gray-600' : 'bg-white'} p-5 rounded-lg shadow-md relative group transition-colors duration-300`}>
                     <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}`}>{course.name}</h3>
                     <p className={`text-gray-400`}>{course.certificate}</p>
-                    {isAdmin && (
+                    {isLocalEditMode && (
                       <button
                         onClick={() => handleDeleteItem('courses', index)}
                         className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -1076,7 +728,7 @@ function App() {
                   </div>
                 ))}
               </div>
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleAddItem('courses')}
                   className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4 font-bold ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
@@ -1084,7 +736,7 @@ function App() {
                   Add Course
                 </button>
               )}
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleEdit('courses', portfolioData.courses)}
                   className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
@@ -1102,7 +754,7 @@ function App() {
                 {(portfolioData.achievements || []).map((achievement, index) => (
                   <li key={index} className="relative group">
                     {achievement}
-                    {isAdmin && (
+                    {isLocalEditMode && (
                       <button
                         onClick={() => handleDeleteItem('achievements', index)}
                         className="absolute left-full top-0 ml-2 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -1114,7 +766,7 @@ function App() {
                   </li>
                 ))}
               </ul>
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleEdit('achievements', (portfolioData.achievements || []).join('\n'))}
                   className={`mt-6 py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 font-bold ${isDarkMode ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-yellow-500 hover:bg-yellow-600'} text-white`}
@@ -1134,7 +786,7 @@ function App() {
                 <p><strong>LinkedIn:</strong> <a href={portfolioData.contact?.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-blue-400 hover:underline' : 'text-blue-600 hover:underline'}`}>{portfolioData.contact?.linkedin}</a></p>
                 <p><strong>GitHub:</strong> <a href={portfolioData.contact?.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400 hover:underline' : 'text-gray-700 hover:underline'}`}>{portfolioData.contact?.github}</a></p>
               </div>
-              {isAdmin && (
+              {isLocalEditMode && (
                 <button
                   onClick={() => handleEdit('contact', portfolioData.contact)}
                   className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
@@ -1177,7 +829,7 @@ function App() {
                 >
                   {contactStatus === 'sending' ? 'Sending...' : 'Send Message'}
                 </button>
-                {contactStatus === 'success' && <p className="text-green-500 mt-2 text-center">Message sent successfully!</p>}
+                {contactStatus === 'success' && <p className="text-green-500 mt-2 text-center">Message received (frontend demo only). A backend service is needed to send actual emails.</p>}
                 {contactStatus === 'error' && <p className="text-red-500 mt-2 text-center">Failed to send message. Please try again.</p>}
               </form>
             </div>
@@ -1188,43 +840,23 @@ function App() {
       {/* Footer */}
       <footer className={`mt-8 text-center text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
         <p>© {new Date().getFullYear()} Kosuri Gowry Sankar. All rights reserved.</p>
-        <p>Designed with ❤️ and built with React, Tailwind CSS, and Firebase.</p>
+        <p>Designed with ❤️ and built with React, Tailwind CSS, and Local Storage.</p>
       </footer>
 
 
       {/* Modals */}
-      {/* Login Modal */}
+      {/* Login Modal (repurposed for Local Edit Mode info) */}
       {showLoginModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
-            <h2 className="text-2xl font-bold mb-6">Admin Login</h2>
-            {loginError && <p className="text-red-600 text-center mb-4">{loginError}</p>}
-            <input
-              type="email"
-              placeholder="Admin Email"
-              className={`w-full p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-              value={adminEmail}
-              onChange={(e) => setAdminEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Admin Password"
-              className={`w-full p-3 mb-6 border rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
-            />
+            <h2 className="text-2xl font-bold mb-6">Local Edit Mode</h2>
+            <p className="text-lg text-center mb-6">{loginMessage}</p>
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowLoginModal(false); setLoginError(''); }}
+                onClick={handleCloseLoginModal}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
-                Cancel
-              </button>
-              <button
-                onClick={handleLogin}
-                className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold`}
-              >
-                Login
+                Close
               </button>
             </div>
           </div>
@@ -1270,7 +902,7 @@ function App() {
             </ul>
             <div className="flex justify-end mt-6">
               <button
-                onClick={() => { setShowNotificationModal(false); setLoginError(''); }}
+                onClick={() => { setShowNotificationModal(false); setLoginMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Close
@@ -1285,7 +917,7 @@ function App() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[80vh] overflow-y-auto transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Edit {editingField.replace('skills.', '').replace(/([A-Z])/g, ' $1').trim().replace(/^(.)/, (match) => match.toUpperCase())}</h2>
-            {loginError && <p className="text-red-600 text-center mb-4">{loginError}</p>}
+            {loginMessage && <p className="text-red-600 text-center mb-4">{loginMessage}</p>}
             {editingField === 'about' && (
               <textarea
                 className={`w-full p-3 mb-4 border rounded-md h-32 focus:outline-none focus:ring-2 ${isDarkMode ? 'bg-gray-700 border-gray-600 text-gray-200 focus:ring-blue-500' : 'bg-white border-gray-300 text-gray-800 focus:ring-blue-500'}`}
@@ -1328,7 +960,7 @@ function App() {
             )}
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowEditModal(false); setLoginError(''); }}
+                onClick={() => { setShowEditModal(false); setLoginMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Cancel
@@ -1349,6 +981,7 @@ function App() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Add New {editingField.slice(0, -1)}</h2>
+            {loginMessage && <p className="text-red-600 text-center mb-4">{loginMessage}</p>}
             {editingField === 'projects' && (
               <>
                 <input
@@ -1399,7 +1032,7 @@ function App() {
             )}
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowAddModal(false); setLoginError(''); }}
+                onClick={() => { setShowAddModal(false); setLoginMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Cancel
@@ -1420,7 +1053,7 @@ function App() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-800'} p-8 rounded-lg shadow-xl w-full max-w-md transition-colors duration-300`}>
             <h2 className="text-2xl font-bold mb-6">Add New Tracked Profile</h2>
-            {loginError && <p className="text-red-600 text-center mb-4">{loginError}</p>}
+            {loginMessage && <p className="text-red-600 text-center mb-4">{loginMessage}</p>}
             <input
               type="text"
               placeholder="Platform Name (e.g., Medium, Stack Overflow)"
@@ -1447,7 +1080,7 @@ function App() {
             />
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowAddProfileModal(false); setLoginError(''); }}
+                onClick={() => { setShowAddProfileModal(false); setLoginMessage(''); }}
                 className={`py-2 px-4 rounded-md transition duration-300 ${isDarkMode ? 'bg-gray-600 hover:bg-gray-500 text-gray-200' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'} font-bold`}
               >
                 Cancel
