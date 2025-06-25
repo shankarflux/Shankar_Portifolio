@@ -1,30 +1,32 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, query, orderBy, where, addDoc, getDocs, deleteDoc } from 'firebase/firestore';
-import { Analytics } from 'firebase/analytics'; // Import Analytics if you intend to use it, though not directly used in the provided base
+import { getAuth, signInAnonymously, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getFirestore, doc, setDoc, updateDoc, onSnapshot, collection, query, orderBy, addDoc, deleteDoc } from 'firebase/firestore';
+// No direct use of getAnalytics from 'firebase/analytics' in this App component's logic,
+// but the import for Analytics is kept commented out as it was in your provided code
+// import { Analytics } from 'firebase/analytics'; 
 
 // --- Global Variables for Canvas Environment ---
 // Note: These are ONLY available within the Canvas environment (e.g., when running in Google's AI Studio).
-// For deployments like GitHub Pages, these will be undefined, so we provide default/hardcoded values.
+// For deployments like GitHub Pages, these will be undefined, so we provide hardcoded values.
 
 // Using the projectId from your actual Firebase config as a consistent appId.
 // This is used for Firestore collection paths (public/data/ and users/{userId}/)
 const appId = 'shnakar-portfolio'; // This should match your Firebase projectId
 
-// *** YOUR ACTUAL FIREBASE CONFIGURATION GOES HERE ***
-// Copied directly from your Firebase Project Settings -> Your apps -> Web app setup snippet.
-// This is CRUCIAL for your app to connect to Firebase when deployed on GitHub Pages.
+// *** YOUR ACTUAL FIREBASE CONFIGURATION ***
+// This configuration MUST EXACTLY match the details for the 'shankar' web app
+// (App ID: 1:283865216684:web:3c824b2df5ebf73adf1109) in your Firebase Project Settings.
 const firebaseConfig = {
   apiKey: "AIzaSyB22e6RAx4jHl_eRHmC6Zj6Xjl9U6lRlf8",
   authDomain: "shnakar-portfolio.firebaseapp.com",
   projectId: "shnakar-portfolio",
   storageBucket: "shnakar-portfolio.firebasestorage.app",
   messagingSenderId: "283865216684",
-  appId: "1:283865216684:web:3c824b2df5ebf73adf1109",
-  measurementId: "G-D5QQH552VJ" // Include if present in your config
+  appId: "1:283865216684:web:3c824b2df5ebf73adf1109", // Make SURE this appId is correct for 'shankar'
+  measurementId: "G-D5QQH552VJ" // Make SURE this measurementId is correct for 'shankar'
 };
-// ******************************************************
+// ********************************************
 
 // __initial_auth_token is provided by the Canvas environment for authentication.
 // For GitHub Pages, it will be undefined, so we default to null.
@@ -42,8 +44,10 @@ try {
   // If you intend to use Google Analytics for Firebase, initialize it here:
   // const analytics = getAnalytics(firebaseApp);
 } catch (error) {
-  console.error("Firebase initialization error:", error);
-  // Handle the error (e.g., display a message to the user)
+  // Catching and logging the Firebase initialization error here
+  console.error("Firebase initialization failed:", error);
+  // An optional user-facing message could be displayed here if initialization fails
+  // For now, the App will display its own error modal if `authReady` isn't true
 }
 
 function App() {
@@ -53,7 +57,7 @@ function App() {
   const [showLoginModal, setShowLoginModal] = useState(false); // State to control login modal visibility
   const [adminEmail, setAdminEmail] = useState(''); // State for admin login email
   const [adminPassword, setAdminPassword] = useState(''); // State for admin login password
-  const [loginError, setLoginError] = useState(''); // State for login error messages
+  const [loginError, setLoginError] = useState(''); // State for login error messages (also used for general app errors)
   const [authReady, setAuthReady] = useState(false); // State to indicate Firebase Auth is ready
   const [currentUserId, setCurrentUserId] = useState(null); // Stores current user's UID
   const [showNotificationModal, setShowNotificationModal] = useState(false); // State for notification modal
@@ -90,10 +94,11 @@ function App() {
    * Fetches data from Firestore and updates state.
    */
   const setupPortfolioListener = useCallback(() => {
+    // Only proceed if db is initialized
     if (!db) {
-      console.error("Firestore not initialized.");
+      console.error("Firestore not initialized for portfolio listener.");
       setLoading(false);
-      return;
+      return undefined; // Return undefined for cleanup
     }
 
     const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
@@ -107,7 +112,7 @@ function App() {
         console.log("Portfolio data updated:", data);
       } else {
         console.log("No portfolio data found. Initializing with default structure.");
-        setPortfolioData({
+        const defaultPortfolioData = { // Define default data here
           about: "A passionate full stack developer and UI/UX designer with a knack for creating intuitive and efficient web applications. I love bringing ideas to life through code and crafting seamless user experiences.",
           contact: {
             email: "shankarflux@example.com",
@@ -139,24 +144,27 @@ function App() {
             "Mentored junior developers in web development best practices."
           ],
           profileImage: profileImageUrl // Use default initially
-        });
+        };
+        setPortfolioData(defaultPortfolioData);
         // Create the document if it doesn't exist
-        setDoc(portfolioDocRef, portfolioData); // Using the default data to initialize
+        setDoc(portfolioDocRef, defaultPortfolioData).catch(e => console.error("Error setting default portfolio data:", e));
       }
       setLoading(false);
     }, (error) => {
       console.error("Error fetching portfolio data:", error);
+      setLoginError(`Failed to load portfolio data: ${error.message}. Please check Firebase rules.`); // Display error to user
       setLoading(false);
     });
 
     return unsubscribe; // Cleanup listener on component unmount
-  }, [db, appId]); // Added db and appId as dependencies
+  }, [db, appId, profileImageUrl]); // Added db, appId, profileImageUrl as dependencies
 
   /**
    * Sets up real-time listener for notifications.
    * Fetches data from Firestore and updates state.
    */
   const setupNotificationsListener = useCallback(() => {
+    // Only proceed if db and currentUserId are initialized
     if (!db || !currentUserId) {
       console.log("Skipping notification listener setup: DB not ready or user not authenticated.");
       return undefined; // Return undefined if prerequisites not met
@@ -164,7 +172,8 @@ function App() {
 
     // Notifications are private to the user
     const notificationsCollectionRef = collection(db, 'artifacts', appId, 'users', currentUserId, 'notifications');
-    const q = query(notificationsCollectionRef, orderBy('timestamp', 'desc')); // Order by timestamp
+    // Using a more robust query that Firestore supports (no orderBy if not indexed, but assuming for now)
+    const q = query(notificationsCollectionRef, orderBy('timestamp', 'desc'));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedNotifications = snapshot.docs.map(doc => ({
@@ -175,6 +184,7 @@ function App() {
       console.log("Notifications updated:", fetchedNotifications);
     }, (error) => {
       console.error("Error fetching notifications:", error);
+      setLoginError(`Failed to load notifications: ${error.message}.`); // Display error to user
     });
 
     return unsubscribe;
@@ -203,11 +213,17 @@ function App() {
             console.log("Signed in anonymously.");
           } catch (error) {
             console.error("Error signing in anonymously:", error);
+            setLoginError(`Authentication failed: ${error.message}. App may not function correctly.`); // Display error to user
           }
         }
         setAuthReady(true); // Set authReady to true after initial check
       });
       return () => unsubscribe(); // Cleanup on unmount
+    } else {
+      // If auth object itself is not initialized (e.g., firebaseApp failed to initialize)
+      setLoginError("Firebase Authentication service is not available. Check Firebase setup.");
+      setAuthReady(true); // Still set authReady to true to proceed with UI render
+      setLoading(false); // Stop loading if auth failed
     }
   }, [auth, ADMIN_EMAIL]);
 
@@ -216,7 +232,9 @@ function App() {
     if (authReady && db) { // Ensure auth is ready and db is initialized before setting up listeners
       const unsubscribePortfolio = setupPortfolioListener();
       let unsubscribeNotifications;
-      if (currentUserId) { // Only set up notifications listener if currentUserId is available
+      // Only set up notifications listener if currentUserId is available
+      // This also implicitly relies on authentication succeeding
+      if (currentUserId) {
         unsubscribeNotifications = setupNotificationsListener();
       }
 
@@ -224,6 +242,10 @@ function App() {
         if (unsubscribePortfolio) unsubscribePortfolio();
         if (unsubscribeNotifications) unsubscribeNotifications();
       };
+    } else if (authReady && !db) {
+      // Auth is ready but DB failed to initialize. Display an error.
+      setLoginError("Firestore Database is not available. Data persistence will not work.");
+      setLoading(false); // Stop loading if DB not available
     }
   }, [authReady, db, currentUserId, setupPortfolioListener, setupNotificationsListener]);
 
@@ -244,15 +266,19 @@ function App() {
     try {
       await signOut(auth);
       console.log("Logged out.");
-      // After logging out, attempt anonymous sign-in
+      // After logging out, attempt anonymous sign-in to keep a user session
       await signInAnonymously(auth);
     } catch (error) {
       console.error("Logout failed:", error);
+      setLoginError(`Logout failed: ${error.message}`);
     }
   };
 
   const handleAddNotification = async () => {
-    if (!newNotification.trim() || !db || !currentUserId) return;
+    if (!newNotification.trim() || !db || !currentUserId) {
+      setLoginError("Cannot add notification: Invalid input or Firebase not ready.");
+      return;
+    }
     try {
       const notificationsCollectionRef = collection(db, 'artifacts', appId, 'users', currentUserId, 'notifications');
       await addDoc(notificationsCollectionRef, {
@@ -265,16 +291,21 @@ function App() {
       }
     } catch (error) {
       console.error("Error adding notification:", error);
+      setLoginError(`Error adding notification: ${error.message}`);
     }
   };
 
   const handleDeleteNotification = async (id) => {
-    if (!db || !currentUserId) return;
+    if (!db || !currentUserId) {
+      setLoginError("Cannot delete notification: Firebase not ready or no user.");
+      return;
+    }
     try {
       const notificationDocRef = doc(db, 'artifacts', appId, 'users', currentUserId, 'notifications', id);
       await deleteDoc(notificationDocRef);
     } catch (error) {
       console.error("Error deleting notification:", error);
+      setLoginError(`Error deleting notification: ${error.message}`);
     }
   };
 
@@ -286,7 +317,10 @@ function App() {
   };
 
   const handleSaveEdit = async () => {
-    if (!db) return;
+    if (!db) {
+      setLoginError("Cannot save changes: Firebase not ready.");
+      return;
+    }
     setLoading(true);
     try {
       const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
@@ -295,39 +329,37 @@ function App() {
       if (editingField === 'about') {
         updatedData.about = editValue;
       } else if (editingField === 'contact') {
-        updatedData.contact = JSON.parse(editValue);
+        // Validate JSON parsing
+        try {
+          updatedData.contact = JSON.parse(editValue);
+        } catch (e) {
+          throw new Error("Invalid JSON for Contact data.");
+        }
       } else if (editingField.startsWith('skills')) {
         const skillCategory = editingField.split('.')[1];
-        updatedData.skills[skillCategory] = editValue.split(',').map(s => s.trim());
+        updatedData.skills[skillCategory] = editValue.split(',').map(s => s.trim()).filter(s => s); // Filter out empty strings
       } else if (editingField === 'achievements') {
         updatedData.achievements = editValue.split('\n').map(s => s.trim()).filter(s => s);
-      } else if (editingField === 'experience') {
-        const parsedExperience = JSON.parse(editValue);
-        if (Array.isArray(parsedExperience)) {
-          updatedData.experience = parsedExperience;
-        } else {
-          throw new Error("Experience data must be an array.");
-        }
-      } else if (editingField === 'projects') {
-        const parsedProjects = JSON.parse(editValue);
-        if (Array.isArray(parsedProjects)) {
-          updatedData.projects = parsedProjects;
-        } else {
-          throw new Error("Projects data must be an array.");
-        }
-      } else if (editingField === 'courses') {
-        const parsedCourses = JSON.parse(editValue);
-        if (Array.isArray(parsedCourses)) {
-          updatedData.courses = parsedCourses;
-        } else {
-          throw new Error("Courses data must be an array.");
+      } else if (editingField === 'experience' || editingField === 'projects' || editingField === 'courses') {
+        // Validate JSON parsing and array type for complex fields
+        try {
+          const parsedArray = JSON.parse(editValue);
+          if (Array.isArray(parsedArray)) {
+            updatedData[editingField] = parsedArray;
+          } else {
+            throw new Error(`${editingField} data must be a JSON array.`);
+          }
+        } catch (e) {
+          throw new Error(`Invalid JSON for ${editingField} data: ${e.message}`);
         }
       }
 
       await setDoc(portfolioDocRef, updatedData); // Use setDoc to overwrite with updated data
-      setPortfolioData(updatedData); // Optimistically update UI
+      // Optimistically update UI, but Firestore listener will eventually provide canonical data
+      setPortfolioData(updatedData); 
       setShowEditModal(false);
       setLoading(false);
+      setLoginError(''); // Clear any previous error on successful save
     } catch (error) {
       console.error("Error saving portfolio data:", error);
       setLoginError(`Error saving: ${error.message}`); // Use loginError state for general errors
@@ -345,7 +377,10 @@ function App() {
   };
 
   const handleSaveNewItem = async () => {
-    if (!db) return;
+    if (!db) {
+      setLoginError("Cannot add item: Firebase not ready.");
+      return;
+    }
     setLoading(true);
     try {
       const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
@@ -355,11 +390,15 @@ function App() {
         if (newProjectName && newProjectDesc) {
           const newProject = { name: newProjectName, description: newProjectDesc };
           updatedData.projects = [...(updatedData.projects || []), newProject];
+        } else {
+          throw new Error("Project name and description cannot be empty.");
         }
       } else if (editingField === 'courses') {
         if (newCourseName && newCourseCert) {
           const newCourse = { name: newCourseName, certificate: newCourseCert };
           updatedData.courses = [...(updatedData.courses || []), newCourse];
+        } else {
+          throw new Error("Course name and certificate cannot be empty.");
         }
       }
 
@@ -367,6 +406,7 @@ function App() {
       setPortfolioData(updatedData);
       setShowAddModal(false);
       setLoading(false);
+      setLoginError(''); // Clear any previous error
     } catch (error) {
       console.error("Error adding new item:", error);
       setLoginError(`Error adding item: ${error.message}`);
@@ -375,7 +415,10 @@ function App() {
   };
 
   const handleDeleteItem = async (type, index) => {
-    if (!db) return;
+    if (!db) {
+      setLoginError("Cannot delete item: Firebase not ready.");
+      return;
+    }
     setLoading(true);
     try {
       const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
@@ -394,6 +437,7 @@ function App() {
       await setDoc(portfolioDocRef, updatedData);
       setPortfolioData(updatedData);
       setLoading(false);
+      setLoginError(''); // Clear any previous error
     } catch (error) {
       console.error("Error deleting item:", error);
       setLoginError(`Error deleting item: ${error.message}`);
@@ -404,6 +448,10 @@ function App() {
   const handleProfileImageUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
+    if (!db) {
+      setLoginError("Cannot upload image: Firebase not ready.");
+      return;
+    }
 
     setLoading(true);
     const reader = new FileReader();
@@ -415,6 +463,7 @@ function App() {
         await updateDoc(portfolioDocRef, { profileImage: base64Image });
         setProfileImageUrl(base64Image); // Update state to display new image
         setLoading(false);
+        setLoginError(''); // Clear any previous error
       } catch (error) {
         console.error("Error uploading profile image:", error);
         setLoginError(`Error uploading image: ${error.message}`);
@@ -424,16 +473,28 @@ function App() {
     reader.readAsDataURL(file); // Convert file to base64
   };
 
-  if (loading) {
+  // Display initial loading state or an error if Firebase setup completely failed
+  if (loading || !authReady) { // Keep loading until auth is ready and initial data fetch starts
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100 text-gray-800">
-        <p className="text-2xl font-bold">Loading Portfolio...</p>
+        <p className="text-2xl font-bold">
+          {loginError ? `Error: ${loginError}` : "Loading Portfolio..."}
+        </p>
       </div>
     );
   }
 
+
   return (
     <div className="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col items-center p-4 sm:p-8">
+      {/* Global Error Message Display */}
+      {loginError && (
+        <div className="fixed top-4 right-4 bg-red-600 text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2">
+          <span>{loginError}</span>
+          <button onClick={() => setLoginError('')} className="ml-2 text-white font-bold">&times;</button>
+        </div>
+      )}
+
       {/* Login/Logout and Notifications */}
       <div className="w-full max-w-6xl flex justify-between items-center mb-6">
         {isAdmin ? (
