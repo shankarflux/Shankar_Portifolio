@@ -1,68 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getFirestore, doc, setDoc, updateDoc, onSnapshot, collection, query, orderBy, addDoc, deleteDoc } from 'firebase/firestore';
-// No direct use of getAnalytics from 'firebase/analytics' in this App component's logic,
-// but the import for Analytics is kept commented out as it was in your provided code
-// import { Analytics } from 'firebase/analytics'; 
 
-// --- Global Variables for Canvas Environment ---
-// Note: These are ONLY available within the Canvas environment (e.g., when running in Google's AI Studio).
-// For deployments like GitHub Pages, these will be undefined, so we provide hardcoded values.
+// --- Local Storage Implementation ---
 
-// Using the projectId from your actual Firebase config as a consistent appId.
-// This is used for Firestore collection paths (public/data/ and users/{userId}/)
-const appId = 'shnakar-portfolio'; // This should match your Firebase projectId
-
-// *** YOUR ACTUAL FIREBASE CONFIGURATION ***
-// This configuration MUST EXACTLY match the details for the 'shankar' web app
-// (App ID: 1:283865216684:web:3c824b2df5ebf73adf1109) in your Firebase Project Settings.
-const firebaseConfig = {
-  apiKey: "AIzaSyB22e6RAx4jHl_eRHmC6Zj6Xjl9U6lRlf8",
-  authDomain: "shnakar-portfolio.firebaseapp.com",
-  projectId: "shnakar-portfolio",
-  storageBucket: "shnakar-portfolio.firebasestorage.app",
-  messagingSenderId: "283865216684",
-  appId: "1:283865216684:web:3c824b2df5ebf73adf1109", // Make SURE this appId is correct for 'shankar'
-  measurementId: "G-D5QQH552VJ" // Make SURE this measurementId is correct for 'shankar'
-};
-// ********************************************
-
-// __initial_auth_token is provided by the Canvas environment for authentication.
-// For GitHub Pages, it will be undefined, so we default to null.
-const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-// Initialize Firebase outside the component to prevent re-initialization on re-renders
-let firebaseApp;
-let db;
-let auth;
-
-try {
-  firebaseApp = initializeApp(firebaseConfig);
-  db = getFirestore(firebaseApp);
-  auth = getAuth(firebaseApp);
-  // If you intend to use Google Analytics for Firebase, initialize it here:
-  // const analytics = getAnalytics(firebaseApp);
-} catch (error) {
-  // Catching and logging the Firebase initialization error here
-  console.error("Firebase initialization failed:", error);
-  // An optional user-facing message could be displayed here if initialization fails
-  // For now, the App will display its own error modal if `authReady` isn't true
-}
+// Key for storing portfolio data in Local Storage
+const LOCAL_STORAGE_PORTFOLIO_KEY = 'myPortfolioData';
 
 function App() {
   const [activeTab, setActiveTab] = useState('About'); // State for active navigation tab
   const [portfolioData, setPortfolioData] = useState({}); // Stores all portfolio data
-  const [isAdmin, setIsAdmin] = useState(false); // State to check if current user is admin
-  const [showLoginModal, setShowLoginModal] = useState(false); // State to control login modal visibility
-  const [adminEmail, setAdminEmail] = useState(''); // State for admin login email
-  const [adminPassword, setAdminPassword] = useState(''); // State for admin login password
-  const [loginError, setLoginError] = useState(''); // State for login error messages (also used for general app errors)
-  const [authReady, setAuthReady] = useState(false); // State to indicate Firebase Auth is ready
-  const [currentUserId, setCurrentUserId] = useState(null); // Stores current user's UID
-  const [showNotificationModal, setShowNotificationModal] = useState(false); // State for notification modal
-  const [notifications, setNotifications] = useState([]); // State for notifications
-  const [newNotification, setNewNotification] = useState(''); // State for new notification input
   const [showEditModal, setShowEditModal] = useState(false); // State for edit modal visibility
   const [editingField, setEditingField] = useState(''); // Stores the field being edited
   const [editValue, setEditValue] = useState(''); // Stores the value in the edit modal input
@@ -73,241 +18,92 @@ function App() {
   const [newCourseName, setNewCourseName] = useState(''); // State for new course name
   const [newCourseCert, setNewCourseCert] = useState(''); // State for new course certificate
   const [loading, setLoading] = useState(true); // Loading state for data fetching
-  const [profileImageFile, setProfileImageFile] = useState(null); // For image upload
   const [profileImageUrl, setProfileImageUrl] = useState('https://placehold.co/400x400/CCCCCC/FFFFFF?text=Profile'); // Default profile image
 
-  const notificationInputRef = useRef(null); // Ref for notification input to maintain focus
+  const notificationInputRef = useRef(null); // Ref for potential future use, currently not used with local storage
 
-  // Admin credentials (hardcoded for this example, in a real app, manage securely)
-  const ADMIN_EMAIL = '23jr1a05b3@gmail.com';
+  // No admin logic with local storage, as it's not multi-user/authenticated
+  const isAdmin = true; // For demonstration, assume local user is always "admin" for editing UI
+  const localError = useState('')[1]; // Placeholder for error display, not used for Firebase errors
 
-  // --- Utility Functions ---
-
-  /**
-   * Generates a unique ID for new documents.
-   * @returns {string} A unique ID.
-   */
-  const generateUniqueId = () => crypto.randomUUID();
+  // --- Utility Functions for Local Storage ---
 
   /**
-   * Sets up real-time listener for portfolio data.
-   * Fetches data from Firestore and updates state.
+   * Defines default portfolio data if none exists in Local Storage.
    */
-  const setupPortfolioListener = useCallback(() => {
-    // Only proceed if db is initialized
-    if (!db) {
-      console.error("Firestore not initialized for portfolio listener.");
-      setLoading(false);
-      return undefined; // Return undefined for cleanup
-    }
+  const defaultPortfolioData = {
+    about: "A passionate full stack developer and UI/UX designer with a knack for creating intuitive and efficient web applications. I love bringing ideas to life through code and crafting seamless user experiences.",
+    contact: {
+      email: "shankarflux@example.com",
+      phone: "+1234567890",
+      linkedin: "https://linkedin.com/in/shankarflux",
+      github: "https://github.com/shankarflux"
+    },
+    experience: [
+      { title: "Software Engineer", company: "Tech Innovations", years: "2022-Present", description: "Developed and maintained web applications using React and Node.js, improving performance by 20%." },
+      { title: "UI/UX Intern", company: "Creative Designs Inc.", years: "2021-2022", description: "Assisted in designing user interfaces and conducting usability tests for mobile applications." }
+    ],
+    projects: [
+      { name: "E-commerce Platform", description: "Built a full-stack e-commerce site with user authentication, product listings, and payment integration." },
+      { name: "Task Management App", description: "Developed a responsive task manager with drag-and-drop functionality and real-time updates." }
+    ],
+    courses: [
+      { name: "Advanced React Patterns", certificate: "Issued by Online Academy" },
+      { name: "Responsive Web Design", certificate: "Issued by Web Dev Institute" }
+    ],
+    skills: {
+      frontend: ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
+      backend: ["Node.js", "Express.js", "Firebase", "MongoDB"],
+      tools: ["Git", "VS Code", "Figma", "Jira"],
+      design: ["UI/UX Design", "Wireframing", "Prototyping"]
+    },
+    achievements: [
+      "Awarded 'Innovator of the Year' at Tech Innovations 2023.",
+      "Published a research paper on accessible web design.",
+      "Mentored junior developers in web development best practices."
+    ],
+    profileImage: 'https://placehold.co/400x400/CCCCCC/FFFFFF?text=Profile' // Default profile image
+  };
 
-    const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
-    const unsubscribe = onSnapshot(portfolioDocRef, (docSnap) => {
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        setPortfolioData(data);
-        if (data.profileImage) {
-          setProfileImageUrl(data.profileImage);
+  // --- Effect for loading data from Local Storage on mount ---
+  useEffect(() => {
+    try {
+      const storedData = localStorage.getItem(LOCAL_STORAGE_PORTFOLIO_KEY);
+      if (storedData) {
+        const parsedData = JSON.parse(storedData);
+        setPortfolioData(parsedData);
+        if (parsedData.profileImage) {
+          setProfileImageUrl(parsedData.profileImage);
         }
-        console.log("Portfolio data updated:", data);
+        console.log("Loaded portfolio data from Local Storage.");
       } else {
-        console.log("No portfolio data found. Initializing with default structure.");
-        const defaultPortfolioData = { // Define default data here
-          about: "A passionate full stack developer and UI/UX designer with a knack for creating intuitive and efficient web applications. I love bringing ideas to life through code and crafting seamless user experiences.",
-          contact: {
-            email: "shankarflux@example.com",
-            phone: "+1234567890",
-            linkedin: "https://linkedin.com/in/shankarflux",
-            github: "https://github.com/shankarflux"
-          },
-          experience: [
-            { title: "Software Engineer", company: "Tech Innovations", years: "2022-Present", description: "Developed and maintained web applications using React and Node.js, improving performance by 20%." },
-            { title: "UI/UX Intern", company: "Creative Designs Inc.", years: "2021-2022", description: "Assisted in designing user interfaces and conducting usability tests for mobile applications." }
-          ],
-          projects: [
-            { name: "E-commerce Platform", description: "Built a full-stack e-commerce site with user authentication, product listings, and payment integration." },
-            { name: "Task Management App", description: "Developed a responsive task manager with drag-and-drop functionality and real-time updates." }
-          ],
-          courses: [
-            { name: "Advanced React Patterns", certificate: "Issued by Online Academy" },
-            { name: "Responsive Web Design", certificate: "Issued by Web Dev Institute" }
-          ],
-          skills: {
-            frontend: ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
-            backend: ["Node.js", "Express.js", "Firebase", "MongoDB"],
-            tools: ["Git", "VS Code", "Figma", "Jira"],
-            design: ["UI/UX Design", "Wireframing", "Prototyping"]
-          },
-          achievements: [
-            "Awarded 'Innovator of the Year' at Tech Innovations 2023.",
-            "Published a research paper on accessible web design.",
-            "Mentored junior developers in web development best practices."
-          ],
-          profileImage: profileImageUrl // Use default initially
-        };
+        // Initialize with default data if nothing in local storage
         setPortfolioData(defaultPortfolioData);
-        // Create the document if it doesn't exist
-        setDoc(portfolioDocRef, defaultPortfolioData).catch(e => console.error("Error setting default portfolio data:", e));
+        localStorage.setItem(LOCAL_STORAGE_PORTFOLIO_KEY, JSON.stringify(defaultPortfolioData));
+        console.log("Initialized portfolio data with defaults to Local Storage.");
       }
+    } catch (error) {
+      console.error("Error loading/parsing data from Local Storage:", error);
+      // Fallback to default data if Local Storage is corrupted or inaccessible
+      setPortfolioData(defaultPortfolioData);
+    } finally {
       setLoading(false);
-    }, (error) => {
-      console.error("Error fetching portfolio data:", error);
-      setLoginError(`Failed to load portfolio data: ${error.message}. Please check Firebase rules.`); // Display error to user
-      setLoading(false);
-    });
-
-    return unsubscribe; // Cleanup listener on component unmount
-  }, [db, appId, profileImageUrl]); // Added db, appId, profileImageUrl as dependencies
-
-  /**
-   * Sets up real-time listener for notifications.
-   * Fetches data from Firestore and updates state.
-   */
-  const setupNotificationsListener = useCallback(() => {
-    // Only proceed if db and currentUserId are initialized
-    if (!db || !currentUserId) {
-      console.log("Skipping notification listener setup: DB not ready or user not authenticated.");
-      return undefined; // Return undefined if prerequisites not met
     }
+  }, []); // Empty dependency array means this runs once on mount
 
-    // Notifications are private to the user
-    const notificationsCollectionRef = collection(db, 'artifacts', appId, 'users', currentUserId, 'notifications');
-    // Using a more robust query that Firestore supports (no orderBy if not indexed, but assuming for now)
-    const q = query(notificationsCollectionRef, orderBy('timestamp', 'desc'));
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const fetchedNotifications = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setNotifications(fetchedNotifications);
-      console.log("Notifications updated:", fetchedNotifications);
-    }, (error) => {
-      console.error("Error fetching notifications:", error);
-      setLoginError(`Failed to load notifications: ${error.message}.`); // Display error to user
-    });
-
-    return unsubscribe;
-  }, [db, appId, currentUserId]); // Added all dependencies
-
-  // --- Firebase Authentication Effect ---
+  // --- Effect for saving data to Local Storage whenever portfolioData changes ---
   useEffect(() => {
-    if (auth) {
-      const unsubscribe = onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          setCurrentUserId(user.uid);
-          if (user.email === ADMIN_EMAIL) {
-            setIsAdmin(true);
-            console.log("Admin logged in:", user.uid);
-          } else {
-            setIsAdmin(false);
-            console.log("User logged in:", user.uid);
-          }
-        } else {
-          setCurrentUserId(null);
-          setIsAdmin(false);
-          console.log("No user logged in. Attempting anonymous sign-in.");
-          // Anonymous sign-in for unauthenticated users (like on GitHub Pages)
-          try {
-            await signInAnonymously(auth);
-            console.log("Signed in anonymously.");
-          } catch (error) {
-            console.error("Error signing in anonymously:", error);
-            setLoginError(`Authentication failed: ${error.message}. App may not function correctly.`); // Display error to user
-          }
-        }
-        setAuthReady(true); // Set authReady to true after initial check
-      });
-      return () => unsubscribe(); // Cleanup on unmount
-    } else {
-      // If auth object itself is not initialized (e.g., firebaseApp failed to initialize)
-      setLoginError("Firebase Authentication service is not available. Check Firebase setup.");
-      setAuthReady(true); // Still set authReady to true to proceed with UI render
-      setLoading(false); // Stop loading if auth failed
-    }
-  }, [auth, ADMIN_EMAIL]);
-
-  // --- Data Listeners Effect ---
-  useEffect(() => {
-    if (authReady && db) { // Ensure auth is ready and db is initialized before setting up listeners
-      const unsubscribePortfolio = setupPortfolioListener();
-      let unsubscribeNotifications;
-      // Only set up notifications listener if currentUserId is available
-      // This also implicitly relies on authentication succeeding
-      if (currentUserId) {
-        unsubscribeNotifications = setupNotificationsListener();
+    if (!loading) { // Only save after initial load is complete
+      try {
+        localStorage.setItem(LOCAL_STORAGE_PORTFOLIO_KEY, JSON.stringify(portfolioData));
+        console.log("Saved portfolio data to Local Storage.");
+      } catch (error) {
+        console.error("Error saving data to Local Storage:", error);
       }
+    }
+  }, [portfolioData, loading]);
 
-      return () => {
-        if (unsubscribePortfolio) unsubscribePortfolio();
-        if (unsubscribeNotifications) unsubscribeNotifications();
-      };
-    } else if (authReady && !db) {
-      // Auth is ready but DB failed to initialize. Display an error.
-      setLoginError("Firestore Database is not available. Data persistence will not work.");
-      setLoading(false); // Stop loading if DB not available
-    }
-  }, [authReady, db, currentUserId, setupPortfolioListener, setupNotificationsListener]);
-
-  // --- Handlers for Admin/Edit Functionality ---
-
-  const handleLogin = async () => {
-    setLoginError('');
-    try {
-      await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
-      setShowLoginModal(false);
-    } catch (error) {
-      setLoginError(error.message);
-      console.error("Login failed:", error);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      console.log("Logged out.");
-      // After logging out, attempt anonymous sign-in to keep a user session
-      await signInAnonymously(auth);
-    } catch (error) {
-      console.error("Logout failed:", error);
-      setLoginError(`Logout failed: ${error.message}`);
-    }
-  };
-
-  const handleAddNotification = async () => {
-    if (!newNotification.trim() || !db || !currentUserId) {
-      setLoginError("Cannot add notification: Invalid input or Firebase not ready.");
-      return;
-    }
-    try {
-      const notificationsCollectionRef = collection(db, 'artifacts', appId, 'users', currentUserId, 'notifications');
-      await addDoc(notificationsCollectionRef, {
-        message: newNotification.trim(),
-        timestamp: new Date().toISOString(), // Use ISO string for consistent sorting
-      });
-      setNewNotification('');
-      if (notificationInputRef.current) {
-        notificationInputRef.current.focus();
-      }
-    } catch (error) {
-      console.error("Error adding notification:", error);
-      setLoginError(`Error adding notification: ${error.message}`);
-    }
-  };
-
-  const handleDeleteNotification = async (id) => {
-    if (!db || !currentUserId) {
-      setLoginError("Cannot delete notification: Firebase not ready or no user.");
-      return;
-    }
-    try {
-      const notificationDocRef = doc(db, 'artifacts', appId, 'users', currentUserId, 'notifications', id);
-      await deleteDoc(notificationDocRef);
-    } catch (error) {
-      console.error("Error deleting notification:", error);
-      setLoginError(`Error deleting notification: ${error.message}`);
-    }
-  };
+  // --- Handlers for Editing Functionality (now local) ---
 
   const handleEdit = (field, value, index = null) => {
     setEditingField(field);
@@ -316,20 +112,13 @@ function App() {
     setShowEditModal(true);
   };
 
-  const handleSaveEdit = async () => {
-    if (!db) {
-      setLoginError("Cannot save changes: Firebase not ready.");
-      return;
-    }
-    setLoading(true);
+  const handleSaveEdit = () => {
     try {
-      const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
       let updatedData = { ...portfolioData };
 
       if (editingField === 'about') {
         updatedData.about = editValue;
       } else if (editingField === 'contact') {
-        // Validate JSON parsing
         try {
           updatedData.contact = JSON.parse(editValue);
         } catch (e) {
@@ -337,11 +126,10 @@ function App() {
         }
       } else if (editingField.startsWith('skills')) {
         const skillCategory = editingField.split('.')[1];
-        updatedData.skills[skillCategory] = editValue.split(',').map(s => s.trim()).filter(s => s); // Filter out empty strings
+        updatedData.skills[skillCategory] = editValue.split(',').map(s => s.trim()).filter(s => s);
       } else if (editingField === 'achievements') {
         updatedData.achievements = editValue.split('\n').map(s => s.trim()).filter(s => s);
       } else if (editingField === 'experience' || editingField === 'projects' || editingField === 'courses') {
-        // Validate JSON parsing and array type for complex fields
         try {
           const parsedArray = JSON.parse(editValue);
           if (Array.isArray(parsedArray)) {
@@ -353,22 +141,17 @@ function App() {
           throw new Error(`Invalid JSON for ${editingField} data: ${e.message}`);
         }
       }
-
-      await setDoc(portfolioDocRef, updatedData); // Use setDoc to overwrite with updated data
-      // Optimistically update UI, but Firestore listener will eventually provide canonical data
-      setPortfolioData(updatedData); 
+      setPortfolioData(updatedData); // Update state, which triggers localStorage save
       setShowEditModal(false);
-      setLoading(false);
-      setLoginError(''); // Clear any previous error on successful save
+      localError(''); // Clear any previous local error
     } catch (error) {
-      console.error("Error saving portfolio data:", error);
-      setLoginError(`Error saving: ${error.message}`); // Use loginError state for general errors
-      setLoading(false);
+      console.error("Error saving portfolio data locally:", error);
+      localError(`Error saving: ${error.message}`);
     }
   };
 
   const handleAddItem = (type) => {
-    setEditingField(type); // Re-use editingField to denote item type for add
+    setEditingField(type);
     setShowAddModal(true);
     setNewProjectName('');
     setNewProjectDesc('');
@@ -376,14 +159,8 @@ function App() {
     setNewCourseCert('');
   };
 
-  const handleSaveNewItem = async () => {
-    if (!db) {
-      setLoginError("Cannot add item: Firebase not ready.");
-      return;
-    }
-    setLoading(true);
+  const handleSaveNewItem = () => {
     try {
-      const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
       let updatedData = { ...portfolioData };
 
       if (editingField === 'projects') {
@@ -401,27 +178,17 @@ function App() {
           throw new Error("Course name and certificate cannot be empty.");
         }
       }
-
-      await setDoc(portfolioDocRef, updatedData);
-      setPortfolioData(updatedData);
+      setPortfolioData(updatedData); // Update state, which triggers localStorage save
       setShowAddModal(false);
-      setLoading(false);
-      setLoginError(''); // Clear any previous error
+      localError(''); // Clear any previous local error
     } catch (error) {
-      console.error("Error adding new item:", error);
-      setLoginError(`Error adding item: ${error.message}`);
-      setLoading(false);
+      console.error("Error adding new item locally:", error);
+      localError(`Error adding item: ${error.message}`);
     }
   };
 
-  const handleDeleteItem = async (type, index) => {
-    if (!db) {
-      setLoginError("Cannot delete item: Firebase not ready.");
-      return;
-    }
-    setLoading(true);
+  const handleDeleteItem = (type, index) => {
     try {
-      const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
       let updatedData = { ...portfolioData };
 
       if (type === 'experience') {
@@ -433,103 +200,39 @@ function App() {
       } else if (type === 'achievements') {
         updatedData.achievements = updatedData.achievements.filter((_, i) => i !== index);
       }
-
-      await setDoc(portfolioDocRef, updatedData);
-      setPortfolioData(updatedData);
-      setLoading(false);
-      setLoginError(''); // Clear any previous error
+      setPortfolioData(updatedData); // Update state, which triggers localStorage save
+      localError(''); // Clear any previous local error
     } catch (error) {
-      console.error("Error deleting item:", error);
-      setLoginError(`Error deleting item: ${error.message}`);
-      setLoading(false);
+      console.error("Error deleting item locally:", error);
+      localError(`Error deleting item: ${error.message}`);
     }
   };
 
-  const handleProfileImageUpload = async (event) => {
+  const handleProfileImageUpload = (event) => {
     const file = event.target.files[0];
     if (!file) return;
-    if (!db) {
-      setLoginError("Cannot upload image: Firebase not ready.");
-      return;
-    }
 
-    setLoading(true);
     const reader = new FileReader();
-    reader.onloadend = async () => {
+    reader.onloadend = () => {
       const base64Image = reader.result; // This is the base64 string
-
-      try {
-        const portfolioDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portfolio');
-        await updateDoc(portfolioDocRef, { profileImage: base64Image });
-        setProfileImageUrl(base64Image); // Update state to display new image
-        setLoading(false);
-        setLoginError(''); // Clear any previous error
-      } catch (error) {
-        console.error("Error uploading profile image:", error);
-        setLoginError(`Error uploading image: ${error.message}`);
-        setLoading(false);
-      }
+      setProfileImageUrl(base64Image); // Update state
+      setPortfolioData(prevData => ({ ...prevData, profileImage: base64Image })); // This triggers localStorage save
+      localError(''); // Clear any previous local error
     };
     reader.readAsDataURL(file); // Convert file to base64
   };
 
-  // Display initial loading state or an error if Firebase setup completely failed
-  if (loading || !authReady) { // Keep loading until auth is ready and initial data fetch starts
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100 text-gray-800">
-        <p className="text-2xl font-bold">
-          {loginError ? `Error: ${loginError}` : "Loading Portfolio..."}
-        </p>
+        <p className="text-2xl font-bold">Loading Portfolio...</p>
       </div>
     );
   }
 
-
   return (
     <div className="min-h-screen bg-gray-100 font-inter text-gray-800 flex flex-col items-center p-4 sm:p-8">
-      {/* Global Error Message Display */}
-      {loginError && (
-        <div className="fixed top-4 right-4 bg-red-600 text-white p-3 rounded-md shadow-lg z-50 flex items-center space-x-2">
-          <span>{loginError}</span>
-          <button onClick={() => setLoginError('')} className="ml-2 text-white font-bold">&times;</button>
-        </div>
-      )}
-
-      {/* Login/Logout and Notifications */}
-      <div className="w-full max-w-6xl flex justify-between items-center mb-6">
-        {isAdmin ? (
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-          >
-            Logout (Admin)
-          </button>
-        ) : (
-          <button
-            onClick={() => setShowLoginModal(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-          >
-            Admin Login
-          </button>
-        )}
-
-        {/* Display currentUserId */}
-        {currentUserId && (
-          <div className="text-sm text-gray-600 bg-gray-200 px-3 py-1 rounded-full">
-            User ID: {currentUserId}
-          </div>
-        )}
-
-        {isAdmin && (
-          <button
-            onClick={() => setShowNotificationModal(true)}
-            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-          >
-            Manage Notifications
-          </button>
-        )}
-      </div>
-
+      {/* No admin login, notifications, or current user ID display with local storage */}
       {/* Main Content Area */}
       <div className="bg-white shadow-xl rounded-lg p-6 sm:p-10 w-full max-w-6xl transform transition-all duration-500 ease-in-out scale-95 sm:scale-100">
         {/* Profile Section */}
@@ -540,21 +243,20 @@ function App() {
               alt="Profile"
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             />
-            {isAdmin && (
-              <label
-                htmlFor="profileImageUpload"
-                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-              >
-                Upload
-                <input
-                  id="profileImageUpload"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleProfileImageUpload}
-                  className="hidden"
-                />
-              </label>
-            )}
+            {/* Editing is always enabled for local storage version */}
+            <label
+              htmlFor="profileImageUpload"
+              className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+            >
+              Upload
+              <input
+                id="profileImageUpload"
+                type="file"
+                accept="image/*"
+                onChange={handleProfileImageUpload}
+                className="hidden"
+              />
+            </label>
           </div>
           <div className="text-center sm:text-left">
             <h1 className="text-4xl font-extrabold text-blue-700 mb-2">Gowry Sankar</h1>
@@ -615,14 +317,13 @@ function App() {
             <div className="bg-blue-50 p-6 rounded-lg shadow-inner relative group">
               <h2 className="text-3xl font-bold text-blue-600 mb-4">About Me</h2>
               <p className="text-lg leading-relaxed text-gray-800">{portfolioData.about}</p>
-              {isAdmin && (
-                <button
-                  onClick={() => handleEdit('about', portfolioData.about)}
-                  className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                >
-                  <i className="fas fa-edit text-sm"></i>
-                </button>
-              )}
+              {/* Editing is always enabled for local storage version */}
+              <button
+                onClick={() => handleEdit('about', portfolioData.about)}
+                className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+              >
+                <i className="fas fa-edit text-sm"></i>
+              </button>
             </div>
           )}
 
@@ -638,14 +339,13 @@ function App() {
                         <li key={idx}>{skill}</li>
                       ))}
                     </ul>
-                    {isAdmin && (
-                      <button
-                        onClick={() => handleEdit(`skills.${category}`, portfolioData.skills[category].join(', '))}
-                        className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-edit text-sm"></i>
-                      </button>
-                    )}
+                    {/* Editing is always enabled for local storage version */}
+                    <button
+                      onClick={() => handleEdit(`skills.${category}`, portfolioData.skills[category].join(', '))}
+                      className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                    >
+                      <i className="fas fa-edit text-sm"></i>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -661,25 +361,23 @@ function App() {
                     <h3 className="text-xl font-semibold text-gray-700">{exp.title} at {exp.company}</h3>
                     <p className="text-gray-500 text-sm mb-2">{exp.years}</p>
                     <p className="text-gray-600">{exp.description}</p>
-                    {isAdmin && (
-                      <button
-                        onClick={() => handleDeleteItem('experience', index)}
-                        className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-trash-alt text-sm"></i>
-                      </button>
-                    )}
+                    {/* Editing is always enabled for local storage version */}
+                    <button
+                      onClick={() => handleDeleteItem('experience', index)}
+                      className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                    >
+                      <i className="fas fa-trash-alt text-sm"></i>
+                    </button>
                   </div>
                 ))}
               </div>
-              {isAdmin && (
-                <button
-                  onClick={() => handleEdit('experience', portfolioData.experience)}
-                  className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-                >
-                  Edit Experience
-                </button>
-              )}
+              {/* Editing is always enabled for local storage version */}
+              <button
+                onClick={() => handleEdit('experience', portfolioData.experience)}
+                className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Edit Experience
+              </button>
             </div>
           )}
 
@@ -691,33 +389,29 @@ function App() {
                   <div key={index} className="bg-white p-5 rounded-lg shadow-md relative group">
                     <h3 className="text-xl font-semibold text-gray-700 mb-2">{project.name}</h3>
                     <p className="text-gray-600">{project.description}</p>
-                    {isAdmin && (
-                      <button
-                        onClick={() => handleDeleteItem('projects', index)}
-                        className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-trash-alt text-sm"></i>
-                      </button>
-                    )}
+                    {/* Editing is always enabled for local storage version */}
+                    <button
+                      onClick={() => handleDeleteItem('projects', index)}
+                      className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                    >
+                      <i className="fas fa-trash-alt text-sm"></i>
+                    </button>
                   </div>
                 ))}
               </div>
-              {isAdmin && (
-                <button
-                  onClick={() => handleAddItem('projects')}
-                  className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4"
-                >
-                  Add Project
-                </button>
-              )}
-              {isAdmin && (
-                <button
-                  onClick={() => handleEdit('projects', portfolioData.projects)}
-                  className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-                >
-                  Edit Projects
-                </button>
-              )}
+              {/* Editing is always enabled for local storage version */}
+              <button
+                onClick={() => handleAddItem('projects')}
+                className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4"
+              >
+                Add Project
+              </button>
+              <button
+                onClick={() => handleEdit('projects', portfolioData.projects)}
+                className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Edit Projects
+              </button>
             </div>
           )}
 
@@ -729,33 +423,29 @@ function App() {
                   <div key={index} className="bg-white p-5 rounded-lg shadow-md relative group">
                     <h3 className="text-xl font-semibold text-gray-700">{course.name}</h3>
                     <p className="text-gray-600">{course.certificate}</p>
-                    {isAdmin && (
-                      <button
-                        onClick={() => handleDeleteItem('courses', index)}
-                        className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                      >
-                        <i className="fas fa-trash-alt text-sm"></i>
-                      </button>
-                    )}
+                    {/* Editing is always enabled for local storage version */}
+                    <button
+                      onClick={() => handleDeleteItem('courses', index)}
+                      className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                    >
+                      <i className="fas fa-trash-alt text-sm"></i>
+                    </button>
                   </div>
                 ))}
               </div>
-              {isAdmin && (
-                <button
-                  onClick={() => handleAddItem('courses')}
-                  className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4"
-                >
-                  Add Course
-                </button>
-              )}
-              {isAdmin && (
-                <button
-                  onClick={() => handleEdit('courses', portfolioData.courses)}
-                  className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-                >
-                  Edit Courses
-                </button>
-              )}
+              {/* Editing is always enabled for local storage version */}
+              <button
+                onClick={() => handleAddItem('courses')}
+                className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 mr-4"
+              >
+                Add Course
+              </button>
+              <button
+                onClick={() => handleEdit('courses', portfolioData.courses)}
+                className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Edit Courses
+              </button>
             </div>
           )}
 
@@ -766,26 +456,24 @@ function App() {
                 {(portfolioData.achievements || []).map((achievement, index) => (
                   <li key={index} className="relative group">
                     {achievement}
-                    {isAdmin && (
-                      <button
-                        onClick={() => handleDeleteItem('achievements', index)}
-                        className="absolute left-full top-0 ml-2 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                        style={{ transform: 'translateY(-50%)' }}
-                      >
-                        <i className="fas fa-trash-alt text-xs"></i>
-                      </button>
-                    )}
+                    {/* Editing is always enabled for local storage version */}
+                    <button
+                      onClick={() => handleDeleteItem('achievements', index)}
+                      className="absolute left-full top-0 ml-2 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+                      style={{ transform: 'translateY(-50%)' }}
+                    >
+                      <i className="fas fa-trash-alt text-xs"></i>
+                    </button>
                   </li>
                 ))}
               </ul>
-              {isAdmin && (
-                <button
-                  onClick={() => handleEdit('achievements', (portfolioData.achievements || []).join('\n'))}
-                  className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-                >
-                  Edit Achievements
-                </button>
-              )}
+              {/* Editing is always enabled for local storage version */}
+              <button
+                onClick={() => handleEdit('achievements', (portfolioData.achievements || []).join('\n'))}
+                className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Edit Achievements
+              </button>
             </div>
           )}
 
@@ -798,113 +486,26 @@ function App() {
                 <p><strong>LinkedIn:</strong> <a href={portfolioData.contact?.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{portfolioData.contact?.linkedin}</a></p>
                 <p><strong>GitHub:</strong> <a href={portfolioData.contact?.github} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:underline">{portfolioData.contact?.github}</a></p>
               </div>
-              {isAdmin && (
-                <button
-                  onClick={() => handleEdit('contact', portfolioData.contact)}
-                  className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
-                >
-                  <i className="fas fa-edit text-sm"></i>
-                </button>
-              )}
+              {/* Editing is always enabled for local storage version */}
+              <button
+                onClick={() => handleEdit('contact', portfolioData.contact)}
+                className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform hover:scale-110"
+              >
+                <i className="fas fa-edit text-sm"></i>
+              </button>
             </div>
           )}
         </div>
       </div>
 
-      {/* Modals */}
-      {/* Login Modal */}
-      {showLoginModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Admin Login</h2>
-            {loginError && <p className="text-red-600 text-center mb-4">{loginError}</p>}
-            <input
-              type="email"
-              placeholder="Admin Email"
-              className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={adminEmail}
-              onChange={(e) => setAdminEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Admin Password"
-              className="w-full p-3 mb-6 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
-            />
-            <div className="flex justify-end space-x-4">
-              <button
-                onClick={() => setShowLoginModal(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition duration-300"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleLogin}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
-              >
-                Login
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Notifications Modal */}
-      {showNotificationModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[80vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Notifications</h2>
-            <div className="mb-6">
-              <input
-                ref={notificationInputRef}
-                type="text"
-                placeholder="Add new notification"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
-                value={newNotification}
-                onChange={(e) => setNewNotification(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') handleAddNotification();
-                }}
-              />
-              <button
-                onClick={handleAddNotification}
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 w-full"
-              >
-                Add Notification
-              </button>
-            </div>
-            <ul className="space-y-3">
-              {notifications.map((notification) => (
-                <li key={notification.id} className="flex justify-between items-center bg-gray-100 p-3 rounded-md shadow-sm">
-                  <span className="text-gray-700 text-base">{notification.message}</span>
-                  <button
-                    onClick={() => handleDeleteNotification(notification.id)}
-                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition duration-300 transform hover:scale-105"
-                  >
-                    <i className="fas fa-trash-alt text-sm"></i>
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <div className="flex justify-end mt-6">
-              <button
-                onClick={() => setShowNotificationModal(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition duration-300"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Modals (Login/Notification modals removed as they are not applicable) */}
 
       {/* Edit Modal (for about, contact, skills, achievements, experience, projects, courses) */}
       {showEditModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-xl max-h-[80vh] overflow-y-auto">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Edit {editingField.replace('skills.', '').replace(/([A-Z])/g, ' $1').trim().replace(/^(.)/, (match) => match.toUpperCase())}</h2>
-            {loginError && <p className="text-red-600 text-center mb-4">{loginError}</p>} {/* Display potential save errors here */}
+            {/* localError display is just a placeholder here now */}
             {editingField === 'about' && (
               <textarea
                 className="w-full p-3 mb-4 border border-gray-300 rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -947,7 +548,7 @@ function App() {
             )}
             <div className="flex justify-end space-x-4">
               <button
-                onClick={() => { setShowEditModal(false); setLoginError(''); }} // Clear error on close
+                onClick={() => { setShowEditModal(false); localError(''); }} // Clear error on close
                 className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition duration-300"
               >
                 Cancel
