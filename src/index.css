@@ -1,134 +1,117 @@
-/* src/index.css */
+            /* src/index.css */
 
-/* REQUIRED: Tailwind CSS Directives */
-/* These lines are CRITICAL for Tailwind to generate its CSS from your configuration */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+            /* REQUIRED: Tailwind CSS Directives */
+            @tailwind base;
+            @tailwind components;
+            @tailwind utilities;
 
-/* Custom global CSS for your React app */
+            /* Custom global CSS for your React app */
 
-/* Apply Inter font globally */
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  /* Background colors are now dynamically set by App.jsx based on dark/light mode */
-  /* via inline styles on the body element, leveraging Tailwind's custom colors. */
-  /* Default body background for safety if JS hasn't loaded yet. */
-  background-color: #0A0A0A; /* Dark fallback */
-  color: #E0E0E0; /* Light text fallback */
-}
+            /* Apply Inter font globally */
+            body {
+              font-family: 'Inter', sans-serif;
+              margin: 0;
+              overflow-x: hidden; /* Prevent horizontal scrolling */
+              /* Background colors are now dynamically set by App.jsx based on dark/light mode */
+              /* via inline styles on the body element, leveraging Tailwind's custom colors. */
+              /* Default body background for safety if JS hasn't loaded yet. */
+              background-color: #0A0A0A; /* Dark fallback */
+              color: #E0E0E0; /* Light text fallback */
+            }
 
-html {
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
-}
+            html {
+              scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+            }
 
-/*
-* REMOVED: All custom CSS variables for colors (e.g., --color-gray-950, --color-blue-300)
-* REASON: These are now defined in tailwind.config.js and used directly as Tailwind classes
-* (e.g., bg-dark-bg-start, text-dark-gradient-pink).
-* Defining them here would be redundant and lead to inconsistencies.
-*/
+            /* Custom Animations (Tailwind's animation utility classes will reference these keyframes) */
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
 
-/* Custom Animations (kept, but ensure they don't conflict with Tailwind's generated ones) */
-/* Tailwind's animation utility classes will reference these keyframes */
+            @keyframes scaleIn {
+              from { transform: scale(0.95); opacity: 0; }
+              to { transform: scale(1); opacity: 1; }
+            }
 
-/* You can remove keyframes that are not mapped in tailwind.config.js if you want to keep it minimal */
+            @keyframes fadeAndScaleIn {
+                0% { opacity: 0; transform: scale(0.95); }
+                100% { opacity: 1; transform: scale(1); }
+            }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+            @keyframes slideInUp {
+              from { opacity: 0; transform: translateY(30px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
 
-@keyframes scaleIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
+            @keyframes slideInDown {
+              from { opacity: 0; transform: translateY(-30px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
 
-@keyframes fadeAndScaleIn {
-    0% { opacity: 0; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
-}
+            @keyframes textPopUp {
+              0% { transform: scale(0.8); opacity: 0; }
+              50% { transform: scale(1.05); opacity: 1; }
+              100% { transform: scale(1); opacity: 1; }
+            }
 
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+            @keyframes textSlideIn {
+              from { opacity: 0; transform: translateX(-50px); }
+              to { opacity: 1; transform: translateX(0); }
+            }
 
-@keyframes slideInDown {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+            @keyframes typing {
+              from { width: 0; }
+              to { width: 100%; }
+            }
 
-@keyframes textPopUp {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
+            @keyframes blink {
+              50% { border-color: transparent; }
+            }
 
-@keyframes textSlideIn {
-  from { opacity: 0; transform: translateX(-50px); }
-  to { opacity: 1; transform: translateX(0); }
-}
+            @keyframes pulseSubtle {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.03); }
+            }
 
-/* Typing animation remains the same, as it's width-based */
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
+            /* Corrected pulseBorder to directly use Tailwind's custom color CSS variables */
+            /* Tailwind generates custom properties like --tw-colors-dark-gradient-blue */
+            @keyframes pulseBorder {
+                0% { border-color: var(--tw-colors-dark-gradient-blue); box-shadow: 0 0 10px var(--tw-colors-dark-gradient-blue); }
+                50% { border-color: var(--tw-colors-dark-gradient-pink); box-shadow: 0 0 20px var(--tw-colors-dark-gradient-pink); }
+                100% { border-color: var(--tw-colors-dark-gradient-blue); box-shadow: 0 0 10px var(--tw-colors-dark-gradient-blue); }
+            }
 
-@keyframes blink {
-  50% { border-color: transparent; }
-}
+            /* Specific glowing effect for profile picture, using Tailwind custom colors */
+            .shadow-glow-pink {
+              box-shadow: 0 0 15px var(--tw-colors-dark-gradient-pink), /* dark-gradient-pink */
+                          0 0 30px rgba(255, 0, 128, 0.5); /* stronger pink glow */
+            }
 
-@keyframes pulseSubtle {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-}
+            /* Essential for gradient text to show colors */
+            .gradient-text {
+              background-clip: text;
+              -webkit-background-clip: text; /* For WebKit browsers */
+              color: transparent; /* Makes the text transparent so the background gradient shows through */
+              display: inline-block; /* Required for background-clip to work */
+              /* The actual gradient will be applied via Tailwind classes in App.jsx */
+            }
 
-/* UPDATED: pulseBorder to use direct color values or Tailwind's generated colors */
-/* Note: For ultimate consistency, colors for keyframes should ideally be passed via CSS variables
-   set dynamically by JS or generated by Tailwind, but direct hex values work too if these are fixed.
-   I'm using Tailwind's custom colors which are generated as CSS Custom Properties behind the scenes.
-   If you see issues, replace these with specific hex codes from your tailwind.config.js.
-*/
-@keyframes pulseBorder {
-    0% { border-color: theme('colors.dark-gradient-blue'); box-shadow: 0 0 10px theme('colors.dark-gradient-blue'); }
-    50% { border-color: theme('colors.dark-gradient-pink'); box-shadow: 0 0 20px theme('colors.dark-gradient-pink'); }
-    100% { border-color: theme('colors.dark-gradient-blue'); box-shadow: 0 0 10px theme('colors.dark-gradient-blue'); }
-}
+            @keyframes pulseDot {
+                0%, 100% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.5); opacity: 0.5; }
+            }
 
-/* Specific glowing effect for profile picture, using Tailwind custom colors */
-.shadow-glow-pink {
-  box-shadow: 0 0 15px rgba(255, 0, 128, 0.7), /* dark-gradient-pink */
-              0 0 30px rgba(255, 0, 128, 0.5); /* stronger pink glow */
-}
-
-/* Ensure the gradient text works by applying the background-clip property */
-.gradient-text {
-  background-clip: text;
-  -webkit-background-clip: text; /* For WebKit browsers */
-  color: transparent;
-  display: inline-block; /* Essential for background-clip to work */
-  /* Gradient applied in App.jsx using Tailwind classes like bg-gradient-to-r from-dark-gradient-pink to-dark-gradient-blue */
-}
-
-@keyframes pulseDot {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
-}
-
-/* Special animation for unread notifications */
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 theme('colors.dark-gradient-blue');
-  }
-  70% {
-    box-shadow: 0 0 0 10px transparent;
-  }
-}
-.animate-pulse-notification { /* Renamed for clarity */
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
+            /* Special animation for unread notifications */
+            @keyframes pulse {
+              0%, 100% {
+                box-shadow: 0 0 0 0 var(--tw-colors-dark-gradient-blue);
+              }
+              70% {
+                box-shadow: 0 0 0 10px transparent;
+              }
+            }
+            .animate-pulse-notification { /* Renamed for clarity */
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+            
