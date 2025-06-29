@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Set this to your default branch (e.g., main or master)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a recent LTS Node.js version
+
+      - name: Install dependencies 🔧
+        run: npm install
+
+      - name: Build 🏗️
+        run: npm run build
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: peaceiris/actions-gh-pages@v4 # Use v4 for better compatibility
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # This is the directory Vite builds to
+          # If your repository name is different from your username,
+          # you might need to set a CNAME or ensure base path is correct in vite.config.js
+          # For example, if your repo is `my-username/my-portfolio`,
+          # and base in vite.config.js is `/my-portfolio/`, this should work.
