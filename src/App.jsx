@@ -683,7 +683,7 @@ function App() {
     setShowAddModal(true);
     // Reset all new item specific states
     setNewProjectName(''); setNewProjectDesc(''); setNewProjectCategory('');
-    setNewProjectImages(''); setNewProjectImages(''); setNewProjectTechUsed(''); setNewProjectChallenges('');
+    setNewProjectImages(''); setNewProjectTechUsed(''); setNewProjectChallenges('');
     setNewProjectLiveLink(''); setNewProjectGithubLink('');
     setNewCourseName(''); setNewCourseCert(''); setNewCourseDesc(''); setNewCourseLink('');
     setNewSkillName(''); setNewSkillLevel(0); setNewSkillCategory('');
@@ -847,7 +847,7 @@ function App() {
 
   // Home Page Content
   const HomePage = () => (
-    <div className={`relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 overflow-hidden pt-20
+    <div className={`relative min-h-screen flex flex-col items-center justify-start p-4 sm:p-8 overflow-hidden pt-20
       ${isDarkMode ? 'text-text-dark-light' : 'text-text-light-dark'}`}>
       {/* Dynamic Background Elements for Dark Mode (Cloning the image) */}
       {isDarkMode && (
@@ -863,7 +863,7 @@ function App() {
 
       {/* Background Video (Subtle, for both themes, adjusted opacity) */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0 opacity-10" // Reduced opacity for subtlety
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-20" // Increased opacity for more visibility
         src="https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-and-red-lines-41589-large.mp4" // Abstract tech video
         autoPlay
         loop
@@ -873,57 +873,65 @@ function App() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Overlay for text readability and theme blending */}
-      <div className={`absolute inset-0 z-10 ${isDarkMode ? 'bg-gradient-to-b from-dark-bg-start to-dark-bg-end opacity-90' : 'bg-gradient-to-b from-white to-gray-100 opacity-80'}`}></div>
+      {/* Overlay for text readability and theme blending - Adjusted opacity */}
+      <div className={`absolute inset-0 z-10 ${isDarkMode ? 'bg-gradient-to-b from-dark-bg-start to-dark-bg-end opacity-80' : 'bg-gradient-to-b from-white to-gray-100 opacity-80'}`}></div>
 
 
-      <div className="relative z-20 flex flex-col items-center justify-center text-center max-w-4xl mx-auto min-h-[calc(100vh-100px)] pt-16 animate-fade-in"> {/* Adjusted pt for header */}
-        {/* Profile Picture and Glowing Border */}
-        <div className={`relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-2xl group flex-shrink-0 mb-8 transition-all duration-500 transform hover:scale-105
-            ${isDarkMode ? 'border-4 sm:border-8 border-dark-gradient-pink shadow-glow-pink' : 'border-4 sm:border-8 border-light-accent-blue shadow-lg'}`}>
-          <img
-            src={profileImagePath} // Use the resolved path
-            alt="Gowry Sankar Profile"
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-          />
-          {isLocalEditMode && (
-            <label
-              htmlFor="profileImageUpload"
-              className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-            >
-              Upload
-              <input
-                id="profileImageUpload"
-                type="file"
-                accept="image/*"
-                onChange={handleProfileImageUpload}
-                className="hidden"
-              />
-            </label>
-          )}
+      <div className="relative z-20 w-full max-w-4xl mx-auto pt-8 animate-fade-in"> {/* Changed from flex-col items-center to w-full mx-auto */}
+
+        {/* New container for image and intro text - flex-row on large screens */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start w-full mb-8">
+          {/* Profile Picture and Glowing Border - Position and Size Adjusted */}
+          <div className={`relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-2xl group flex-shrink-0 mb-8 lg:mb-0 lg:mr-12 transition-all duration-500 transform hover:scale-105
+              ${isDarkMode ? 'border-4 sm:border-8 border-dark-gradient-pink shadow-glow-pink' : 'border-4 sm:border-8 border-light-accent-blue shadow-lg'}
+              mx-auto lg:mx-0`}> {/* mx-auto for mobile centering, lg:mx-0 for left align on desktop */}
+            <img
+              src={profileImagePath} // Use the resolved path
+              alt="Gowry Sankar Profile"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            />
+            {isLocalEditMode && (
+              <label
+                htmlFor="profileImageUpload"
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+              >
+                Upload
+                <input
+                  id="profileImageUpload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfileImageUpload}
+                  className="hidden"
+                />
+              </label>
+            )}
+          </div>
+
+          {/* Text content - flex-grow and left-aligned on large screens */}
+          <div className="flex-grow text-center lg:text-left">
+            <h1 className={`text-4xl sm:text-6xl font-extrabold mb-4 drop-shadow-lg
+              ${isDarkMode ? 'text-white' : 'text-text-light-dark'}`}>
+              Hi, I'm <span className={`${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-blue'} gradient-text`}>Gowry Sankar</span>
+            </h1>
+            <p className={`text-xl sm:text-2xl font-semibold mb-6 max-w-2xl
+              ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+              Full Stack Developer & UI/UX Designer
+            </p>
+            <p className={`text-lg sm:text-xl leading-relaxed mb-8 max-w-3xl
+              ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+              {portfolioData.about.split('. ').slice(0,2).join('. ')}.
+            </p>
+          </div>
         </div>
 
-        <h1 className={`text-4xl sm:text-6xl font-extrabold mb-4 drop-shadow-lg
-          ${isDarkMode ? 'text-white' : 'text-text-light-dark'}`}> {/* Text color adjusted for dark/light */}
-          Hi, I'm <span className={`${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-blue'} gradient-text`}>Gowry Sankar</span>
-        </h1>
-        <p className={`text-xl sm:text-2xl font-semibold mb-6 max-w-2xl
-          ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-          Full Stack Developer & UI/UX Designer
-        </p>
-        <p className={`text-lg sm:text-xl leading-relaxed mb-8 max-w-3xl
-          ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-          {portfolioData.about.split('. ').slice(0,2).join('. ')}. {/* Display first two sentences */}
-        </p>
-
-        {/* Typing Animation Section - Styled like the 'metaverse world' section */}
-        <div className={`w-full max-w-xl text-lg sm:text-xl font-light rounded-xl p-6 flex items-center justify-center min-h-[90px] shadow-lg border animate-pulse-border
+        {/* Typing Animation Section - Now outside the image/text flex container, centered */}
+        <div className={`w-full max-w-xl text-lg sm:text-xl font-light rounded-xl p-6 flex items-center justify-center min-h-[90px] shadow-lg border animate-pulse-border mx-auto mb-12
           ${isDarkMode ? 'bg-dark-bg-start bg-opacity-80 border-dark-gradient-blue text-dark-gradient-blue' : 'bg-gray-100 bg-opacity-80 border-light-accent-blue text-light-accent-blue'}`}>
             <span ref={typingRef} className="whitespace-pre-wrap">{displayedQuote}</span>
         </div>
 
-        {/* Call to action buttons mimicking the reference image */}
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-12">
+        {/* Call to action buttons - Now outside the image/text flex container, centered */}
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-12 mx-auto mb-12">
             <button
                 onClick={() => setActiveTab('About')}
                 className={`py-3 px-8 rounded-lg font-bold text-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-xl
@@ -941,8 +949,8 @@ function App() {
         </div>
 
 
-        {/* Track My Interests Portal - Direct Access, styled */}
-        <div className={`mt-16 w-full max-w-3xl pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} text-center animate-fade-in`}>
+        {/* Track My Interests Portal - Centered */}
+        <div className={`mt-16 w-full max-w-3xl pt-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} text-center animate-fade-in mx-auto`}>
             <h3 className={`text-2xl sm:text-3xl font-bold mb-6
               ${isDarkMode ? 'text-dark-gradient-pink' : 'text-light-accent-purple'}`}>Track My Interests</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
